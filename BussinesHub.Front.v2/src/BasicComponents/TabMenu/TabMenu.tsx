@@ -78,7 +78,7 @@ const TabMenu: React.FC<IMenu> = ({ children, orientation, background }) => {
                   }}
                 >
                   {children.map((x, i) => (
-                    <li style={{ width: "100%" }}>
+                    <li style={{ width: "100%" }} key={"litabMenu" + i}>
                       {i === selectedTab && (
                         <button
                           key={"tmb" + i}

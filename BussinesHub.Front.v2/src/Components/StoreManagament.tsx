@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from "react";
-import Grid from "../BasicComponents/Grid/Grid";
-import { GridColumn } from "../BasicComponents/Grid/GridColumn";
+import Grid from "../basicComponents/Grid/Grid";
+import { GridColumn } from "../basicComponents/Grid/GridColumn";
 
 export const StoreManagament: React.FC = () => {
   return (
@@ -15,7 +15,7 @@ export const StoreManagament: React.FC = () => {
       >
         <GridColumn width={200} text="a" property="naziv" />
         <GridColumn text="b" property="boja" />
-        <GridColumn text="b" cellRender={<tr>nesto</tr>} />
+        <GridColumn text="b" cellRender={<td>nesto</td>} />
       </Grid>
     </>
   );

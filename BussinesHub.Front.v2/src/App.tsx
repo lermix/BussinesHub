@@ -1,22 +1,29 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 import "./App.css";
-import TabMenu from "./BasicComponents/TabMenu/TabMenu";
-import { TabItem } from "./BasicComponents/TabMenu/TabItem";
-import StoreManagament from "./Components/StoreManagament";
+import TabMenu from "./basicComponents/TabMenu/TabMenu";
+import { TabItem } from "./basicComponents/TabMenu/TabItem";
+import StoreManagament from "./components/StoreManagament";
+import Register from "./components/Register";
+import Login from "./components/Login";
 
-function App() {
+const App: React.FC = () => {
   return (
     <>
       <TabMenu orientation="vertical">
         <TabItem title="Home"></TabItem>
-        <TabItem title="Register"></TabItem>
+
         <TabItem title="Store managament">
-          <StoreManagament />
+          <StoreManagament></StoreManagament>
+        </TabItem>
+        <TabItem title="Register">
+          <Register />
+        </TabItem>
+        <TabItem title="Login">
+          <Login />
         </TabItem>
       </TabMenu>
     </>
   );
-}
+};
 
 export default App;

@@ -1,3 +1,20 @@
 body {
-  background-image: url("./images/abstract.jpg");
+  background-image: url("./images/comm.jpg");
+}
+
+button {
+  background-color: inherit;
+  border: 1px solid black;
+  cursor: pointer;
+  padding: 7px 10px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+button:hover {
+  border: 1px solid black;
+  cursor: pointer;
+  padding: 7px 10px;
+  font-size: 17px;
+  background-color: #ccc;
 }

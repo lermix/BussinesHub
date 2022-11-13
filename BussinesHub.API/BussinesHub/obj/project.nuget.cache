@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "je6dQzBIopyC+MVud+2krdtDvR0K4FtULv0S1FxuaXej9OcAq8wbItettT7fnekxlqb3u21WWUQ3KGwYw69dsw==",
+  "dgSpecHash": "hYYpsx8SmSSgMIVRlQI15sY2nTqIkA61PN1MbCb2OJqyKTCFX5dr7eI3naCwlyCMDAtLcZpWJWWk6UrtHifEcQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BussinesHub\\BussinesHub.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\amuller\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\amuller\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
+    "C:\\Users\\amuller\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
+    "C:\\Users\\amuller\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\amuller\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\amuller\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\amuller\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.10\\microsoft.entityframeworkcore.6.0.10.nupkg.sha512",

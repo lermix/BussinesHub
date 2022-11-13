@@ -62,3 +62,5 @@ C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BussinesHub\obj\Debug\
 C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BussinesHub\obj\Debug\net6.0\BussinesHub.pdb
 C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BussinesHub\obj\Debug\net6.0\BussinesHub.genruntimeconfig.cache
 C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BussinesHub\obj\Debug\net6.0\ref\BussinesHub.dll
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BussinesHub\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BussinesHub\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

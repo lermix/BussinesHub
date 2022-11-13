@@ -1,4 +1,6 @@
-﻿using BH.Model.General;
+﻿using AutoMapper;
+using BH.Model.Dtos;
+using BH.Model.General;
 using BH.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,13 +9,26 @@ namespace BussinesHub.Controllers
 	public class UserController : BaseController
 	{
 		private readonly IUserRepository userRepository;
-		public UserController( IUserRepository userRepository )
+		public readonly IMapper mapper;
+
+		public UserController( IUserRepository userRepository, IMapper mapper )
 		{
 			this.userRepository = userRepository;
+			this.mapper = mapper;
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> CreateUser( User user ) => Ok( userRepository.CreateUser( user ) );
+		public async Task<IActionResult> CreateUser( UserDto userDto )
+		{
+			if ( userDto == null )
+				return BadRequest( "User is null" );
+
+			User user = mapper.Map<User>( userDto );
+			user.userFuncEnum = UserFuncEnum.Default;
+			await userRepository.CreateUser( user );
+			return Ok( );
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> DeleteUser( int UserId )
 		{

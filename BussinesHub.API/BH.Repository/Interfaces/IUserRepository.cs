@@ -1,4 +1,5 @@
-﻿using BH.Model.General;
+﻿using BH.Model.Dtos;
+using BH.Model.General;
 
 namespace BH.Repository.Interfaces
 {

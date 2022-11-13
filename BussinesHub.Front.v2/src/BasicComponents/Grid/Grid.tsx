@@ -25,26 +25,30 @@ const Grid = <T extends Record<string, any>>(
         </thead>
         <tbody>
           <>
-            {props.data.map((e, i) => (
+            {props.data.map((e, i1) => (
               <tr
-                key={"gridTr" + i}
+                key={"gridTr" + i1}
                 onClick={() => props.onRowClick && props.onRowClick(e)}
               >
                 {props.children &&
                   Array.isArray(props.children) &&
-                  props.children.map((x, i) => (
-                    <td
-                      key={"gridTd" + i}
-                      style={{
-                        textAlign: "center",
-                      }}
-                    >
-                      {x.props.property &&
-                        Object.entries(e).find(
-                          ([key]) => key == x.props.property
-                        )?.[1]}
+                  props.children.map((x, i2) => (
+                    <>
                       {x.props.cellRender && x.props.cellRender}
-                    </td>
+                      {!x.props.cellRender && (
+                        <td
+                          key={"gridTr" + i1 + "gridTd" + i2}
+                          style={{
+                            textAlign: "center",
+                          }}
+                        >
+                          {x.props.property &&
+                            Object.entries(e).find(
+                              ([key]) => key == x.props.property
+                            )?.[1]}
+                        </td>
+                      )}
+                    </>
                   ))}
               </tr>
             ))}

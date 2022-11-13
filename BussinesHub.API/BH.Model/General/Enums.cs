@@ -10,6 +10,7 @@ namespace BH.Model.General
 	{
 		StoreOwner = 0,
 		Worker = 1,
+		Default = 2,
 
 	}
 
