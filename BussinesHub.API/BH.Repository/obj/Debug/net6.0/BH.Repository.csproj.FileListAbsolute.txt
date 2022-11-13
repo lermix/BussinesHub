@@ -1,0 +1,15 @@
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BH.Repository\bin\Debug\net6.0\BH.Repository.deps.json
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BH.Repository\bin\Debug\net6.0\BH.Repository.dll
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BH.Repository\bin\Debug\net6.0\BH.Repository.pdb
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BH.Repository\bin\Debug\net6.0\BH.Model.dll
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BH.Repository\bin\Debug\net6.0\BH.Model.pdb
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BH.Repository\obj\Debug\net6.0\BH.Repository.csproj.AssemblyReference.cache
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BH.Repository\obj\Debug\net6.0\BH.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BH.Repository\obj\Debug\net6.0\BH.Repository.AssemblyInfoInputs.cache
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BH.Repository\obj\Debug\net6.0\BH.Repository.AssemblyInfo.cs
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BH.Repository\obj\Debug\net6.0\BH.Repository.csproj.CoreCompileInputs.cache
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BH.Repository\obj\Debug\net6.0\BH.Repository.csproj.CopyComplete
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BH.Repository\obj\Debug\net6.0\BH.Repository.dll
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BH.Repository\obj\Debug\net6.0\refint\BH.Repository.dll
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BH.Repository\obj\Debug\net6.0\BH.Repository.pdb
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BH.Repository\obj\Debug\net6.0\ref\BH.Repository.dll

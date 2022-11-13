@@ -1,0 +1,18 @@
+.column-bordered-table td {
+  border-left: 1px solid #c3c3c3;
+}
+.column-bordered-table td:last-child {
+  border-right: 1px solid #c3c3c3;
+}
+
+.column-bordered-table tr:hover {
+  background-color: linen;
+}
+
+.column-bordered-table th {
+  background-color: lightgrey;
+}
+
+.column-bordered-table {
+  border-spacing: 0;
+}
