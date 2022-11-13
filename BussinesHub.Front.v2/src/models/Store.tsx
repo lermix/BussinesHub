@@ -1,4 +1,4 @@
-import { Company } from "./Company";
+import { Company, CompanyClass } from "./Company";
 import { Image } from "./Image";
 import { Product } from "./Product";
 
@@ -13,4 +13,17 @@ export interface Store {
   parentCompany: Company;
   images: Image[];
   products: Product[];
+}
+
+export class StoreClass implements Store {
+  id = 0;
+  name = "";
+  adress = "";
+  city = "";
+  postalCode = "";
+  country = "";
+  mobileNumber = "";
+  parentCompany = new CompanyClass();
+  images = [];
+  products = [];
 }

@@ -6,17 +6,18 @@ using System.Security.Claims;
 
 namespace BussinesHub.Controllers
 {
-	[Route( "api/[controller]" )]
-	[ApiController]
-	public class SecurityController : ControllerBase
+	public class SecurityController : BaseController
 	{
 		private readonly JwtTokenService _tokenService;
 		private readonly IClaimProvider _claimProvider;
+		private readonly IConfiguration _config;
 
-		public SecurityController(JwtTokenService tokenService, IClaimProvider claimProvider)
+
+		public SecurityController( JwtTokenService tokenService, IClaimProvider claimProvider, IConfiguration config )
 		{
 			_tokenService = tokenService;
 			_claimProvider = claimProvider;
+			_config=config;
 		}
 
 		/// <summary>
@@ -26,12 +27,12 @@ namespace BussinesHub.Controllers
 		/// <returns></returns>
 		[HttpPost]
 		[AllowAnonymous]
-		public async Task<ActionResult> Login([FromBody] LoginDto loginDto)
+		public async Task<ActionResult> Login( [FromBody] LoginDto loginDto )
 		{
 			try
 			{
 				List<Claim> claims = new List<Claim>();
-				await Task.Run( () => claims = _claimProvider.GetRoles(loginDto.Username, loginDto.Password) );
+				await Task.Run( () => claims = _claimProvider.GetRoles( loginDto.Username, loginDto.Password ) );
 
 				if ( claims == null )
 					return Unauthorized();
@@ -43,6 +44,22 @@ namespace BussinesHub.Controllers
 				return StatusCode( StatusCodes.Status500InternalServerError, ex.Message );
 			}
 
+		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		public ActionResult CheckUserToken()
+		{
+
+			var allowedRoles = _config.GetSection( "Roles" ).GetChildren().Select( x => x.Value );
+			var roles = HttpContext.User.Claims
+							.Where( x => x.Type == ClaimTypes.Role )
+							.Select( x => x.Value );
+			if ( roles?.Intersect( allowedRoles ).Count() > 0 )
+				return Ok( true );
+
+
+			return Ok( false );
 		}
 
 	}

@@ -3,70 +3,24 @@ import * as actionTypes from "./actionTypes";
 import { VerifiedUserClass } from "../../models/User";
 
 const initialState: IUserState = {
-  showMainLoading: false,
-  showErrorMessage: false,
-  errorMessageTitle: null,
-  errorMessage: null,
-  notificationIsOpen: false,
-  deleteDialogIsOpen: false,
-  deleteDialogAction: null,
-  notificationType: "none",
-  notificationMessage: "",
-  dialogMessage: "",
-  selectedId: 0,
   verifiedUser: new VerifiedUserClass(),
+  companies: [],
 };
 
-// REDUCER
-export function sharedReducer(
+export function userReducer(
   state: IUserState = initialState,
   action: IUserActionType
 ): IUserState {
   switch (action.type) {
-    case actionTypes.TURN_ON_MAIN_LOADING:
-      return {
-        ...state,
-        showMainLoading: true,
-      };
-    case actionTypes.TURN_OFF_MAIN_LOADING:
-      return {
-        ...state,
-        showMainLoading: false,
-      };
-    case actionTypes.SHOW_ERROR_MESSAGE:
-      return {
-        ...state,
-        showErrorMessage: true,
-        errorMessageTitle: action.errorMessageTitle,
-        errorMessage: action.errorMessage,
-      };
-    case actionTypes.HIDE_ERROR_MESSAGE:
-      return {
-        ...state,
-        showErrorMessage: false,
-        errorMessageTitle: null,
-        errorMessage: null,
-      };
-    case actionTypes.NOTIFICATION_TOGGLE:
-      return {
-        ...state,
-        notificationIsOpen: action.notificationIsOpen,
-        notificationType: action.notificationType,
-        notificationMessage: action.notificationMessage,
-      };
-
-    case actionTypes.TOGGLE_DELETE_DIALOG:
-      return {
-        ...state,
-        selectedId: action.selectedId,
-        deleteDialogIsOpen: action.deleteDialogIsOpen,
-        deleteDialogAction: action.deleteDialogAction,
-        dialogMessage: action.dialogMessage,
-      };
     case actionTypes.USER_LOGIN:
       return {
         ...state,
         verifiedUser: action.verifiedUser,
+      };
+    case actionTypes.CREATE_COMPANY:
+      return {
+        ...state,
+        companies: [...state.companies, action.company],
       };
 
     default:

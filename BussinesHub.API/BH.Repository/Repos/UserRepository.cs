@@ -11,6 +11,21 @@ namespace BH.Repository.Repos
 		{
 			this.context = context;
 		}
+
+		public async Task<Company> AddCompanyToUser( int userId, int companyId )
+		{
+			var foundCompany = context.Companies.FirstOrDefault( x => x.Id == companyId );
+			var foundUser = context.Users.FirstOrDefault( x => x.Id == userId );
+			if( foundCompany != null && foundUser != null)
+			{
+				foundUser.Companies.Add( foundCompany );
+				await context.SaveChangesAsync();
+				return foundCompany;
+			}
+
+			return null;
+		}
+
 		public async Task<User> CreateUser( User user )
 		{
 			var entry = context.Users.Add( user );

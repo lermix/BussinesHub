@@ -1,10 +1,16 @@
-import React, { ChangeEvent } from "react";
-import Grid from "../basicComponents/Grid/Grid";
-import { GridColumn } from "../basicComponents/Grid/GridColumn";
+import React, { ChangeEvent, useState } from "react";
+import Grid from "../../basicComponents/Grid/Grid";
+import { GridColumn } from "../../basicComponents/Grid/GridColumn";
+import { Company } from "../../models/Company";
 
 export const StoreManagament: React.FC = () => {
+  const [showStoreCreator, setShowStoreCreator] = useState<boolean>(false);
+  const [showUserStores, setShowUserStores] = useState<boolean>(false);
+
   return (
     <>
+      <h3>My stores</h3>
+      <button style={{ borderRadius: 10 }}>Create new</button>
       <Grid
         style={{ margin: 20 }}
         onRowClick={(e) => console.log(e)}

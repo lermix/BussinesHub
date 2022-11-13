@@ -1,4 +1,5 @@
-import React, { Children, ReactElement, useState } from "react";
+import { type } from "os";
+import React, { Children, ReactElement, useState, ReactNode } from "react";
 import { Spliter } from "../Spliter/Spliter";
 import { TabItemProps } from "./TabItem";
 import "./TabMenu.css";
@@ -6,7 +7,9 @@ import "./TabMenu.css";
 interface IMenu {
   orientation: "vertical" | "horizontal";
   background?: string;
-  children?: ReactElement<TabItemProps> | Array<ReactElement<TabItemProps>>;
+  children?:
+    | ReactElement<TabItemProps>
+    | Array<ReactElement<TabItemProps> | Element | null | undefined | "">;
 }
 
 const TabMenu: React.FC<IMenu> = ({ children, orientation, background }) => {
@@ -29,23 +32,26 @@ const TabMenu: React.FC<IMenu> = ({ children, orientation, background }) => {
             )}
             {children &&
               Array.isArray(children) &&
-              children.map((x, i) => (
-                <>
-                  <button
-                    key={"tmb" + i}
-                    className="tablinks"
-                    onClick={() => setSelectedTab(i)}
-                  >
-                    {x.props.title}
-                  </button>
-                </>
-              ))}
+              children.map(
+                (x, i) =>
+                  React.isValidElement(x) && (
+                    <>
+                      <button
+                        key={"tmb" + i}
+                        className="tablinks"
+                        onClick={() => setSelectedTab(i)}
+                      >
+                        {x.props.title}
+                      </button>
+                    </>
+                  )
+              )}
           </div>
           {children && !Array.isArray(children) && (
             <div>{children && children}</div>
           )}
           {children && Array.isArray(children) && (
-            <div>{children && children[selectedTab]}</div>
+            <div>{children && (children[selectedTab] as ReactNode)}</div>
           )}
         </>
       )}
@@ -79,7 +85,7 @@ const TabMenu: React.FC<IMenu> = ({ children, orientation, background }) => {
                 >
                   {children.map((x, i) => (
                     <li style={{ width: "100%" }} key={"litabMenu" + i}>
-                      {i === selectedTab && (
+                      {i === selectedTab && React.isValidElement(x) && (
                         <button
                           key={"tmb" + i}
                           style={{
@@ -87,16 +93,22 @@ const TabMenu: React.FC<IMenu> = ({ children, orientation, background }) => {
                             backgroundColor: "#ccc",
                             opacity: 0.8,
                           }}
-                          onClick={() => setSelectedTab(i)}
+                          onClick={() => {
+                            x.props.onClick && x.props.onClick();
+                            x.props.children && setSelectedTab(i);
+                          }}
                         >
                           {x.props.title}
                         </button>
                       )}
-                      {i !== selectedTab && (
+                      {i !== selectedTab && React.isValidElement(x) && (
                         <button
                           key={"tmb" + i}
                           style={{ width: "100%", opacity: 0.8 }}
-                          onClick={() => setSelectedTab(i)}
+                          onClick={() => {
+                            x.props.onClick && x.props.onClick();
+                            x.props.children && setSelectedTab(i);
+                          }}
                         >
                           {x.props.title}
                         </button>
@@ -122,7 +134,11 @@ const TabMenu: React.FC<IMenu> = ({ children, orientation, background }) => {
                 <div>{children && children}</div>
               )}
               {children && Array.isArray(children) && (
-                <div>{children && children[selectedTab]}</div>
+                <div>
+                  {children &&
+                    (children[selectedTab] as ReactNode) !== undefined &&
+                    (children[selectedTab] as ReactNode)}
+                </div>
               )}
             </div>
           </Spliter>

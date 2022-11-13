@@ -1,7 +1,6 @@
 import { requests } from "../agent";
 import * as actionTypes from "./actionTypes";
 import { IUserActionType } from "./interfaces";
-import { IUserLogin, LoginDto, VerifiedUser } from "../../models/User";
 import { ThunkAction } from "redux-thunk";
 import { AppState } from "../rootReducer";
 import { Action } from "redux";

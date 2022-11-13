@@ -27,16 +27,6 @@ axios.interceptors.response.use(
   (error) => {
     const { status, headers } = error.response;
 
-    if (
-      status === 403 ||
-      status === 404 ||
-      status === 401 ||
-      status === 405 ||
-      status === 406 ||
-      status === 407
-    )
-      store.dispatch(dispatchUserInfo(undefined, undefined, undefined));
-
     throw error.response;
   }
 );

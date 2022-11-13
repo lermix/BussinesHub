@@ -1,13 +1,13 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import { Input } from "../basicComponents/Input/Input";
-import { User, UserClass } from "../models/User";
+import { LoginDto, User, UserClass } from "../models/User";
 import { useAppDispatch } from "../store/hooks";
-import { RegisterUser } from "../store/user/actions";
+import { login } from "../store/user/actions";
 
 export const Login: React.FC = () => {
   const dispatch = useAppDispatch();
 
-  const [user, setUser] = useState<User>(new UserClass());
+  const [user, setUser] = useState<LoginDto>({ username: "", password: "" });
 
   return (
     <>
@@ -28,10 +28,7 @@ export const Login: React.FC = () => {
         />
         <br />
         <br />
-        <button
-          style={{ width: 257 }}
-          onClick={() => dispatch(RegisterUser(user))}
-        >
+        <button style={{ width: 257 }} onClick={() => dispatch(login(user))}>
           Login
         </button>
       </div>

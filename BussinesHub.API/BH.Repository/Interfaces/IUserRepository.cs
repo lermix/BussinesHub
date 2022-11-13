@@ -9,5 +9,6 @@ namespace BH.Repository.Interfaces
 		public Task<int> DeleteUser( int UserId );
 		public Task<User> UpdateUser( User user );
 		public Task<List<User>> GetAllUsers();
+		public Task<Company> AddCompanyToUser( int userId, int companyId );
 	}
 }

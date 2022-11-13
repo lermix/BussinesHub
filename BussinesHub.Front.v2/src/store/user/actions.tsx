@@ -5,58 +5,55 @@ import { LoginDto, User, VerifiedUser } from "../../models/User";
 import { ThunkAction } from "redux-thunk";
 import { AppState } from "../rootReducer";
 import { Action } from "redux";
+import {
+  toggleNotification,
+  turnOffLoading,
+  turnOnLoading,
+} from "../shared/actions";
+import { Company } from "../../models/Company";
 
 const apiActions = {
   login: (userLogin: LoginDto): Promise<VerifiedUser> =>
-    requests.post(`user/Login`, userLogin),
-  CheckUserToken: (): Promise<boolean> => requests.get(`user/CheckUserToken`),
+    requests.post(`Security/Login`, userLogin),
+  CheckUserToken: (): Promise<boolean> =>
+    requests.get(`Security/CheckUserToken`),
   register: (user: User): Promise<void> =>
     requests.post(`User/CreateUser`, user),
+  CreateCompany: (company: Company, username: string): Promise<Company> =>
+    requests.post(`Company/CreateCompany?username=${username}`, company),
+  DeleteCompany: (companyId: number): Promise<boolean> =>
+    requests.post(`Company/DeleteCompany`, companyId),
+  AddCopmanyToUser: (userId: number, companyId: number) =>
+    requests.post(
+      `User/AddCompanyToUser?userId=${userId}&companyId=${companyId}`,
+      {}
+    ),
 };
 
-export const turnOnLoading = (): IUserActionType => ({
-  type: actionTypes.TURN_ON_MAIN_LOADING,
-});
+export const createCompany =
+  (
+    company: Company,
+    username: string
+  ): ThunkAction<void, AppState, unknown, Action<string>> =>
+  async (dispatch) => {
+    try {
+      dispatch(turnOnLoading());
+      dispatch(
+        CreateCompany(await apiActions.CreateCompany(company, username))
+      );
+      dispatch(turnOffLoading());
+    } catch (error) {
+      console.error(error);
+      dispatch(turnOffLoading());
+    }
 
-export const turnOffLoading = (): IUserActionType => ({
-  type: actionTypes.TURN_OFF_MAIN_LOADING,
-});
-
-export const showErrorMessage = (
-  errorMessageTitle: string,
-  errorMessage: string
-): IUserActionType => ({
-  type: actionTypes.SHOW_ERROR_MESSAGE,
-  errorMessageTitle: errorMessageTitle,
-  errorMessage: errorMessage,
-});
-
-export const hideErrorMessage = (): IUserActionType => ({
-  type: actionTypes.HIDE_ERROR_MESSAGE,
-});
-export const toggleNotification = (
-  toggle: boolean,
-  type: "none" | "success" | "error" | "warning" | "info",
-  message: string
-): IUserActionType => ({
-  type: actionTypes.NOTIFICATION_TOGGLE,
-  notificationIsOpen: toggle,
-  notificationType: type,
-  notificationMessage: message,
-});
-
-export const toggleDeleteDialog = (
-  toggle: boolean,
-  id: number,
-  dialogAction?: () => void,
-  dialogMessage?: string
-): IUserActionType => ({
-  type: actionTypes.TOGGLE_DELETE_DIALOG,
-  deleteDialogIsOpen: toggle,
-  selectedId: id,
-  deleteDialogAction: dialogAction,
-  dialogMessage: dialogMessage ? dialogMessage : "",
-});
+    function CreateCompany(company: Company): IUserActionType {
+      return {
+        type: actionTypes.CREATE_COMPANY,
+        company: company,
+      };
+    }
+  };
 
 export const login =
   (loginDto: LoginDto): ThunkAction<void, AppState, unknown, Action<string>> =>
@@ -146,19 +143,17 @@ export const setTokenIfExists =
         .split("; ")
         .find((row) => row.startsWith("username="))
         ?.split("=")[1];
+      console.log(token);
       if (token) {
-        const isUserHasRoles = apiActions.CheckUserToken();
+        const jwtData = token.split(".")[1];
+        const decodedJwtJsonData = window.atob(jwtData);
+        const decodedJwtData = JSON.parse(decodedJwtJsonData);
 
-        if (await isUserHasRoles) {
-          const jwtData = token.split(".")[1];
-          const decodedJwtJsonData = window.atob(jwtData);
-          const decodedJwtData = JSON.parse(decodedJwtJsonData);
-
-          const roles = decodedJwtData.role;
-          dispatch(dispatchUserInfo(token, username, roles));
-        }
+        const roles = decodedJwtData.role;
+        dispatch(dispatchUserInfo(token, username, roles));
       }
     } catch (error) {
+      console.error(error);
       dispatch(dispatchUserInfo(undefined, undefined, undefined));
       dispatch(
         toggleNotification(

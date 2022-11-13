@@ -12,3 +12,15 @@ export interface Company {
   stores: Store[];
   analitics: Analitic[];
 }
+
+export class CompanyClass implements Company {
+  id = 0;
+  name = "";
+  identificationNumber = "";
+  adress = "";
+  city = "";
+  postalCode = "";
+  country = "";
+  stores = [];
+  analitics = [];
+}

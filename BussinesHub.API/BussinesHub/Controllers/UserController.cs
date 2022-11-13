@@ -42,6 +42,9 @@ namespace BussinesHub.Controllers
 		public async Task<IActionResult> UpdateUser( User user ) => Ok( userRepository.UpdateUser( user ) );
 		[HttpGet]
 		public async Task<IActionResult> GetUsers() => Ok( userRepository.GetAllUsers() );
+		[HttpPost]
+		public async Task<IActionResult> AddCompanyToUser( int userId, int companyId ) => Ok( userRepository.AddCompanyToUser( userId, companyId ) );
+
 
 	}
 }
