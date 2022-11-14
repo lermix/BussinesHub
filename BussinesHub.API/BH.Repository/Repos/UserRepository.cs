@@ -1,6 +1,7 @@
 ﻿using BH.Model;
 using BH.Model.General;
 using BH.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BH.Repository.Repos
 {
@@ -16,7 +17,7 @@ namespace BH.Repository.Repos
 		{
 			var foundCompany = context.Companies.FirstOrDefault( x => x.Id == companyId );
 			var foundUser = context.Users.FirstOrDefault( x => x.Id == userId );
-			if( foundCompany != null && foundUser != null)
+			if ( foundCompany != null && foundUser != null )
 			{
 				foundUser.Companies.Add( foundCompany );
 				await context.SaveChangesAsync();
@@ -49,6 +50,16 @@ namespace BH.Repository.Repos
 		public async Task<List<User>> GetAllUsers()
 		{
 			return context.Users.ToList();
+		}
+
+		public async Task<List<Company>> GetUserCompanies( string username )
+		{
+			var foundUser = context.Users.Include(x => x.Companies).FirstOrDefault( x => x.Username == username );
+			if ( foundUser != null )
+				if ( foundUser.Companies != null )
+					return await Task.FromResult(foundUser.Companies.ToList());
+
+			return new List<Company>();
 		}
 
 		public async Task<User> UpdateUser( User user )

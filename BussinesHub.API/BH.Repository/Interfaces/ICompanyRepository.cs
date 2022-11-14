@@ -10,5 +10,6 @@ namespace BH.Repository.Interfaces
 		public Task<List<Store>> GetCompanyStores( int companyId );
 		public Task<Company> AddStoreToCompany( int storeId, int companyId );
 		public Task<int> DeleteStoreFromCompany( int storeId, int companyId );
+		public Task<Store> CreateStore( int companyId, Store store );
 	}
 }

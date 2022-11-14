@@ -6,13 +6,16 @@
 }
 
 .column-bordered-table tr:hover {
-  background-color: linen;
+  background-color: skyblue;
 }
 
 .column-bordered-table th {
-  background-color: lightgrey;
+  background-color: steelblue;
 }
 
 .column-bordered-table {
   border-spacing: 0;
+  border-collapse: separate;
+  border: solid #ccc 1px;
+  border-radius: 6px;
 }

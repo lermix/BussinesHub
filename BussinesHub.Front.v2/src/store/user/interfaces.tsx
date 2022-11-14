@@ -17,4 +17,24 @@ interface ICreateCompany {
   company: Company;
 }
 
-export type IUserActionType = IUserLogin | ICreateCompany;
+interface IGetUserCompany {
+  type: typeof actionTypes.GET_USER_COMPANIES;
+  companies: Company[];
+}
+
+interface IEditCompany {
+  type: typeof actionTypes.EDIT_COMPANY;
+  company: Company;
+}
+
+interface IDeleteCompany {
+  type: typeof actionTypes.DELETE_COMPANY;
+  companyId: number;
+}
+
+export type IUserActionType =
+  | IUserLogin
+  | ICreateCompany
+  | IGetUserCompany
+  | IEditCompany
+  | IDeleteCompany;

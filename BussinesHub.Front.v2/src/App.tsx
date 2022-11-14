@@ -11,17 +11,21 @@ import { AppState } from "./store/rootReducer";
 import { useAppDispatch } from "./store/hooks";
 import { logOut, setTokenIfExists } from "./store/user/actions";
 import CompanyManagament from "./components/companyManagament/CompanyManagament";
+import { Company } from "./models/Company";
+import { stat } from "fs";
 
 interface IStateProps {
   verifiedUser: VerifiedUser | null;
+  selectedCompany: Company | null;
 }
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { verifiedUser } = useSelector<AppState, IStateProps>(
+  const { verifiedUser, selectedCompany } = useSelector<AppState, IStateProps>(
     (state: AppState): IStateProps => {
       return {
         verifiedUser: state.user.verifiedUser,
+        selectedCompany: state.company.selectedCompany,
       };
     }
   );
@@ -34,7 +38,7 @@ const App: React.FC = () => {
     <>
       <TabMenu orientation="vertical">
         <TabItem title="Home"></TabItem>
-        {verifiedUser?.token && (
+        {verifiedUser?.token && selectedCompany && (
           <TabItem title="Store managament">
             <StoreManagament></StoreManagament>
           </TabItem>

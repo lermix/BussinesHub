@@ -5,16 +5,18 @@ using BussinesHub.Security;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder( args );
 
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions( o => o.JsonSerializerOptions
+				.ReferenceHandler = ReferenceHandler.IgnoreCycles ); ;
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<BHDbContex>(); 
+builder.Services.AddDbContext<BHDbContex>();
 builder.Services.AddAutoMapper( AppDomain.CurrentDomain.GetAssemblies() );
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();

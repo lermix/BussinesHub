@@ -5,6 +5,7 @@ export interface GridColumnProps {
   width?: number;
   property?: string;
   cellRender?: ReactElement;
+  OnSort?: () => void;
 }
 
 export const GridColumn: React.FC<GridColumnProps> = ({
@@ -12,6 +13,7 @@ export const GridColumn: React.FC<GridColumnProps> = ({
   width,
   property,
   cellRender,
+  OnSort,
 }) => {
   return (
     <>
@@ -26,6 +28,14 @@ export const GridColumn: React.FC<GridColumnProps> = ({
           }}
         >
           {text}
+          {OnSort && (
+            <button
+              onClick={() => OnSort()}
+              style={{ border: "none", height: 30, fontSize: 17 }}
+            >
+              &#8693;
+            </button>
+          )}
         </th>
       )}
     </>

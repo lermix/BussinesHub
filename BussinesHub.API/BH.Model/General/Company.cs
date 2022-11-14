@@ -10,6 +10,6 @@
 		public string PostalCode { get; set; }
 		public string Country { get; set; }
 		public virtual ICollection<Store> Stores { get; set; }
-		public virtual ICollection<Analitic> Analitics { get; set; }
+		public virtual ICollection<Analitic>? Analitics { get; set; }
 	}
 }

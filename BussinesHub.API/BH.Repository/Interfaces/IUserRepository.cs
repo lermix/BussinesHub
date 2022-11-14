@@ -10,5 +10,6 @@ namespace BH.Repository.Interfaces
 		public Task<User> UpdateUser( User user );
 		public Task<List<User>> GetAllUsers();
 		public Task<Company> AddCompanyToUser( int userId, int companyId );
+		public Task<List<Company>> GetUserCompanies( string username );
 	}
 }

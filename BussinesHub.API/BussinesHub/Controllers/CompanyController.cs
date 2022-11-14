@@ -24,7 +24,7 @@ namespace BussinesHub.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> DeleteCompany( int companyId )
+		public async Task<IActionResult> DeleteCompany( [FromQuery] int companyId )
 		{
 			int deletedId = await comapnyRepository.DeleteCompany( companyId );
 			if ( deletedId == -1 )
@@ -33,6 +33,14 @@ namespace BussinesHub.Controllers
 			return Ok( deletedId );
 		}
 
+		[HttpGet]
+		public async Task<IActionResult> GetCompanyStores( int companyId ) =>  Ok( await comapnyRepository.GetCompanyStores( companyId ));
 
+		[HttpPost]
+		public async Task<IActionResult> CreateStore( [FromBody] Store store, [FromQuery] int companyId ) =>
+			Ok( await comapnyRepository.CreateStore( companyId, store ) );
+		[HttpPost]
+		public async Task<IActionResult> EditCompany( [FromBody] Company company) =>
+			Ok( await comapnyRepository.UpdateCompany( company ) );
 	}
 }

@@ -3,12 +3,13 @@ body {
 }
 
 button {
-  background-color: inherit;
+  background-color: steelblue;
   border: 1px solid black;
   cursor: pointer;
   padding: 7px 10px;
   transition: 0.3s;
   font-size: 17px;
+  color: black;
 }
 
 button:hover {
@@ -16,7 +17,7 @@ button:hover {
   cursor: pointer;
   padding: 7px 10px;
   font-size: 17px;
-  background-color: #ccc;
+  background-color: skyblue;
 }
 
 .leaflet-container {

@@ -20,17 +20,6 @@ axios.interceptors.request.use((config) => {
   return config;
 });
 
-axios.interceptors.response.use(
-  async (response) => {
-    return response;
-  },
-  (error) => {
-    const { status, headers } = error.response;
-
-    throw error.response;
-  }
-);
-
 export const requests = {
   get: (url: string) => axios.get(url).then(responseBody),
   post: (url: string, body: {}) => axios.post(url, body).then(responseBody),

@@ -6,18 +6,19 @@ import { Company, CompanyClass } from "../../models/Company";
 import { VerifiedUser } from "../../models/User";
 import { useAppDispatch } from "../../store/hooks";
 import { AppState } from "../../store/rootReducer";
-import { createCompany } from "../../store/user/actions";
+import { createCompany, editCompany } from "../../store/user/actions";
 import MapConsumer from "../MapConsumer";
 
 interface IProps {
   showCreator: React.Dispatch<React.SetStateAction<boolean>>;
+  toEdit: Company | null;
 }
 
 interface IStateProps {
   verifiedUser: VerifiedUser | null;
 }
 
-const CompanyCreator: React.FC<IProps> = ({ showCreator }) => {
+const CompanyCreator: React.FC<IProps> = ({ showCreator, toEdit }) => {
   const dispatch = useAppDispatch();
 
   const { verifiedUser } = useSelector<AppState, IStateProps>(
@@ -28,27 +29,33 @@ const CompanyCreator: React.FC<IProps> = ({ showCreator }) => {
     }
   );
 
-  const [company, setCompany] = useState<Company>(new CompanyClass());
+  const [company, setCompany] = useState<Company>(toEdit ?? new CompanyClass());
 
   const CreateCompany = () => {
     verifiedUser?.username &&
       dispatch(createCompany(company, verifiedUser?.username));
-    //showCreator(false);
+    showCreator(false);
+  };
+
+  const EditCompany = () => {
+    verifiedUser?.username && dispatch(editCompany(company));
+    showCreator(false);
   };
   return (
     <>
       <h2>Create Company</h2>
-
       <br />
       <div style={{ width: 400, float: "left" }}>
         <Input
           type="text"
           text="name"
+          value={company.name}
           onChange={(value: string) => setCompany({ ...company, name: value })}
         />
         <Input
           type="text"
           text="IdentificationNumber"
+          value={company.identificationNumber}
           onChange={(value: string) =>
             setCompany({ ...company, identificationNumber: value })
           }
@@ -56,25 +63,29 @@ const CompanyCreator: React.FC<IProps> = ({ showCreator }) => {
         <Input
           type="text"
           text="Adress"
-          onChange={(value: string) => setCompany({ ...company, city: value })}
+          value={company.adress}
+          onChange={(value: string) =>
+            setCompany({ ...company, adress: value })
+          }
         />
         <Input
           type="text"
           text="City"
+          value={company.city}
+          onChange={(value: string) => setCompany({ ...company, city: value })}
+        />
+        <Input
+          type="text"
+          text="Postal code"
+          value={company.postalCode}
           onChange={(value: string) =>
             setCompany({ ...company, postalCode: value })
           }
         />
         <Input
           type="text"
-          text="Postal code"
-          onChange={(value: string) =>
-            setCompany({ ...company, country: value })
-          }
-        />
-        <Input
-          type="text"
           text="Country"
+          value={company.country}
           onChange={(value: string) =>
             setCompany({ ...company, country: value })
           }
@@ -82,9 +93,16 @@ const CompanyCreator: React.FC<IProps> = ({ showCreator }) => {
         <br />
         <br />
         <div style={{ width: 408 }}>
-          <button style={{ float: "left" }} onClick={CreateCompany}>
-            Create
-          </button>
+          {toEdit && (
+            <button style={{ float: "left" }} onClick={EditCompany}>
+              Edit
+            </button>
+          )}
+          {!toEdit && (
+            <button style={{ float: "left" }} onClick={CreateCompany}>
+              Create
+            </button>
+          )}
           <button style={{ float: "right" }} onClick={() => showCreator(false)}>
             Cancel
           </button>

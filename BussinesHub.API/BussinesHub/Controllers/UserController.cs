@@ -39,12 +39,11 @@ namespace BussinesHub.Controllers
 			return Ok( deletedId );
 		}
 		[HttpPost]
-		public async Task<IActionResult> UpdateUser( User user ) => Ok( userRepository.UpdateUser( user ) );
+		public async Task<IActionResult> UpdateUser( User user ) => Ok( await userRepository.UpdateUser( user ) );
 		[HttpGet]
-		public async Task<IActionResult> GetUsers() => Ok( userRepository.GetAllUsers() );
-		[HttpPost]
-		public async Task<IActionResult> AddCompanyToUser( int userId, int companyId ) => Ok( userRepository.AddCompanyToUser( userId, companyId ) );
-
+		public async Task<IActionResult> GetUsers() => Ok( await userRepository.GetAllUsers() );
+		[HttpGet]
+		public async Task<IActionResult> GetUserCompanies( string username ) => Ok( await userRepository.GetUserCompanies( username ) );
 
 	}
 }

@@ -7,6 +7,9 @@ export interface InputProps {
   height?: number;
   onChange?(value: string | number): void;
   type: "text" | "number";
+  autoComplete?: "off";
+  style?: React.CSSProperties;
+  value?: string | number;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -15,9 +18,12 @@ export const Input: React.FC<InputProps> = ({
   height,
   onChange,
   type,
+  autoComplete,
+  style,
+  value,
 }) => {
   return (
-    <>
+    <div style={style}>
       <label htmlFor="a">
         <span className="spanInput" style={{ color: "black" }}>
           {text && text}
@@ -26,6 +32,8 @@ export const Input: React.FC<InputProps> = ({
       <input
         id="a"
         type={type}
+        defaultValue={value}
+        autoComplete={autoComplete}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           const target = event.target as HTMLInputElement;
           if (type === "number") onChange && onChange(Number(target.value));
@@ -33,6 +41,6 @@ export const Input: React.FC<InputProps> = ({
         }}
         style={{ width: width ? width : 400, height: height ? height : 34 }}
       ></input>
-    </>
+    </div>
   );
 };

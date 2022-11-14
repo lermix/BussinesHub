@@ -32,7 +32,7 @@ namespace BussinesHub.Controllers
 		[HttpGet]
 		public async Task<ActionResult> GetStoreProduct( int storeId ) => Ok( storeRepository.GetStoreProduct( storeId ) );
 		[HttpPost]
-		public async Task<ActionResult> AddProductToStore( Product product, int SsoreId ) => Ok( storeRepository.AddProductToStore( product, SsoreId ) );
+		public async Task<ActionResult> AddProductToStore([FromBody] Product product,[FromQuery] int storeId ) => Ok( storeRepository.AddProductToStore( product, storeId ) );
 		[HttpPost]
 		public async Task<ActionResult> DeleteProductFromStore( int productId, int storeId )
 		{

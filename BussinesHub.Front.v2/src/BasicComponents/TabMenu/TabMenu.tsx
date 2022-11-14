@@ -90,7 +90,7 @@ const TabMenu: React.FC<IMenu> = ({ children, orientation, background }) => {
                           key={"tmb" + i}
                           style={{
                             width: "100%",
-                            backgroundColor: "#ccc",
+                            backgroundColor: "SteelBlue",
                             opacity: 0.8,
                           }}
                           onClick={() => {

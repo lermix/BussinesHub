@@ -26,21 +26,41 @@ namespace BH.Repository.Repos
 
 			return null;
 		}
-		
+
 		public async Task<Company> CreateCompany( Company comapny, string username )
 		{
 			var foundUser = context.Users.FirstOrDefault( x => x.Username == username );
-			if(foundUser != null)
+			if ( foundUser != null )
 			{
 				var entry = context.Companies.Add( comapny );
-				if(foundUser.Companies == null)
+				if ( foundUser.Companies == null )
 					foundUser.Companies = new List<Company>();
 				foundUser.Companies.Add( comapny );
 				await context.SaveChangesAsync();
 				return entry.Entity;
 			}
 			return null;
-			
+
+		}
+
+		public async Task<Store> CreateStore( int companyId, Store store )
+		{
+			var foundCompany = context.Companies.FirstOrDefault( x => x.Id == companyId );			
+			if ( foundCompany != null )
+			{
+				if ( foundCompany.Stores == null )
+				{
+					foundCompany.Stores = new List<Store>();
+					foundCompany.Stores.Add( store );
+				}
+				else
+					foundCompany.Stores.Add( store );
+
+				await context.SaveChangesAsync();
+				return store;
+			}
+			return null;
+
 		}
 
 		public async Task<int> DeleteCompany( int companyId )
@@ -72,11 +92,14 @@ namespace BH.Repository.Repos
 			return -1;
 		}
 
+
+
 		public Task<List<Store>> GetCompanyStores( int companyId )
 		{
-			var foundCompany = context.Companies.FirstOrDefault( x => x.Id == companyId );
+			var foundCompany = context.Companies.Include(x => x.Stores).FirstOrDefault( x => x.Id == companyId );
 			if ( foundCompany != null )
-				return Task.FromResult( foundCompany.Stores.ToList() );
+				if ( foundCompany.Stores != null )
+					return Task.FromResult( foundCompany.Stores.ToList() );
 
 			return Task.FromResult( new List<Store>() );
 		}

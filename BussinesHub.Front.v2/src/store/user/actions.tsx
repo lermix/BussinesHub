@@ -28,7 +28,77 @@ const apiActions = {
       `User/AddCompanyToUser?userId=${userId}&companyId=${companyId}`,
       {}
     ),
+  GetUserCompanies: (username: string): Promise<Company[]> =>
+    requests.get(`User/GetUserCompanies?username=${username}`),
+  editCompany: (company: Company): Promise<Company> =>
+    requests.post(`Company/EditCompany`, company),
+  deleteCompany: (companyId: number): Promise<number> =>
+    requests.post(`Company/DeleteCompany?companyId=${companyId}`, {}),
 };
+
+export const getUserCompanies =
+  (username: string): ThunkAction<void, AppState, unknown, Action<string>> =>
+  async (dispatch) => {
+    try {
+      dispatch(turnOnLoading());
+      dispatch(
+        GetUserCompaniesSuccess(await apiActions.GetUserCompanies(username))
+      );
+      dispatch(turnOffLoading());
+    } catch (error) {
+      console.error(error);
+      dispatch(turnOffLoading());
+    }
+
+    function GetUserCompaniesSuccess(companies: Company[]): IUserActionType {
+      return {
+        type: actionTypes.GET_USER_COMPANIES,
+        companies: companies,
+      };
+    }
+  };
+
+export const editCompany =
+  (company: Company): ThunkAction<void, AppState, unknown, Action<string>> =>
+  async (dispatch) => {
+    try {
+      company.stores = [];
+      company.analitics = [];
+      dispatch(turnOnLoading());
+      dispatch(editCompanySuccess(await apiActions.editCompany(company)));
+      dispatch(turnOffLoading());
+    } catch (error) {
+      console.error(error);
+      dispatch(turnOffLoading());
+    }
+
+    function editCompanySuccess(company: Company): IUserActionType {
+      return {
+        type: actionTypes.EDIT_COMPANY,
+        company: company,
+      };
+    }
+  };
+
+export const deleteCompany =
+  (companyId: number): ThunkAction<void, AppState, unknown, Action<string>> =>
+  async (dispatch) => {
+    try {
+      dispatch(turnOnLoading());
+      dispatch(editCompanySuccess(await apiActions.deleteCompany(companyId)));
+      dispatch(turnOffLoading());
+    } catch (error) {
+      console.error(error);
+      dispatch(turnOffLoading());
+    }
+
+    function editCompanySuccess(companyId: number): IUserActionType {
+      return {
+        type: actionTypes.DELETE_COMPANY,
+        companyId: companyId,
+      };
+    }
+  };
 
 export const createCompany =
   (

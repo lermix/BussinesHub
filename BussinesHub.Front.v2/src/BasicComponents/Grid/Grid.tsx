@@ -20,7 +20,12 @@ const Grid = <T extends Record<string, any>>(
           <tr>
             {props.children &&
               Array.isArray(props.children) &&
-              props.children.map((x, i) => x)}
+              props.children.map((x, i) => (
+                <>
+                  {x.props.cellRender && <th>{x.props.text}</th>}
+                  {!x.props.cellRender && x}
+                </>
+              ))}
           </tr>
         </thead>
         <tbody>

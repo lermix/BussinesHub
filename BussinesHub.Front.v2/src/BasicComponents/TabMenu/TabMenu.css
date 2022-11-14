@@ -30,11 +30,11 @@
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #ddd;
+  background-color: SkyBlue;
 }
 
 .tabVertical button:hover {
-  background-color: #ddd;
+  background-color: SkyBlue;
 }
 
 .tab-vertical {
