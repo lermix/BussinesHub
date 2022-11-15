@@ -48,7 +48,6 @@ const App: React.FC = () => {
             <CompanyManagament></CompanyManagament>
           </TabItem>
         )}
-        <TabItem title="test"></TabItem>
         <TabItem title="Register">
           <Register />
         </TabItem>
