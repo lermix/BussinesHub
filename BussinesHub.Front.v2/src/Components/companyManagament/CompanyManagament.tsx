@@ -13,6 +13,7 @@ import { useAppDispatch } from "../../store/hooks";
 import { AppState } from "../../store/rootReducer";
 import { deleteCompany, getUserCompanies } from "../../store/user/actions";
 import CompanyCreator from "./CompanyCreator";
+import { Window } from "../../basicComponents/Window/Window";
 
 interface IStateProps {
   companies: Company[];
@@ -46,8 +47,9 @@ export const CompanyManagament: React.FC = () => {
     <>
       {!showCompanyCreator && (
         <>
-          <h3>My companies</h3>
+          <h3 style={{ marginTop: 0 }}>My companies</h3>
           <button
+            className="shw"
             style={{ borderRadius: 10 }}
             onClick={() => {
               setCopmanyToEdit(null);
@@ -61,6 +63,7 @@ export const CompanyManagament: React.FC = () => {
           {selectedCompany && (
             <>
               <button
+                className="shw"
                 style={{ borderRadius: 10, marginLeft: 20 }}
                 onClick={() => {
                   setCopmanyToEdit(selectedCompany);
@@ -72,6 +75,7 @@ export const CompanyManagament: React.FC = () => {
                 Edit company {selectedCompany.name}
               </button>
               <button
+                className="shw"
                 style={{ borderRadius: 10, marginLeft: 20 }}
                 onClick={() => dispatch(deleteCompany(selectedCompany.id))}
               >

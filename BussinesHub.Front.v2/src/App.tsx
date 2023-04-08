@@ -1,5 +1,9 @@
 import { useEffect } from "react";
+
 import "./App.css";
+import "./Styles/Scrollbar.css";
+// import "./basicComponents/Grid/Grid.css";
+
 import TabMenu from "./basicComponents/TabMenu/TabMenu";
 import { TabItem } from "./basicComponents/TabMenu/TabItem";
 import StoreManagament from "./components/storeManagament/StoreManagament";
@@ -13,7 +17,13 @@ import { logOut, setTokenIfExists } from "./store/user/actions";
 import CompanyManagament from "./components/companyManagament/CompanyManagament";
 import { Company } from "./models/Company";
 import { stat } from "fs";
-
+import { Card } from "./basicComponents/Card/Card";
+import cardImg from "./images/abstract.jpg";
+import { CardContainer } from "./basicComponents/Card/CardContainer";
+import { SideMenu } from "./basicComponents/SideMenu/SideMenu";
+import { SideMenuBtn } from "./basicComponents/SideMenu/SideMenuBtn";
+import Grid from "./basicComponents/Grid/Grid";
+import { GridColumn } from "./basicComponents/Grid/GridColumn";
 interface IStateProps {
   verifiedUser: VerifiedUser | null;
   selectedCompany: Company | null;
@@ -36,7 +46,33 @@ const App: React.FC = () => {
 
   return (
     <>
-      <TabMenu orientation="vertical">
+      {/* <div className="cardWrapper">
+        <div className="cardBussines"></div>
+
+        <div className="cardPrivate"></div>
+      </div> */}
+
+      <div className="mainDisplay">
+        <SideMenu>
+          <SideMenuBtn text="Most popular" />
+          <SideMenuBtn text="Service" />
+          <SideMenuBtn text="Companies" />
+          <SideMenuBtn text="Bucket list" />
+          <SideMenuBtn text="Sell" />
+        </SideMenu>
+        <CardContainer>
+          <Card></Card>
+          <Card></Card>
+          <Card></Card>
+          <Card></Card>
+          <Card></Card>
+          <Card></Card>
+          <Card></Card>
+        </CardContainer>
+        <div className="mainDisplayBottom"></div>
+      </div>
+
+      {/* <TabMenu orientation="vertical">
         <TabItem title="Home"></TabItem>
         {verifiedUser?.token && selectedCompany && (
           <TabItem title="Store managament">
@@ -55,7 +91,7 @@ const App: React.FC = () => {
           <Login />
         </TabItem>
         <button title="LogOut" onClick={() => dispatch(logOut())} />
-      </TabMenu>
+      </TabMenu> */}
     </>
   );
 };

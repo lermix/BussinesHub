@@ -1,0 +1,39 @@
+.TopMenu {
+  width: 100%;
+  height: 5vh;
+  background-color: #112d32;
+  text-align: center;
+  display: table;
+}
+
+.btnTopMenu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 17px;
+  color: #88dbbc;
+  font-family: "Century Gothic";
+}
+
+.BtnDivTopMenu {
+  display: inline-block;
+  margin-left: 20px;
+  margin-top: 0.8vh;
+}
+
+.BtnDivTopMenu:hover .hrTopMenu {
+  border: 1px solid #88dbbc;
+}
+
+.BtnDivTopMenu:hover .btnTopMenu {
+  font-size: large;
+}
+
+.hrTopMenu {
+  border: 1px solid #254e58;
+
+  width: 100%;
+  margin: 0;
+  transition: 1s;
+}

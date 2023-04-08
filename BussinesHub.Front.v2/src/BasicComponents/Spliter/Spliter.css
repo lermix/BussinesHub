@@ -1,16 +1,18 @@
-.split {
-  height: 100%;
-  width: 50%;
+.fbc-split {
+  height: 98vh;
   z-index: 1;
   top: 0;
-  overflow-x: hidden;
   padding: 0;
+  overflow-x: hidden;
+  opacity: 0.9;
+  border-radius: 10;
+  background-color: aqua;
 }
 
-.left {
+.fbc-left {
   float: left;
 }
 
-.right {
+.fbc-right {
   float: right;
 }

@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode, useState } from "react";
 import { GridColumnProps } from "./GridColumn";
 import "./Grid.css";
 export interface GridProps<T> {
@@ -13,9 +13,11 @@ export interface GridProps<T> {
 const Grid = <T extends Record<string, any>>(
   props: GridProps<T> & { children?: ReactNode }
 ) => {
+  const [selectedRowIndex, setSelectedRowIndex] = useState<number>(-1);
+
   return (
     <>
-      <table className="column-bordered-table" style={props.style}>
+      <table className="fbc-table" style={props.style}>
         <thead>
           <tr>
             {props.children &&
@@ -33,7 +35,13 @@ const Grid = <T extends Record<string, any>>(
             {props.data.map((e, i1) => (
               <tr
                 key={"gridTr" + i1}
-                onClick={() => props.onRowClick && props.onRowClick(e)}
+                onClick={() => {
+                  setSelectedRowIndex(i1);
+                  props.onRowClick && props.onRowClick(e);
+                }}
+                className={
+                  selectedRowIndex == i1 ? "fbc-Tr-Selected" : "fbc-Tr"
+                }
               >
                 {props.children &&
                   Array.isArray(props.children) &&

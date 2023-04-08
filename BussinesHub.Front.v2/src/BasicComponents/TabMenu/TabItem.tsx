@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 export interface TabItemProps {
   title?: string;
@@ -7,5 +7,5 @@ export interface TabItemProps {
 }
 
 export const TabItem: React.FC<TabItemProps> = ({ children }) => {
-  return <div style={{ margin: 15 }}>{children}</div>;
+  return <div>{children}</div>;
 };

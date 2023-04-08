@@ -8,32 +8,24 @@ export interface SpliterProps {
 }
 
 export const Spliter: React.FC<SpliterProps> = ({ children, left, right }) => {
+  const css = `
+    .fbc-left {
+      width: ${left - 1}%;
+    }
+
+    .fbc-right {
+        width: ${right}%;
+    }
+`;
+
   return (
     <>
-      <div
-        className="split left"
-        style={{
-          width: left - 1 + "%",
-          height: "98vh",
-          background: "#FFFAFA",
-          opacity: 0.9,
-          borderRadius: 10,
-          paddingTop: 5,
-        }}
-      >
+      <style>{css}</style>
+      <div className="fbc-split fbc-left">
         {children && children[0] && children[0]}
       </div>
 
-      <div
-        className="split right"
-        style={{
-          width: right + "%",
-          height: "98vh",
-          background: "#FFFAFA",
-          opacity: 0.9,
-          borderRadius: 10,
-        }}
-      >
+      <div className="fbc-split fbc-right">
         {children && children[1] && children[1]}
       </div>
     </>

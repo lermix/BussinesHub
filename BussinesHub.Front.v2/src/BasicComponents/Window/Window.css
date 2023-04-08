@@ -1,0 +1,14 @@
+.fbc-window {
+  display: block;
+  position: fixed;
+  width: 300px;
+  border: 1px solid black;
+  background-color: white;
+}
+
+.fbc-window-header {
+  display: block;
+  width: 100%;
+  height: 30px;
+  background-color: var(--primary);
+}

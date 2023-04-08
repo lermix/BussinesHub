@@ -62,11 +62,9 @@ const TabMenu: React.FC<IMenu> = ({ children, orientation, background }) => {
               className="tabVertical"
               style={{
                 width: "100%",
-                height: "98%",
+                height: "100%",
                 background: "#FFFAFA",
-                opacity: 0.9,
                 borderRadius: 10,
-                paddingTop: 5,
               }}
             >
               {children && !Array.isArray(children) && (
@@ -120,14 +118,10 @@ const TabMenu: React.FC<IMenu> = ({ children, orientation, background }) => {
             </div>
             <div
               style={{
-                width: "98%",
-                height: "98%",
-                marginLeft: 15,
-                padding: 0,
+                width: "100%",
+                height: "100%",
                 borderRadius: 10,
-                display: "block",
                 backgroundColor: "#FFFAFA",
-                opacity: 0.9,
               }}
             >
               {children && !Array.isArray(children) && (

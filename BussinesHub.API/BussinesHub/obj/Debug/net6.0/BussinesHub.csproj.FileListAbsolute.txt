@@ -66,3 +66,8 @@ C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BussinesHub\bin\Debug\
 C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BussinesHub\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BussinesHub\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BussinesHub\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BussinesHub\obj\Debug\net6.0\staticwebassets\msbuild.BussinesHub.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BussinesHub\obj\Debug\net6.0\staticwebassets\msbuild.build.BussinesHub.props
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BussinesHub\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.BussinesHub.props
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BussinesHub\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.BussinesHub.props
+C:\Users\amuller\source\repos\BussinesHub\BussinesHub.API\BussinesHub\obj\Debug\net6.0\staticwebassets.pack.json

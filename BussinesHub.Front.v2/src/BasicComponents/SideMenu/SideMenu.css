@@ -1,0 +1,141 @@
+.mainDisplayBottom {
+  background-color: #112d32;
+  width: 100%;
+  height: 3vh;
+  opacity: 0.9;
+}
+
+.sideMenuHeader {
+  font-family: "Century Gothic";
+  font-size: 25px;
+  border-bottom: 2px solid #88dbbc;
+  display: inline-flex;
+}
+
+.sideMenuHeader > * {
+  margin: 10px;
+
+  color: #88dbbc;
+}
+
+.sideMenuColapseBtn {
+  width: 30px;
+  height: 30px;
+
+  background-color: transparent;
+  border: none;
+  background-image: url("../../images/back.png");
+  background-size: cover;
+  transition: 23;
+}
+
+.sideMenuExpandBtn {
+  width: 0px;
+  height: 0px;
+  background-color: transparent;
+  margin: 5px;
+  border: none;
+
+  background-image: url("../../images/forward.png");
+  background-size: cover;
+  transition: 1s;
+}
+
+.sideMenu {
+  float: left;
+  border-radius: 4px;
+  height: 97vh;
+  margin-right: 1vw;
+  background-color: #ffffff;
+  width: 12vw;
+  background-color: rgba(79, 74, 65, 0.95);
+  transition: 1s;
+}
+
+.sideMenuBtn {
+  width: 0px;
+  height: 0;
+  border-top: 5vh solid black;
+  border-bottom: 0px solid transparent;
+  border-left: 10vw solid black;
+  border-right: 2vw solid transparent;
+  transition: 1s;
+}
+
+.sideMenuBtn > p {
+  padding: 0;
+  position: absolute;
+  margin-top: -3.5vh;
+  margin-left: -9vw;
+  color: #88dbbc;
+  font-size: calc(1.2vw);
+  font-family: "Century Gothic";
+}
+
+.sideMenuBtn:hover > p {
+  color: black;
+  font-weight: bold;
+}
+
+.sideMenuBtn:hover > .innertriangle {
+  width: 0px;
+  height: 0;
+  margin-top: -5vh;
+  border-top: 5vh solid #88dbbc;
+  border-bottom: 0px solid transparent;
+  border-left: 10vw solid #88dbbc;
+  border-right: 2vw solid transparent;
+  color: black;
+}
+
+@media only screen and (max-width: 1226px) {
+  .sideMenu {
+    width: 40px;
+  }
+
+  .sideMenuColapseBtn {
+    visibility: hidden;
+  }
+
+  .sideMenuExpandBtn {
+    visibility: hidden;
+  }
+
+  .innertriangle {
+    border: 0px;
+  }
+
+  .sideMenuBtn {
+    border: 0px;
+  }
+
+  .sideMenuHeader {
+    position: absolute;
+    left: -50vw;
+  }
+
+  .sideMenuExpandBtn {
+    width: 30px;
+    height: 30px;
+  }
+
+  .sideMenuColapseBtn {
+    position: absolute;
+    left: -50vw;
+  }
+}
+
+@media only screen and (min-width: 1225px) {
+  .innertriangle {
+    position: absolute;
+    margin-top: -4.4vh;
+    margin-left: -10vw;
+    width: 0px;
+    height: 0;
+    border-top: 4.5vh solid #112d32;
+    border-bottom: 0px solid transparent;
+    border-left: 9vw solid #112d32;
+    border-right: 2vw solid transparent;
+    transition: 0.5s;
+  }
+}

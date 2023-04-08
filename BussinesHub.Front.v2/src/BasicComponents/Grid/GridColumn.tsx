@@ -1,4 +1,4 @@
-import React, { ChangeEvent, ReactElement } from "react";
+import React, { ReactElement } from "react";
 
 export interface GridColumnProps {
   text?: string;
@@ -15,21 +15,22 @@ export const GridColumn: React.FC<GridColumnProps> = ({
   cellRender,
   OnSort,
 }) => {
+  const css = `
+    .fbc-th {
+        width: ${width}px;
+    }
+`;
+
   return (
     <>
+      <style>{css}</style>
       {cellRender && cellRender}
       {!cellRender && (
-        <th
-          style={{
-            width: width,
-            textAlign: "center",
-            border: "1px solid #ccc ",
-            borderRadius: 2,
-          }}
-        >
+        <th className="fbc-th">
           {text}
           {OnSort && (
             <button
+              className="orderBtn"
               onClick={() => OnSort()}
               style={{ border: "none", height: 30, fontSize: 17 }}
             >

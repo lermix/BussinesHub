@@ -1,21 +1,45 @@
-.column-bordered-table td {
+.fbc-table td {
   border-left: 1px solid #c3c3c3;
 }
-.column-bordered-table td:last-child {
+.fbc-table td:last-child {
   border-right: 1px solid #c3c3c3;
 }
 
-.column-bordered-table tr:hover {
-  background-color: skyblue;
-}
-
-.column-bordered-table th {
-  background-color: steelblue;
-}
-
-.column-bordered-table {
+.fbc-table {
   border-spacing: 0;
   border-collapse: separate;
-  border: solid #ccc 1px;
   border-radius: 6px;
+  box-shadow: 4px 8px 8px hsl(0deg 0% 0% / 0.38);
+}
+
+/*OVERRIDABLE just puth .fbc-table infront of class to override*/
+.orderBtn {
+  background-color: var(--primary);
+  border: none;
+  cursor: pointer;
+  padding: 7px 10px;
+  transition: 0.3s;
+  font-size: 17px;
+  color: black;
+}
+
+.orderBtn:hover {
+  box-shadow: 2px 4px 4px hsl(0deg 0% 0% / 0.38);
+  background-color: rgb(98, 170, 228);
+}
+
+.fbc-th {
+  background-color: var(--primary);
+  text-align: "center";
+  border: "1px solid #ccc";
+  border-radius: 2;
+}
+
+.fbc-Tr:hover {
+  background-color: var(--hoverColor);
+}
+
+.fbc-Tr-Selected,
+.fbc-Tr-Selected:hover {
+  background-color: slategray;
 }

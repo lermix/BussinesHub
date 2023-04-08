@@ -1,0 +1,50 @@
+.companyInfoTitle {
+  text-shadow: 2px 2px rgba(0, 0, 0, 0.15);
+}
+
+.companyInfoList {
+  list-style-type: circle;
+  height: 90px;
+}
+
+.companyInfoBtn {
+  background-color: var(--blackGreen);
+  border: none;
+  cursor: pointer;
+  padding: 7px 10px;
+  transition: 0.3s;
+  font-size: 17px;
+  width: 100%;
+  height: 40px;
+  margin-top: 15px;
+  color: #88dbbc;
+  transition: 0.5s;
+}
+
+.companyInfoBtn:hover {
+  background-color: #88dbbc;
+  color: black;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.companyInfoTableTdLeft {
+  border-right: 2px solid #112d32;
+  background-color: #112d32;
+  padding: 15px;
+  color: #88dbbc;
+  box-shadow: 7px 7px 5px -4px rgba(0, 0, 0, 0.24);
+  outline: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.companyInfoTableTdRight {
+  padding-left: 20px;
+  background-color: rgba(95, 158, 160, 0.4);
+  box-shadow: 7px 7px 5px -4px rgba(0, 0, 0, 0.24);
+  outline: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.companyInfoData {
+  border-spacing: 5px;
+  width: calc(100%);
+}

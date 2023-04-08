@@ -28,7 +28,11 @@ export const Login: React.FC = () => {
         />
         <br />
         <br />
-        <button style={{ width: 257 }} onClick={() => dispatch(login(user))}>
+        <button
+          className="fbc-btn"
+          style={{ width: 257 }}
+          onClick={() => dispatch(login(user))}
+        >
           Login
         </button>
       </div>
