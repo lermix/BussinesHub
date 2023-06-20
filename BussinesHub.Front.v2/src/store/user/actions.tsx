@@ -1,7 +1,12 @@
 import { requests } from "../agent";
 import * as actionTypes from "./actionTypes";
 import { IUserActionType } from "./interfaces";
-import { LoginDto, User, VerifiedUser } from "../../models/User";
+import {
+  LoginDto,
+  User,
+  VerifiedUser,
+  VerifiedUserClass,
+} from "../../models/User";
 import { ThunkAction } from "redux-thunk";
 import { AppState } from "../rootReducer";
 import { Action } from "redux";
@@ -62,8 +67,6 @@ export const editCompany =
   (company: Company): ThunkAction<void, AppState, unknown, Action<string>> =>
   async (dispatch) => {
     try {
-      company.stores = [];
-      company.analitics = [];
       dispatch(turnOnLoading());
       dispatch(editCompanySuccess(await apiActions.editCompany(company)));
       dispatch(turnOffLoading());
@@ -125,6 +128,39 @@ export const createCompany =
     }
   };
 
+export const SaveVerifiedUser =
+  (
+    verifiedUser: VerifiedUser
+  ): ThunkAction<void, AppState, unknown, Action<string>> =>
+  async (dispatch) => {
+    try {
+      dispatch(SaveVerifiedUserSuccess(verifiedUser));
+    } catch (error) {
+      dispatch(toggleNotification(true, "error", "Failed to save user"));
+      console.log("ERROR  ---- " + error);
+    }
+
+    function SaveVerifiedUserSuccess(
+      verifiedUser: VerifiedUser
+    ): IUserActionType {
+      if (verifiedUser.token) {
+        document.cookie = `jwt=` + verifiedUser.token + `;path=/`;
+        verifiedUser.username
+          ? (document.cookie = `username=` + verifiedUser.username + `; path=/`)
+          : dispatch(
+              toggleNotification(
+                true,
+                "error",
+                "Token avalible but there is no username"
+              )
+            );
+      }
+      return {
+        type: actionTypes.USER_LOGIN,
+        verifiedUser: verifiedUser,
+      };
+    }
+  };
 export const login =
   (loginDto: LoginDto): ThunkAction<void, AppState, unknown, Action<string>> =>
   async (dispatch) => {

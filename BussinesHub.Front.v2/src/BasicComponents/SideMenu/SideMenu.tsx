@@ -7,12 +7,19 @@ export interface SideMenuProps {
   children?:
     | ReactElement<SideMenuBtnProps>
     | Array<ReactElement<SideMenuBtnProps> | Element | null | undefined | "">;
+  footer?: React.ReactNode;
 }
 
-export const SideMenu: React.FC<SideMenuProps> = ({ children }) => {
+export const SideMenu: React.FC<SideMenuProps> = ({ children, footer }) => {
   const [collapsed, setCollapsed] = useState<boolean>(false);
 
   const cssCollapsed = `
+
+  .sideMenuFooter {
+    border: none;
+    visibility:hidden;
+  }
+  
     .sideMenu {
       width: 40px;   
     }
@@ -43,11 +50,19 @@ export const SideMenu: React.FC<SideMenuProps> = ({ children }) => {
       
     }
     
+ 
+`;
+
+  const cssGeneral = `
+.sideMenuBtnContainer {
+  height: ${Array.isArray(children) ? 55 * children.length : 70}px;
+}
 `;
 
   return (
     <>
       {collapsed && <style>{cssCollapsed}</style>}
+      <style>{cssGeneral}</style>
       <div className="sideMenu" id="sideMenuId">
         <div className="sideMenuHeader" id="sideMenuHeaderId">
           <p>BUSSINESS HUB</p>
@@ -65,7 +80,7 @@ export const SideMenu: React.FC<SideMenuProps> = ({ children }) => {
             setCollapsed(false);
           }}
         ></button>
-        <>
+        <div className="sideMenuBtnContainer">
           {children && !Array.isArray(children) && children}
           {children &&
             Array.isArray(children) &&
@@ -75,7 +90,9 @@ export const SideMenu: React.FC<SideMenuProps> = ({ children }) => {
                   <div key={"sideMenuBtn" + i}>{x}</div>
                 )
             )}
-        </>
+        </div>
+
+        <div className="sideMenuFooter">{footer}</div>
       </div>
     </>
   );

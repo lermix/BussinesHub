@@ -17,6 +17,6 @@ namespace BH.Model.General
 		public string? MobileNumber { get; set; }	
 		public Company ParentCompany { get; set; }
 		public virtual ICollection<Image> Images { get; set; }
-		public virtual ICollection<Product> Products { get; set; }
+		public virtual ICollection<StoreProductData> ProductsData { get; set; }
 	}
 }

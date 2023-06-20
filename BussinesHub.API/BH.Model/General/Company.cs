@@ -9,7 +9,9 @@
 		public string City { get; set; }
 		public string PostalCode { get; set; }
 		public string Country { get; set; }
+		public string PhoneNumber { get; set; }
 		public virtual ICollection<Store> Stores { get; set; }
 		public virtual ICollection<Analitic>? Analitics { get; set; }
+		public virtual ICollection<User> Users { get; set; }
 	}
 }

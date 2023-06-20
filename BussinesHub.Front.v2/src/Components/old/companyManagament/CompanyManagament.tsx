@@ -1,19 +1,19 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Grid from "../../basicComponents/Grid/Grid";
-import { GridColumn } from "../../basicComponents/Grid/GridColumn";
-import { Input } from "../../basicComponents/Input/Input";
-import { Company } from "../../models/Company";
-import { VerifiedUser } from "../../models/User";
+import Grid from "../../../basicComponents/Grid/Grid";
+import { GridColumn } from "../../../basicComponents/Grid/GridColumn";
+import { Input } from "../../../basicComponents/Input/Input";
+import { Company } from "../../../models/Company";
+import { VerifiedUser } from "../../../models/User";
 import {
   getCompanyStores,
   setSelectedCompany,
-} from "../../store/company/actions";
-import { useAppDispatch } from "../../store/hooks";
-import { AppState } from "../../store/rootReducer";
-import { deleteCompany, getUserCompanies } from "../../store/user/actions";
+} from "../../../store/company/actions";
+import { useAppDispatch } from "../../../store/hooks";
+import { AppState } from "../../../store/rootReducer";
+import { deleteCompany, getUserCompanies } from "../../../store/user/actions";
 import CompanyCreator from "./CompanyCreator";
-import { Window } from "../../basicComponents/Window/Window";
+import { Window } from "../../../basicComponents/Window/Window";
 
 interface IStateProps {
   companies: Company[];

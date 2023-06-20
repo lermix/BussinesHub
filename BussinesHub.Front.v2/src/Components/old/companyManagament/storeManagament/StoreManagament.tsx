@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Grid from "../../basicComponents/Grid/Grid";
-import { GridColumn } from "../../basicComponents/Grid/GridColumn";
-import { Input } from "../../basicComponents/Input/Input";
-import { Company } from "../../models/Company";
-import { Store } from "../../models/Store";
-import { getCompanyStores } from "../../store/company/actions";
-import { useAppDispatch } from "../../store/hooks";
-import { AppState } from "../../store/rootReducer";
-import { getStoreProducts, setSelectedStore } from "../../store/store/actions";
+import Grid from "../../../../basicComponents/Grid/Grid";
+import { GridColumn } from "../../../../basicComponents/Grid/GridColumn";
+import { Input } from "../../../../basicComponents/Input/Input";
+import { Company } from "../../../../models/Company";
+import { Store } from "../../../../models/Store";
+import { getCompanyStores } from "../../../../store/company/actions";
+import { useAppDispatch } from "../../../../store/hooks";
+import { AppState } from "../../../../store/rootReducer";
+import {
+  getStoreProducts,
+  setSelectedStore,
+} from "../../../../store/store/actions";
 import StoreCreator from "./StoreCreator";
 
 interface IStateProps {

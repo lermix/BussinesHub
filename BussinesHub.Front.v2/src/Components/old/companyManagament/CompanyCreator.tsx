@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import { useSelector } from "react-redux";
-import { Input } from "../../basicComponents/Input/Input";
-import { Company, CompanyClass } from "../../models/Company";
-import { VerifiedUser } from "../../models/User";
-import { useAppDispatch } from "../../store/hooks";
-import { AppState } from "../../store/rootReducer";
-import { createCompany, editCompany } from "../../store/user/actions";
-import MapConsumer from "../MapConsumer";
+import { Input } from "../../../basicComponents/Input/Input";
+import { Company, CompanyClass } from "../../../models/Company";
+import { VerifiedUser } from "../../../models/User";
+import { useAppDispatch } from "../../../store/hooks";
+import { AppState } from "../../../store/rootReducer";
+import { createCompany, editCompany } from "../../../store/user/actions";
+import MapConsumer from "../../MapConsumer";
 
 interface IProps {
   showCreator: React.Dispatch<React.SetStateAction<boolean>>;

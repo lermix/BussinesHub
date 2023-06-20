@@ -2,25 +2,52 @@
 using BH.Model.General;
 using BH.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace BH.Repository.Repos
 {
 	public class StoreRepository : IStoreRepository
 	{
 		private readonly BHDbContex context;
+
 		public StoreRepository( BHDbContex context )
 		{
 			this.context = context;
 		}
 
-		public async Task<Product> AddProductToStore( Product product, int storeId )
+		public async Task<StoreProductData> AddProductToStore( int productId, int storeId )
 		{
-			var foundStore = context.Store.FirstOrDefault( x => x.Id == storeId );
-			if ( foundStore != null )
+
+			var foundStoreProduct = context.storeProductsData.FirstOrDefault( x => x.Store.Id == storeId && x.Product.Id == productId );
+			if ( foundStoreProduct != null )
 			{
-				foundStore.Products.Add( product );
+				foundStoreProduct.Quantity++;
 				await context.SaveChangesAsync();
-				return product;
+				return foundStoreProduct;
+			}
+			else
+			{
+				var foundProduct = context.Products.FirstOrDefault( x => x.Id == productId );
+				var foundStore = context.Store.FirstOrDefault( x => x.Id == storeId );
+				if ( foundProduct == null )
+				{
+					Log.Error( $"Product with Id: {productId} not found, error adding product to store" );
+					return null;
+				}
+				if ( foundStore == null )
+				{
+					Log.Error( $"Store with Id: {storeId} not found, error adding product to store" );
+					return null;
+				}
+				StoreProductData spd = new StoreProductData();
+				spd.Product = foundProduct;
+				spd.Store = foundStore;
+				spd.Quantity = 1;
+
+				var entry = context.storeProductsData.Add( spd );
+				await context.SaveChangesAsync();
+
+				return entry.Entity;
 			}
 
 			return null;
@@ -35,18 +62,13 @@ namespace BH.Repository.Repos
 
 		public async Task<int> DeleteProductFromStore( int productId, int storeId )
 		{
-			var foundStore = context.Store.FirstOrDefault( x => x.Id == storeId );
-			if ( foundStore != null )
-			{
-				var foundProduct = foundStore.Products.FirstOrDefault( x => x.Id == productId );
-				if ( foundProduct != null )
-				{
-					foundStore.Products.Remove( foundProduct );
-					await context.SaveChangesAsync();
-					return productId;
-				}
-			}
-			return -1;
+			var foundStoreProduct = context.storeProductsData.FirstOrDefault( x => x.Store.Id == storeId && x.Product.Id == productId );
+			if ( foundStoreProduct != null )
+				foundStoreProduct.Quantity--;
+
+			await context.SaveChangesAsync();
+
+			return foundStoreProduct.Quantity;
 		}
 
 		public async Task<int> DeleteStore( int storeId )
@@ -65,7 +87,7 @@ namespace BH.Repository.Repos
 		public Task<List<Product>> GetStoreProduct( int storeId )
 		{
 			var foundStore = context.Store.FirstOrDefault( x => x.Id == storeId );
-			if ( foundStore != null )			
+			if ( foundStore != null )
 				return Task.FromResult( foundStore.Products.ToList() );
 
 			return Task.FromResult( new List<Product>() );

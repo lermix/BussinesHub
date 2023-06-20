@@ -6,15 +6,15 @@ import "./Styles/Scrollbar.css";
 
 import TabMenu from "./basicComponents/TabMenu/TabMenu";
 import { TabItem } from "./basicComponents/TabMenu/TabItem";
-import StoreManagament from "./components/storeManagament/StoreManagament";
+import StoreManagament from "./components/old/companyManagament/storeManagament/StoreManagament";
 import Register from "./components/Register";
-import Login from "./components/Login";
+import Login from "./components/Useres/Login";
 import { VerifiedUser } from "./models/User";
 import { useSelector } from "react-redux";
 import { AppState } from "./store/rootReducer";
 import { useAppDispatch } from "./store/hooks";
 import { logOut, setTokenIfExists } from "./store/user/actions";
-import CompanyManagament from "./components/companyManagament/CompanyManagament";
+import CompanyManagament from "./components/old/companyManagament/CompanyManagament";
 import { Company } from "./models/Company";
 import { stat } from "fs";
 import { Card } from "./basicComponents/Card/Card";
@@ -24,6 +24,11 @@ import { SideMenu } from "./basicComponents/SideMenu/SideMenu";
 import { SideMenuBtn } from "./basicComponents/SideMenu/SideMenuBtn";
 import Grid from "./basicComponents/Grid/Grid";
 import { GridColumn } from "./basicComponents/Grid/GridColumn";
+import SideMenuFooter from "./components/Menus/SideMenuFooter";
+import { Route, Routes } from "react-router-dom";
+import MainDisplay from "./components/MainDisplay";
+import CreateCompany from "./components/Companies/CreateCompany";
+import CreateAccount from "./components/Useres/CreateAccount";
 interface IStateProps {
   verifiedUser: VerifiedUser | null;
   selectedCompany: Company | null;
@@ -52,25 +57,12 @@ const App: React.FC = () => {
         <div className="cardPrivate"></div>
       </div> */}
 
-      <div className="mainDisplay">
-        <SideMenu>
-          <SideMenuBtn text="Most popular" />
-          <SideMenuBtn text="Service" />
-          <SideMenuBtn text="Companies" />
-          <SideMenuBtn text="Bucket list" />
-          <SideMenuBtn text="Sell" />
-        </SideMenu>
-        <CardContainer>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
-          <Card></Card>
-        </CardContainer>
-        <div className="mainDisplayBottom"></div>
-      </div>
+      <Routes>
+        <Route index path="/" element={<MainDisplay />} />
+        <Route path="CreateCompany" element={<CreateCompany />} />
+        <Route path="CreateAccount" element={<CreateAccount />} />
+        <Route path="Login" element={<Login />} />
+      </Routes>
 
       {/* <TabMenu orientation="vertical">
         <TabItem title="Home"></TabItem>

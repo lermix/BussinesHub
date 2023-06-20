@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BH.Database\BH.Database.csproj" />
     <ProjectReference Include="..\BH.Model\BH.Model.csproj" />
   </ItemGroup>
 

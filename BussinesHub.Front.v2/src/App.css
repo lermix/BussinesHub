@@ -8,8 +8,13 @@
   --lightBrown: #6e6658;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-image: url("./images/backgroudn4.jpg");
+
   background-size: cover;
   margin: 0;
   font-family: "Century Gothic";
@@ -37,6 +42,10 @@ body {
 
 .shw {
   box-shadow: 2px 4px 4px hsl(0deg 0% 0% / 0.38);
+}
+
+.sideMenuFooter {
+  border-top: 1px solid #88dbbc;
 }
 
 /* button:hover {

@@ -1,4 +1,6 @@
-﻿using BH.Model.General;
+﻿using AutoMapper;
+using BH.Model.Dtos;
+using BH.Model.General;
 using BH.Repository.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,16 +11,18 @@ namespace BussinesHub.Controllers
 	public class CompanyController : BaseController
 	{
 		private readonly ICompanyRepository comapnyRepository;
-		public CompanyController( ICompanyRepository comapnyRepository )
+		private readonly IMapper mapper;
+		public CompanyController(ICompanyRepository comapnyRepository, IMapper mapper)
 		{
 			this.comapnyRepository = comapnyRepository;
+			this.mapper=mapper;
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> CreateCompany( [FromBody] Company company, [FromQuery] string username )
+		public async Task<IActionResult> CreateCompany( [FromBody] CompanyDto company, [FromQuery] string username )
 		{
 			if ( username != null )
-				return Ok( comapnyRepository.CreateCompany( company, username ) );
+				return Ok( comapnyRepository.CreateCompany( mapper.Map<Company>(company), username ) );
 			else
 				return BadRequest( "No username" );
 		}

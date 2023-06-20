@@ -5,9 +5,12 @@ import App from "./App";
 import "./index.css";
 import { store } from "./store/store";
 import "leaflet/dist/leaflet.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 createRoot(document.getElementById("root") as HTMLElement).render(
-  <Provider store={store}>
-    <App />
-  </Provider>
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>
 );

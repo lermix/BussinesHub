@@ -3,13 +3,14 @@ import "./Input.css";
 
 export interface InputProps {
   text?: string;
-  width?: number;
-  height?: number;
+  width?: number | string;
+  height?: number | string;
   onChange?(value: string | number): void;
   type: "text" | "number";
   autoComplete?: "off";
   style?: React.CSSProperties;
   value?: string | number;
+  className?: string;
 }
 
 export const Input: React.FC<InputProps> = ({
@@ -21,16 +22,12 @@ export const Input: React.FC<InputProps> = ({
   autoComplete,
   style,
   value,
+  className,
 }) => {
   return (
-    <div style={style}>
-      <label htmlFor="a">
-        <span className="spanInput" style={{ color: "black" }}>
-          {text && text}
-        </span>
-      </label>
+    <div style={style} className={className}>
+      <span className="spanInput">{text && text}</span>
       <input
-        id="a"
         type={type}
         defaultValue={value}
         autoComplete={autoComplete}

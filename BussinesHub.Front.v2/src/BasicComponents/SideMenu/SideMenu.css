@@ -88,6 +88,10 @@
   color: black;
 }
 
+.sideMenuFooter {
+  border-top: 2px solid rgba(136, 219, 188, 0.5);
+}
+
 @media only screen and (max-width: 1226px) {
   .sideMenu {
     width: 40px;

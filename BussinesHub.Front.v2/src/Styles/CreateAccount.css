@@ -1,0 +1,44 @@
+.CreateAccountContainer {
+  background-color: rgba(17, 45, 50, 0.9);
+  width: 25%;
+  height: 80vh;
+  margin: 10vh auto;
+  display: flex;
+  flex-direction: column; /* NEW */
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.CreateAccountContainer p {
+  margin: 5px;
+  color: #88dbbc;
+}
+
+.createAccInput {
+  color: #88dbbc;
+  margin-top: 20px;
+}
+
+.createBtn {
+  width: 50%;
+  background-color: #254e58;
+  border: 1px solid white;
+  cursor: pointer;
+  padding: 7px 10px;
+  transition: 0.5s;
+  font-size: 17px;
+  color: #88dbbc;
+  box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.24);
+  outline: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+:root {
+  --primary: steelblue;
+  --hoverColor: skyblue;
+  --green: #88dbbc;
+  --darkGreen: #254e58;
+  --blackGreen: #112d32;
+  --darkBrown: #4f4a41;
+  --lightBrown: #6e6658;
+}

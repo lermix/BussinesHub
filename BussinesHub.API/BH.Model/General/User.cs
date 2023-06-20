@@ -12,7 +12,7 @@
 		public string? MobileNumber { get; set; }
 		public UserFuncEnum userFuncEnum { get; set; }
 		public virtual ICollection<UserPermission> UserPermissions { get; set; }
-		public virtual ICollection<Product>? Products { get; set; }
+		public virtual ICollection<UserProductData> Products { get; set; }
 		public virtual ICollection<Company>? Companies { get; set; }
 
 	}

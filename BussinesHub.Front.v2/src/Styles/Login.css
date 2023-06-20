@@ -1,0 +1,60 @@
+.LoginContainer {
+  background-color: rgba(17, 45, 50, 0.9);
+  width: 25%;
+  height: 80vh;
+  margin: 10vh auto;
+  display: flex;
+  flex-direction: column; /* NEW */
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.loginInput {
+  color: #88dbbc;
+  margin-top: 20px;
+}
+
+.loginBtn {
+  width: 50%;
+  background-color: #254e58;
+  border: 1px solid white;
+  cursor: pointer;
+  padding: 7px 10px;
+  transition: 0.5s;
+  font-size: 17px;
+  color: #88dbbc;
+  box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.24);
+  outline: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.loginBtn:hover {
+  background-color: #88dbbc;
+  color: black;
+  border: 1px solid #88dbbc;
+}
+
+.loginCreateAccBtn:hover {
+  background-color: #88dbbc;
+  color: black;
+}
+
+.loginCreateAccBtn {
+  width: 70%;
+  background-color: rgba(37, 78, 88, 0.5);
+  border: none;
+  cursor: pointer;
+  padding: 7px 10px;
+  transition: 0.3s;
+  font-size: 17px;
+  color: #88dbbc;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.24);
+  outline: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.LoginContainer p {
+  margin-top: 100px;
+  color: #88dbbc;
+}

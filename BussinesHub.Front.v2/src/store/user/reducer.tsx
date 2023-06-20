@@ -3,7 +3,7 @@ import * as actionTypes from "./actionTypes";
 import { VerifiedUserClass } from "../../models/User";
 
 const initialState: IUserState = {
-  verifiedUser: new VerifiedUserClass(),
+  verifiedUser: null,
   companies: [],
 };
 

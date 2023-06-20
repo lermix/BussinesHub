@@ -29,7 +29,7 @@ namespace BH.Repository.Repos
 
 		public async Task<Company> CreateCompany( Company comapny, string username )
 		{
-			var foundUser = context.Users.FirstOrDefault( x => x.Username == username );
+			var foundUser = context.Users.Include(x => x.Companies).FirstOrDefault( x => x.Username == username );
 			if ( foundUser != null )
 			{
 				var entry = context.Companies.Add( comapny );

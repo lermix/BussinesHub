@@ -13,11 +13,14 @@ namespace BH.Model
 		public DbSet<Category> Categories { get; set; }
 		public DbSet<Analitic> Analitics { get; set; }
 		public DbSet<UserPermission> userPermissions { get; set; }
+		public DbSet<StoreProductData> storeProductsData { get; set; }
+		public DbSet<UserProductData> userProductsData { get; set; }
 
-		protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder )
+		public BHDbContex( DbContextOptions<BHDbContex> options )
+		  : base( options )
 		{
-			optionsBuilder.UseSqlServer( "server=ALEN-PC\\SQLEXPRESS;database=BussinesHub;trusted_connection=true;" );
 		}
+
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

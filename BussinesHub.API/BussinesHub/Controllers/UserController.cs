@@ -2,7 +2,9 @@
 using BH.Model.Dtos;
 using BH.Model.General;
 using BH.Repository.Interfaces;
+using BussinesHub.Security;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BussinesHub.Controllers
 {
@@ -11,14 +13,17 @@ namespace BussinesHub.Controllers
 		private readonly IUserRepository userRepository;
 		public readonly IMapper mapper;
 
-		public UserController( IUserRepository userRepository, IMapper mapper )
+		private readonly JwtTokenService _tokenService;
+
+		public UserController(IUserRepository userRepository, IMapper mapper, IClaimProvider claimProvider, JwtTokenService tokenService)
 		{
 			this.userRepository = userRepository;
 			this.mapper = mapper;
+			_tokenService=tokenService;
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> CreateUser( UserDto userDto )
+		public async Task<IActionResult> CreateUser(UserDto userDto)
 		{
 			if ( userDto == null )
 				return BadRequest( "User is null" );
@@ -26,11 +31,24 @@ namespace BussinesHub.Controllers
 			User user = mapper.Map<User>( userDto );
 			user.userFuncEnum = UserFuncEnum.Default;
 			await userRepository.CreateUser( user );
-			return Ok( );
+
+			try
+			{
+				List<Claim> claims = new List<Claim>
+				{
+					new Claim( ClaimTypes.Role, "User"),
+					new Claim( ClaimTypes.Name, userDto.Name ),
+				};
+				return Ok( _tokenService.CreateToken( claims ) );
+			}
+			catch ( Exception ex )
+			{
+				return StatusCode( StatusCodes.Status500InternalServerError, ex.Message );
+			}
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> DeleteUser( int UserId )
+		public async Task<IActionResult> DeleteUser(int UserId)
 		{
 			int deletedId = await userRepository.DeleteUser( UserId );
 			if ( deletedId == -1 )
@@ -39,11 +57,11 @@ namespace BussinesHub.Controllers
 			return Ok( deletedId );
 		}
 		[HttpPost]
-		public async Task<IActionResult> UpdateUser( User user ) => Ok( await userRepository.UpdateUser( user ) );
+		public async Task<IActionResult> UpdateUser(User user) => Ok( await userRepository.UpdateUser( user ) );
 		[HttpGet]
 		public async Task<IActionResult> GetUsers() => Ok( await userRepository.GetAllUsers() );
 		[HttpGet]
-		public async Task<IActionResult> GetUserCompanies( string username ) => Ok( await userRepository.GetUserCompanies( username ) );
+		public async Task<IActionResult> GetUserCompanies(string username) => Ok( await userRepository.GetUserCompanies( username ) );
 
 	}
 }

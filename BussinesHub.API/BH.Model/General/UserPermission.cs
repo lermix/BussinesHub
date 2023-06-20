@@ -5,7 +5,7 @@
 		public int Id { get; set; }
 		public User User{ get; set; }
 		public PermissionEnum PermissionType { get; set; }
-		public string AppliedObjectTable { get; set; }
-		public int AppliedObjectId { get; set; }
+		public string? AppliedObjectTable { get; set; }
+		public int? AppliedObjectId { get; set; }
 	}
 }

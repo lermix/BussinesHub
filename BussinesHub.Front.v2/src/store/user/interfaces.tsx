@@ -4,7 +4,7 @@ import * as actionTypes from "./actionTypes";
 
 // STATE
 export interface IUserState {
-  verifiedUser: VerifiedUser;
+  verifiedUser: VerifiedUser | null;
   companies: Company[];
 }
 interface IUserLogin {

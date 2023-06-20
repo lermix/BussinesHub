@@ -1,0 +1,66 @@
+.mainDisplay {
+  display: flexbox;
+  height: 90vh;
+}
+
+.mainDisplayBottom {
+  background-color: #112d32;
+  width: 100%;
+  height: 3vh;
+  opacity: 0.9;
+}
+
+.logedInUser {
+  position: absolute;
+  right: 10px;
+  width: 0px;
+  height: 0;
+  border-top: 3vh solid #4f4a41;
+  border-bottom: 0px solid transparent;
+  border-left: 5vw solid transparent;
+  border-right: 10vw solid #4f4a41;
+  transition: 1s;
+}
+
+.logedInUser > p {
+  padding: 0;
+  position: absolute;
+  margin-top: -2.7vh;
+  margin-left: 1vw;
+  color: #88dbbc;
+  font-size: 16px;
+  font-family: "Century Gothic";
+}
+
+.mainDisplayLogin {
+  position: absolute;
+  right: 10px;
+  width: 0px;
+  height: 0;
+  border-top: 3vh solid #4f4a41;
+  border-bottom: 0px solid transparent;
+  border-left: 5vw solid transparent;
+  border-right: 10vw solid #4f4a41;
+  transition: 0.5s;
+}
+
+.mainDisplayLogin:hover {
+  cursor: pointer;
+  border-top: 3vh solid #88dbbc;
+  border-right: 10vw solid #88dbbc;
+}
+
+.mainDisplayLogin:hover p {
+  color: black;
+  font-weight: bold;
+}
+
+.mainDisplayLogin > p {
+  padding: 0;
+  position: absolute;
+  margin-top: -2.7vh;
+  margin-left: 1vw;
+  color: #88dbbc;
+  font-size: 16px;
+  font-family: "Century Gothic";
+}

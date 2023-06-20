@@ -9,8 +9,7 @@ export interface Company {
   city: string;
   postalCode: string;
   country: string;
-  stores: Store[];
-  analitics: Analitic[];
+  phoneNumber: string;
 }
 
 export class CompanyClass implements Company {
@@ -21,6 +20,5 @@ export class CompanyClass implements Company {
   city = "";
   postalCode = "";
   country = "";
-  stores = [];
-  analitics = [];
+  phoneNumber = "";
 }

@@ -19,10 +19,11 @@ namespace BH.Model.EntityConfiguration
 			builder.HasMany( x => x.Categories )
 				.WithMany( x => x.Products );
 			builder.HasMany( x => x.Images );
-			builder.HasMany( x => x.Stores )
-				.WithMany( x => x.Products );
+			builder.HasMany( x => x.StoresData )
+				.WithOne( x => x.Product );
 			builder.HasMany( x => x.Analitics )
 				.WithOne( x => x.Product );
+			builder.HasIndex( x => x.Code ).IsUnique();
 		}
 	}
 }
