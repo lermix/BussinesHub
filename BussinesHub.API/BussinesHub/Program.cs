@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder( args );
 
@@ -16,7 +17,16 @@ builder.Services.AddControllers().AddJsonOptions( o => o.JsonSerializerOptions
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<BHDbContex>();
+
+string _connectionString = builder.Configuration.GetConnectionString( "MariaDbConnectionString" );
+
+builder.Services.AddDbContext<BHDbContex>(
+ options => options.UseMySql(
+	 _connectionString,
+	 ServerVersion.AutoDetect( _connectionString )
+ )
+);
+
 builder.Services.AddAutoMapper( AppDomain.CurrentDomain.GetAssemblies() );
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();

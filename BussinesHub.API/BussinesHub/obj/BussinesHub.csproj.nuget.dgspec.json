@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BussinesHub\\BussinesHub.csproj": {}
+    "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BussinesHub\\BussinesHub.csproj": {}
   },
   "projects": {
-    "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BH.Database\\BH.Database.csproj": {
+    "C:\\SOURCE\\BussinesHub\\BH.Database\\BH.Database.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BH.Database\\BH.Database.csproj",
+        "projectUniqueName": "C:\\SOURCE\\BussinesHub\\BH.Database\\BH.Database.csproj",
         "projectName": "BH.Database",
-        "projectPath": "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BH.Database\\BH.Database.csproj",
-        "packagesPath": "C:\\Users\\amuller\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BH.Database\\obj\\",
+        "projectPath": "C:\\SOURCE\\BussinesHub\\BH.Database\\BH.Database.csproj",
+        "packagesPath": "C:\\Users\\amuller.ADNET\\.nuget\\packages\\",
+        "outputPath": "C:\\SOURCE\\BussinesHub\\BH.Database\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\amuller\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\amuller.ADNET\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -27,15 +26,14 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BH.Model\\BH.Model.csproj": {
-                "projectPath": "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BH.Model\\BH.Model.csproj"
+              "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BH.Model\\BH.Model.csproj": {
+                "projectPath": "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BH.Model\\BH.Model.csproj"
               }
             }
           }
@@ -95,25 +93,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BH.Model\\BH.Model.csproj": {
+    "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BH.Model\\BH.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BH.Model\\BH.Model.csproj",
+        "projectUniqueName": "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BH.Model\\BH.Model.csproj",
         "projectName": "BH.Model",
-        "projectPath": "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BH.Model\\BH.Model.csproj",
-        "packagesPath": "C:\\Users\\amuller\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BH.Model\\obj\\",
+        "projectPath": "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BH.Model\\BH.Model.csproj",
+        "packagesPath": "C:\\Users\\amuller.ADNET\\.nuget\\packages\\",
+        "outputPath": "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BH.Model\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\amuller\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\amuller.ADNET\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -122,7 +119,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -172,25 +168,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BH.Repository\\BH.Repository.csproj": {
+    "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BH.Repository\\BH.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BH.Repository\\BH.Repository.csproj",
+        "projectUniqueName": "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BH.Repository\\BH.Repository.csproj",
         "projectName": "BH.Repository",
-        "projectPath": "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BH.Repository\\BH.Repository.csproj",
-        "packagesPath": "C:\\Users\\amuller\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BH.Repository\\obj\\",
+        "projectPath": "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BH.Repository\\BH.Repository.csproj",
+        "packagesPath": "C:\\Users\\amuller.ADNET\\.nuget\\packages\\",
+        "outputPath": "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BH.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\amuller\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\amuller.ADNET\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -199,18 +194,17 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BH.Database\\BH.Database.csproj": {
-                "projectPath": "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BH.Database\\BH.Database.csproj"
+              "C:\\SOURCE\\BussinesHub\\BH.Database\\BH.Database.csproj": {
+                "projectPath": "C:\\SOURCE\\BussinesHub\\BH.Database\\BH.Database.csproj"
               },
-              "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BH.Model\\BH.Model.csproj": {
-                "projectPath": "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BH.Model\\BH.Model.csproj"
+              "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BH.Model\\BH.Model.csproj": {
+                "projectPath": "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BH.Model\\BH.Model.csproj"
               }
             }
           }
@@ -246,25 +240,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BussinesHub\\BussinesHub.csproj": {
+    "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BussinesHub\\BussinesHub.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BussinesHub\\BussinesHub.csproj",
+        "projectUniqueName": "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BussinesHub\\BussinesHub.csproj",
         "projectName": "BussinesHub",
-        "projectPath": "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BussinesHub\\BussinesHub.csproj",
-        "packagesPath": "C:\\Users\\amuller\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BussinesHub\\obj\\",
+        "projectPath": "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BussinesHub\\BussinesHub.csproj",
+        "packagesPath": "C:\\Users\\amuller.ADNET\\.nuget\\packages\\",
+        "outputPath": "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BussinesHub\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\amuller\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\amuller.ADNET\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -273,18 +266,18 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BH.Model\\BH.Model.csproj": {
-                "projectPath": "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BH.Model\\BH.Model.csproj"
+              "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BH.Model\\BH.Model.csproj": {
+                "projectPath": "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BH.Model\\BH.Model.csproj"
               },
-              "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BH.Repository\\BH.Repository.csproj": {
-                "projectPath": "C:\\Users\\amuller\\source\\repos\\BussinesHub\\BussinesHub.API\\BH.Repository\\BH.Repository.csproj"
+              "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BH.Repository\\BH.Repository.csproj": {
+                "projectPath": "C:\\SOURCE\\BussinesHub\\BussinesHub.API\\BH.Repository\\BH.Repository.csproj"
               }
             }
           }
@@ -343,7 +336,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }

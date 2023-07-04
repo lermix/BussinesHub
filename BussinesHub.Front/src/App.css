@@ -1,0 +1,24 @@
+:root {
+  --primary: steelblue;
+  --hoverColor: skyblue;
+  
+  --col4: #88dbbc;
+  --col41: #88dbbca5;
+  --col1: #254e58f5;
+  --col2: #112d32f5;
+  --col3: #4f4a41;
+  --col31: #6e6658;
+  --colFont: white;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url("./Images/backgroudn4.jpg");
+
+  background-size: cover;
+  margin: 0;
+  font-family: "Century Gothic";
+}

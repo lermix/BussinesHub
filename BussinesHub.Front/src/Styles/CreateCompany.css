@@ -1,0 +1,89 @@
+.createCompanyContainer {
+  background-color: rgba(17, 45, 50, 0.9);
+  width: 25%;
+  height: 95vh;
+  float: left;
+  margin-left: 13px;
+  margin-top: 2.5vh;
+}
+
+.CreateCompanyForm {
+  display: flex;
+  width: 100%;
+  height: 93%;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.CreateCompanyinput {
+  color: #88dbbc;
+  margin-top: 20px;
+}
+
+.createCompanyBtn {
+  margin-top: 50px;
+  background-color: #254e58;
+  border: none;
+  cursor: pointer;
+  padding: 7px 10px;
+  transition: 0.3s;
+  font-size: 17px;
+  color: #88dbbc;
+  box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.24);
+  outline: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.createCompanyBtn:hover {
+  background-color: #88dbbc;
+  color: #112d32;
+}
+
+.createCompanyStoreContainer {
+  background-color: rgba(17, 45, 50, 0.9);
+  width: 73%;
+  height: 95vh;
+  float: left;
+  margin-left: 10px;
+  margin-top: 2.5vh;
+}
+
+.ccscLeft {
+  width: 30%;
+  height: 100%;
+  border-right: 1px solid #88dbbc;
+}
+
+.createCompanyHeader {
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid #88dbbc;
+}
+
+.CreateCompanyAddBtn {
+  background-color: transparent;
+  border: 1px solid #88dbbc;
+  border-radius: 20px;
+  transition: 0.3s;
+  font-size: 25px;
+  width: 35px;
+  height: 35px;
+  color: #88dbbc;
+  float: right;
+  margin-top: 7px;
+  margin-right: 10px;
+}
+
+.createCompanyHeader h2 {
+  margin-top: 10px;
+  margin-left: 10px;
+  color: #88dbbc;
+  float: left;
+  font-weight: lighter;
+}
+
+.createCompanyHeader {
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid #88dbbc;
+}

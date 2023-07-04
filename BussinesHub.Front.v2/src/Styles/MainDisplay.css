@@ -1,9 +1,29 @@
+
 .mainDisplay {
   display: flexbox;
-  height: 90vh;
+  height: 100vh;
+  width: 100vw;
 }
 
-.mainDisplayBottom {
+.mainDisplayBottom
+{
+    align-self: flex-end;
+    background-color: var(--col2);
+    width: 100vw;
+    height: 30px;    
+}
+
+/* _______________________________________________SIDE */
+
+.sideMenuContainer{
+  height: calc(100% - 30px);
+  width: 20%;
+  background-color: var(--col1);
+}
+
+
+
+/* .mainDisplayBottom {
   background-color: #112d32;
   width: 100%;
   height: 3vh;
@@ -63,4 +83,4 @@
   color: #88dbbc;
   font-size: 16px;
   font-family: "Century Gothic";
-}
+} */

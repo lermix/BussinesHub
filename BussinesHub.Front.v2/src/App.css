@@ -1,11 +1,11 @@
 :root {
   --primary: steelblue;
   --hoverColor: skyblue;
-  --green: #88dbbc;
-  --darkGreen: #254e58;
-  --blackGreen: #112d32;
-  --darkBrown: #4f4a41;
-  --lightBrown: #6e6658;
+  --col4: #88dbbc;
+  --col1: #254e58;
+  --col2: #112d32;
+  --col3: #4f4a41;
+  --col31: #6e6658;
 }
 
 * {
@@ -18,88 +18,4 @@ body {
   background-size: cover;
   margin: 0;
   font-family: "Century Gothic";
-}
-
-/* button {
-  background-color: var(--primary);
-  border: none;
-  cursor: pointer;
-  padding: 7px 10px;
-  transition: 0.3s;
-  font-size: 17px;
-  color: black;
-} */
-
-.fbc-btn {
-  background-color: var(--darkBrown);
-  border: none;
-  cursor: pointer;
-  padding: 7px 10px;
-  transition: 0.3s;
-  font-size: 17px;
-  color: black;
-}
-
-.shw {
-  box-shadow: 2px 4px 4px hsl(0deg 0% 0% / 0.38);
-}
-
-.sideMenuFooter {
-  border-top: 1px solid #88dbbc;
-}
-
-/* button:hover {
-  cursor: pointer;
-  padding: 7px 10px;
-  font-size: 17px;
-  background-color: var(--hoverColor);
-} */
-
-.leaflet-container {
-  width: 100%;
-  height: 100vh;
-  z-index: 1;
-}
-
-.leftMenu {
-  float: left;
-  border-radius: 4px;
-  height: 97vh;
-  margin-right: 1vw;
-  background-color: #ffffff;
-  width: 15%;
-  background-color: #4f4a41;
-}
-
-.mainDisplay {
-  display: flexbox;
-  height: 90vh;
-}
-
-.sideMenuBtn {
-  text-align: center;
-}
-
-.sideMenuBtn > * {
-  margin: 0;
-  padding: 0;
-}
-
-.mainDisplayBottom {
-  background-color: #112d32;
-  width: 100%;
-  height: 3vh;
-  opacity: 0.9;
-}
-
-.sideMenuHeader {
-  font-family: "Century Gothic";
-  font-size: 25px;
-  border-bottom: 2px solid #88dbbc;
-}
-
-.sideMenuHeader > * {
-  margin: 10px;
-  padding: 0;
-  color: #88dbbc;
 }

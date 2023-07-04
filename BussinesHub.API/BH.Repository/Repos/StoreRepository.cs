@@ -15,13 +15,13 @@ namespace BH.Repository.Repos
 			this.context = context;
 		}
 
-		public async Task<StoreProductData> AddProductToStore( int productId, int storeId )
+		public async Task<StoreProductData> AddProductToStore(int productId, int storeId, double productCount)
 		{
 
 			var foundStoreProduct = context.storeProductsData.FirstOrDefault( x => x.Store.Id == storeId && x.Product.Id == productId );
 			if ( foundStoreProduct != null )
 			{
-				foundStoreProduct.Quantity++;
+				foundStoreProduct.Quantity+= productCount;
 				await context.SaveChangesAsync();
 				return foundStoreProduct;
 			}
@@ -42,7 +42,7 @@ namespace BH.Repository.Repos
 				StoreProductData spd = new StoreProductData();
 				spd.Product = foundProduct;
 				spd.Store = foundStore;
-				spd.Quantity = 1;
+				spd.Quantity = productCount;
 
 				var entry = context.storeProductsData.Add( spd );
 				await context.SaveChangesAsync();
@@ -60,7 +60,7 @@ namespace BH.Repository.Repos
 			return entry.Entity;
 		}
 
-		public async Task<int> DeleteProductFromStore( int productId, int storeId )
+		public async Task<double> DeleteProductFromStore( int productId, int storeId )
 		{
 			var foundStoreProduct = context.storeProductsData.FirstOrDefault( x => x.Store.Id == storeId && x.Product.Id == productId );
 			if ( foundStoreProduct != null )
@@ -84,13 +84,13 @@ namespace BH.Repository.Repos
 				return -1;
 		}
 
-		public Task<List<Product>> GetStoreProduct( int storeId )
+		public Task<List<StoreProductData>> GetStoreProduct( int storeId )
 		{
 			var foundStore = context.Store.FirstOrDefault( x => x.Id == storeId );
 			if ( foundStore != null )
-				return Task.FromResult( foundStore.Products.ToList() );
+				return Task.FromResult( foundStore.ProductsData.ToList() );
 
-			return Task.FromResult( new List<Product>() );
+			return Task.FromResult( new List<StoreProductData>() );
 		}
 
 		public async Task<Store> UpdateStore( Store store )
@@ -100,5 +100,6 @@ namespace BH.Repository.Repos
 			await context.SaveChangesAsync();
 			return entry.Entity;
 		}
+
 	}
 }

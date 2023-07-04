@@ -10,7 +10,7 @@ namespace BH.Model.EntityConfiguration
 		{
 			builder.HasKey( x => x.Id );
 			builder.HasMany( x => x.Images );
-			builder.HasMany( x => x.Products );
+			builder.HasMany( x => x.ProductsData );
 			builder.HasOne( x => x.ParentCompany )
 				.WithMany( x => x.Stores );
 				

@@ -1,0 +1,43 @@
+.cardContainer
+{
+    width: calc(100% - 15vw);
+    height: 100%;
+    display: flex;
+    float: left;
+    justify-content: flex-start;
+    overflow-y: scroll;
+    flex-wrap: wrap;
+    transition: 500ms;
+}
+
+.cardContainerMenuCollapsed
+{
+    width: calc(100% - 50px);
+    height: 100%;
+
+    display: flex;
+    float: left;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+
+    justify-content: flex-start;
+    transition: 500ms;
+
+}
+
+.card{
+    display: flex;
+    width: 300px;
+    height: 400px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    background-color: var(--col1);
+
+    margin-left: 20px;
+    margin-top: 10px;
+
+    -webkit-box-shadow: 10px -3px 5px -4px rgba(0, 0, 0, 0.24);
+    -moz-box-shadow: 10px -3px 5px -4px rgba(0, 0, 0, 0.24);
+    box-shadow: 10px -3px 5px -4px rgba(0, 0, 0, 0.24);
+    font-size: 16px;
+}

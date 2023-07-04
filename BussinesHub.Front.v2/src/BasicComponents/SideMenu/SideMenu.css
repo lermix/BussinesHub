@@ -92,54 +92,40 @@
   border-top: 2px solid rgba(136, 219, 188, 0.5);
 }
 
-@media only screen and (max-width: 1226px) {
-  .sideMenu {
-    width: 40px;
-  }
 
-  .sideMenuColapseBtn {
-    visibility: hidden;
+/* COLLAPSED --------------------------------*/
+ .sideMenuFooterCollapsed {
+    border: none;
+    visibility:hidden;
   }
+  
+    .sideMenuCollapsed {
+      width: 40px;   
+    }
 
-  .sideMenuExpandBtn {
-    visibility: hidden;
-  }
+    .innertriangleCollapsed{
+      border: 0px;
+    }
 
-  .innertriangle {
-    border: 0px;
-  }
+    .sideMenuBtnCollapsed
+    {
+      border: 0px;
+    }
 
-  .sideMenuBtn {
-    border: 0px;
-  }
+    .sideMenuHeaderCollapsed
+    {
+      position: absolute;
+      left: -50vW;
+    }
+    
+    .sideMenuExpandBtnCollapsed{
+      width: 30px;
+      height: 30px;
+    }
 
-  .sideMenuHeader {
-    position: absolute;
-    left: -50vw;
-  }
-
-  .sideMenuExpandBtn {
-    width: 30px;
-    height: 30px;
-  }
-
-  .sideMenuColapseBtn {
-    position: absolute;
-    left: -50vw;
-  }
-}
-
-@media only screen and (min-width: 1225px) {
-  .innertriangle {
-    position: absolute;
-    margin-top: -4.4vh;
-    margin-left: -10vw;
-    width: 0px;
-    height: 0;
-    border-top: 4.5vh solid #112d32;
-    border-bottom: 0px solid transparent;
-    border-left: 9vw solid #112d32;
-    border-right: 2vw solid transparent;
-    transition: 0.5s;
-  }
-}
+    .sideMenuColapseBtnCollapsed {
+      position: absolute;
+      left: -50vW;
+      
+    }
+/* ----------------------------------------- */

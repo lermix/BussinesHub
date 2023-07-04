@@ -1,0 +1,14 @@
+
+.mainDisplay {
+    display: block;
+    height: calc(100vh - 30px);
+    width: 100vw;
+  }
+  
+  .mainDisplayBottom
+  {
+      background-color: var(--col2);
+      width: 100vw;
+      height: 30px;    
+  }
+  

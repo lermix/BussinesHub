@@ -1,0 +1,123 @@
+.CreateAccountWrapper
+{
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 95vh;
+}
+
+.CreateAccountContainer {
+  background-color: rgba(17, 45, 50, 0.9);
+  width: 25%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column; /* NEW */
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: 1s;
+}
+
+.CreateAccountContainerCollapsed
+{  
+  width: 25%;
+  height: 0px;
+  margin: 10vh auto;
+  overflow: hidden;
+  transition: 1s;
+}
+
+.displayNone
+{
+  display: none;
+}
+
+.CreateAccountContainerCollapsed *
+{
+  display: none;
+}
+
+.CreateAccountContainer p {
+  margin: 5px;
+  color: #88dbbc;
+}
+
+.createAccInput {
+  color: #88dbbc;
+  margin-top: 20px;
+}
+
+.createBtn {
+  width: 50%;
+  background-color: #254e58;
+  border: 1px solid white;
+  cursor: pointer;
+  padding: 7px 10px;
+  transition: 0.5s;
+  font-size: 17px;
+  color: #88dbbc;
+  box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.24);
+  outline: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+
+.ContinueContainer
+{
+  background-color: rgba(17, 45, 50, 0.9);
+  width: 25%;
+  height: 80vh;
+  margin: 10vh auto;  
+  display: flex;
+  flex-direction: column; /* NEW */
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow: hidden;
+  transition: 1s;
+}
+
+.ContinueContainerCollapsed
+{
+  width: 25%;
+  height: 0px;
+  margin: 10vh auto;
+  overflow: hidden;
+  transition: 1s;
+}
+
+.continueBtnCollapsed
+{
+  width: 0px;
+  height: 0px;
+  background-color: transparent;
+  color: transparent;
+  border: none;
+  transition: 1s;
+
+}
+
+
+.continueBtn
+{
+    width: 50%;
+    background-color: var(--col2);
+    cursor: pointer;
+    padding: 7px 10px;
+    transition: 1s;
+    font-size: 17px;
+    color: #88dbbc;
+    border: 1px solid var(--col4);
+    box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.24);
+    outline: 1px solid rgba(0, 0, 0, 0.05);
+    white-space: nowrap;
+
+}
+
+.continueBtn:hover
+{
+    color: black;
+    background-color: var(--col4);
+    box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.24);
+    outline: 1px solid rgba(0, 0, 0, 0.05);
+}

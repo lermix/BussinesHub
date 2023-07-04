@@ -1,4 +1,5 @@
-﻿using BH.Model.General;
+﻿using BH.Model.Dtos;
+using BH.Model.General;
 using BH.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,7 +33,7 @@ namespace BussinesHub.Controllers
 		[HttpGet]
 		public async Task<ActionResult> GetStoreProduct( int storeId ) => Ok( storeRepository.GetStoreProduct( storeId ) );
 		[HttpPost]
-		public async Task<ActionResult> AddProductToStore([FromBody] Product product,[FromQuery] int storeId ) => Ok( storeRepository.AddProductToStore( product, storeId ) );
+		public async Task<ActionResult> AddProductToStore(AddProductToStoreDto productInfo ) => Ok( storeRepository.AddProductToStore( productInfo.ProductId, productInfo.StoreId, productInfo.ProductCount ) );
 		[HttpPost]
 		public async Task<ActionResult> DeleteProductFromStore( int productId, int storeId )
 		{

@@ -1,4 +1,5 @@
 ﻿using BH.Model.General;
+using BH.Model.General.Web;
 using Microsoft.EntityFrameworkCore;
 
 namespace BH.Model
@@ -25,6 +26,9 @@ namespace BH.Model
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfigurationsFromAssembly( typeof( BHDbContex ).Assembly );
+			modelBuilder.Entity<WebTab>().ToTable( "WebTab" );
+			modelBuilder.Entity<WebTabProducts>().ToTable( "WebTabProducts" );
+			modelBuilder.Entity<WebTabInfo>().ToTable( "WebTabInfo" );
 		}
 	}
 }
