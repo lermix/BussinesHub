@@ -1,0 +1,13 @@
+.CreateNewProductWrapper{
+    display: flex;
+    width: 90%;
+    height: 90%;
+    background-color: var(--col1);
+    flex-direction: column;
+}
+
+.CreateCompanyInput {
+    color: #88dbbc;
+    margin-top: 10px;
+  }
+  

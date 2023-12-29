@@ -22,7 +22,7 @@ namespace BussinesHub.Controllers
 		public async Task<IActionResult> CreateCompany( [FromBody] CompanyDto company, [FromQuery] string username )
 		{
 			if ( username != null )
-				return Ok( comapnyRepository.CreateCompany( mapper.Map<Company>(company), username ) );
+				return Ok( mapper.Map < CompanyDto >( await comapnyRepository.CreateCompany( mapper.Map<Company>(company), username ) ));
 			else
 				return BadRequest( "No username" );
 		}

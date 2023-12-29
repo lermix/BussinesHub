@@ -1,7 +1,7 @@
-import { IUserState, IUserActionType } from './interfaces'
+import { ISharedState, ISharedActionType } from './interfaces'
 import * as actionTypes from './actionTypes'
 
-const initialState: IUserState = {
+const initialState: ISharedState = {
 	showMainLoading: false,
 	showErrorMessage: false,
 	errorMessageTitle: null,
@@ -15,7 +15,7 @@ const initialState: IUserState = {
 }
 
 // REDUCER
-export function sharedReducer(state: IUserState = initialState, action: IUserActionType): IUserState {
+export function sharedReducer(state: ISharedState = initialState, action: ISharedActionType): ISharedState {
 	switch (action.type) {
 		case actionTypes.TURN_ON_MAIN_LOADING:
 			return {

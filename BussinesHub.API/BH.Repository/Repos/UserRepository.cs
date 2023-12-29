@@ -13,10 +13,10 @@ namespace BH.Repository.Repos
 			this.context = context;
 		}
 
-		public async Task<Company> AddCompanyToUser( int userId, int companyId )
+		public async Task<Company> AddCompanyToUser( string username, int companyId )
 		{
 			var foundCompany = context.Companies.FirstOrDefault( x => x.Id == companyId );
-			var foundUser = context.Users.FirstOrDefault( x => x.Id == userId );
+			var foundUser = context.Users.FirstOrDefault( x => x.Username == username );
 			if ( foundCompany != null && foundUser != null )
 			{
 				foundUser.Companies.Add( foundCompany );
@@ -34,22 +34,27 @@ namespace BH.Repository.Repos
 			return entry.Entity;
 		}
 
-		public async Task<int> DeleteUser( int UserId )
+		public async Task<string> DeleteUser( string username )
 		{
-			var found = context.Users.FirstOrDefault( x => x.Id == UserId );
+			var found = context.Users.FirstOrDefault( x => x.Username == username );
 			if ( found != null )
 			{
 				context.Users.Remove( found );
 				await context.SaveChangesAsync();
-				return UserId;
+				return username;
 			}
 			else
-				return -1;
+				return "";
 		}
 
 		public async Task<List<User>> GetAllUsers()
 		{
 			return context.Users.ToList();
+		}
+
+		public async Task<User?> GetUser( string username, string password )
+		{
+			return await context.Users.FirstOrDefaultAsync( x => x.Username == username && x.Password == password );
 		}
 
 		public async Task<List<Company>> GetUserCompanies( string username )
@@ -60,6 +65,30 @@ namespace BH.Repository.Repos
 					return await Task.FromResult(foundUser.Companies.ToList());
 
 			return new List<Company>();
+		}
+
+		public async Task<Company> SetUserCompany( string username, int companyId )
+		{
+			if(string.IsNullOrEmpty( username ))
+				throw new ArgumentNullException("username is empty or null");
+
+			var company = await context.Companies.FirstOrDefaultAsync(x => x.Id == companyId);
+			if ( company == null )
+				throw new ArgumentNullException( $"Company with id: {companyId} not found" );
+
+			var user = await context.Users.FirstOrDefaultAsync( x => x.Username.Equals( username ) );
+
+			if ( user == null )
+				throw new ArgumentNullException( $"User with username: {username} not found" );
+
+
+			if ( user.Companies == null)
+				user.Companies = new List<Company>();
+
+			user.Companies.Add( company );
+
+			await context.SaveChangesAsync();
+			return company;
 		}
 
 		public async Task<User> UpdateUser( User user )

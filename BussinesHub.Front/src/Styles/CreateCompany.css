@@ -16,6 +16,39 @@
   flex-wrap: wrap;
 }
 
+.createCompanyHomeBtn
+{
+  background-image: url("../Images/home.png");
+  background-size: 70%;
+  background-position: center;
+  background-repeat: no-repeat; 
+
+}
+
+.createCompanyBackBtn{
+  background-image: url("../Images/backGreen.png");
+  background-size: 80%;
+  
+  background-position: center;
+  background-repeat: no-repeat; 
+}
+
+.createCompanyBackBtn:hover{
+  background-image: url("../Images/back.png");
+  background-size: 80%;
+  background-color: #88dbbc;
+  cursor: pointer;
+  background-position: center;
+  background-repeat: no-repeat; 
+}
+
+
+.createCompanyHomeBtn:hover{
+  background-color: #88dbbc;
+	cursor: pointer;
+  background-image: url("../Images/home2.png");
+}
+
 .CreateCompanyinput {
   color: #88dbbc;
   margin-top: 20px;
@@ -60,7 +93,7 @@
   border-bottom: 1px solid #88dbbc;
 }
 
-.CreateCompanyAddBtn {
+.CreateCompanyRoundBtn {
   background-color: transparent;
   border: 1px solid #88dbbc;
   border-radius: 20px;

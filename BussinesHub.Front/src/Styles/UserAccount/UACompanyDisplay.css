@@ -1,0 +1,97 @@
+.userAccCompanyListContainer
+{
+  margin-left: 20px;
+  margin-top: 20px;
+  color: var(--col4);
+  width: 30%;
+  height: 100%;
+  transition: 1s;
+}
+
+.userAccCompanyList
+{
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
+  transition: 1s;
+}
+
+.userAccCompanySettings{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.userAccCompanyList li{
+  transition: 500ms;
+  padding: 10px;
+  border-bottom: 1px solid var(--col4);
+
+}
+.userAccCompanyList li:hover{
+  padding: 10px;
+  margin: 0px;
+  color: black;
+  font-weight: bold;
+  background-color: var(--col4);
+}
+
+.UserAccNoCompanies{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.UserAccNoCompanies p{
+  background-color: var(--col1);
+  padding: 20px;
+  color: var(--col4);
+}
+
+.userAccCompanyControl
+{
+    border-left: 1px solid var(--col4);
+    height: 100%;
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userAccCompanyInfo{
+    width: 50%;
+}
+
+.userAccCompanyInfo p{
+background-color: var(--col1);
+color: var(--col4);
+margin-left: auto;
+width: 70%;
+}
+
+
+.userAccCompanyInfo b{
+    color: var(--col4);
+    padding-right: 10px;
+    }
+
+.userAccCompanyParagraphWraper
+{
+    display: flex;
+    align-items: center;
+}
+
+.userAccCompanyFunctions
+{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.userAccCompanyFunctions *{
+    margin: 15px;
+}

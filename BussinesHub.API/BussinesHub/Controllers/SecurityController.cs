@@ -1,4 +1,7 @@
-﻿using BH.Model.Dtos;
+﻿using AutoMapper;
+using BH.Model.Dtos;
+using BH.Model.General;
+using BH.Repository.Interfaces;
 using BussinesHub.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,13 +14,20 @@ namespace BussinesHub.Controllers
 		private readonly JwtTokenService _tokenService;
 		private readonly IClaimProvider _claimProvider;
 		private readonly IConfiguration _config;
+		private readonly IUserRepository _userRepository;
+		private readonly ISymmetricEncryptionDecryptionManager _encryptor;
+		private readonly IMapper _mapper;
 
 
-		public SecurityController( JwtTokenService tokenService, IClaimProvider claimProvider, IConfiguration config )
+
+		public SecurityController( JwtTokenService tokenService, IClaimProvider claimProvider, IConfiguration config, IUserRepository userRepository, ISymmetricEncryptionDecryptionManager encryptor, IMapper mapper )
 		{
 			_tokenService = tokenService;
 			_claimProvider = claimProvider;
-			_config=config;
+			_config = config;
+			_userRepository = userRepository;
+			_encryptor = encryptor;
+			_mapper = mapper;
 		}
 
 		/// <summary>
@@ -37,7 +47,23 @@ namespace BussinesHub.Controllers
 				if ( claims == null )
 					return Unauthorized();
 				else
-					return Ok( _tokenService.CreateToken( claims ) );
+				{
+					User? user = await _userRepository.GetUser( loginDto.Username, _encryptor.Encrypt( loginDto.Password ) );
+					bool hasCompany = ( await _userRepository.GetUserCompanies( loginDto.Password ) ).Any();
+					if ( user == null )
+						return NotFound("User not found");
+					else
+					{
+						var verifiedUser = _tokenService.CreateToken( claims );
+						UserDto userDto = _mapper.Map<UserDto>( user );
+						userDto.Roles = verifiedUser.Roles;
+						userDto.Token = verifiedUser.Token;
+						userDto.HasCompany = hasCompany;
+
+						return Ok( userDto );
+					}
+
+				}
 			}
 			catch ( Exception ex )
 			{

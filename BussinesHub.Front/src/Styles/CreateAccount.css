@@ -1,6 +1,5 @@
 .CreateAccountWrapper
 {
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,11 +10,11 @@
   background-color: rgba(17, 45, 50, 0.9);
   width: 25%;
   height: 80vh;
+  min-height: 600px;
   display: flex;
   flex-direction: column; /* NEW */
   justify-content: center;
   align-items: center;
-  overflow: hidden;
   transition: 1s;
 }
 

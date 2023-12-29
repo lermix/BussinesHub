@@ -34,6 +34,7 @@ builder.Services.AddScoped<IStoreRepository, StoreRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 builder.Services.AddScoped<IClaimProvider, TestClaimProvider>();
+builder.Services.AddScoped<ISymmetricEncryptionDecryptionManager, SymmetricEncryptionDecryptionManager>();
 builder.Services.AddScoped<JwtTokenService>();
 
 #region security

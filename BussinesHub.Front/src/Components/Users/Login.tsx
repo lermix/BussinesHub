@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
-import { Input } from '../../BasicComponents/Input/Input'
-import { LoginDto, User, UserClass } from '../../Models/User'
-import { useAppDispatch } from '../../Store/hooks'
-import '../../Styles/Login.css'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Input } from '../../BasicComponents/Input/Input';
+import { LoginDto, User, UserClass, VerifiedUserClass } from '../../Models/User';
+import { useAppDispatch } from '../../Store/hooks';
+import '../../Styles/Login.css';
+import { Link, useNavigate } from 'react-router-dom';
+import { ApiSecurity } from '../../Api/SecurityController';
+import { SaveUserToLocal } from '../../Store/LocalStorage';
+import { saveVerifiedUserAsCookie } from '../../Helper/CookieHelper';
+import { setGeneralError } from '../../Helper/generalError';
 
 export const Login: React.FC = () => {
-	const dispatch = useAppDispatch()
+	const navigate = useNavigate();
 
-	const [user, setUser] = useState<LoginDto>({ username: '', password: '' })
+	const [loginDto, setLoginDto] = useState<LoginDto>({ username: '', password: '' });
 
 	return (
 		<>
@@ -19,7 +23,7 @@ export const Login: React.FC = () => {
 					width={'15vw'}
 					height={30}
 					text={'korisničko ime'}
-					onChange={(value: string) => setUser({ ...user, password: value })}
+					onChange={(value: string) => setLoginDto({ ...loginDto, username: value })}
 				/>
 				<Input
 					className="loginInput"
@@ -27,20 +31,31 @@ export const Login: React.FC = () => {
 					height={30}
 					width={'15vw'}
 					text={'lozinka'}
-					onChange={(value: string) => setUser({ ...user, password: value })}
+					onChange={(value: string) => setLoginDto({ ...loginDto, password: value })}
 				/>
 				<br />
 				<br />
-				{/* <button className="loginBtn" onClick={() => dispatch(login(user))}>
+				<button
+					className="loginBtn"
+					onClick={() =>
+						ApiSecurity.Login(loginDto)
+							.then((user) => {
+								SaveUserToLocal(user);
+								saveVerifiedUserAsCookie(VerifiedUserClass.FromUser(user));
+								navigate('/');
+							})
+							.catch((e) => (e.response?.data ? setGeneralError(String(e.response?.data)) : setGeneralError(e.message)))
+					}
+				>
 					Prijava
-				</button> */}
+				</button>
 				<p>Nemate račun?</p>
 				<Link to="/CreateAccount" className="loginCreateAccBtn">
 					Napravi račun
 				</Link>
 			</div>
 		</>
-	)
-}
+	);
+};
 
-export default Login
+export default Login;

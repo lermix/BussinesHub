@@ -105,9 +105,7 @@ namespace BH.Database.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Username = table.Column<string>(type: "longtext", nullable: false)
+                    Username = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -125,7 +123,7 @@ namespace BH.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Username);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -217,7 +215,8 @@ namespace BH.Database.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CompanyId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true),
+                    Username = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     Country = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -243,10 +242,10 @@ namespace BH.Database.Migrations
                         principalTable: "Products",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Analitics_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Analitics_Users_Username",
+                        column: x => x.Username,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Username");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -255,11 +254,12 @@ namespace BH.Database.Migrations
                 columns: table => new
                 {
                     CompaniesId = table.Column<int>(type: "int", nullable: false),
-                    UsersId = table.Column<int>(type: "int", nullable: false)
+                    UsersUsername = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CompanyUser", x => new { x.CompaniesId, x.UsersId });
+                    table.PrimaryKey("PK_CompanyUser", x => new { x.CompaniesId, x.UsersUsername });
                     table.ForeignKey(
                         name: "FK_CompanyUser_Companies_CompaniesId",
                         column: x => x.CompaniesId,
@@ -267,10 +267,10 @@ namespace BH.Database.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CompanyUser_Users_UsersId",
-                        column: x => x.UsersId,
+                        name: "FK_CompanyUser_Users_UsersUsername",
+                        column: x => x.UsersUsername,
                         principalTable: "Users",
-                        principalColumn: "Id",
+                        principalColumn: "Username",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -281,7 +281,8 @@ namespace BH.Database.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Username = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     PermissionType = table.Column<byte>(type: "tinyint unsigned", nullable: false),
                     AppliedObjectTable = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -291,10 +292,10 @@ namespace BH.Database.Migrations
                 {
                     table.PrimaryKey("PK_userPermissions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_userPermissions_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_userPermissions_Users_Username",
+                        column: x => x.Username,
                         principalTable: "Users",
-                        principalColumn: "Id",
+                        principalColumn: "Username",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -305,7 +306,8 @@ namespace BH.Database.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Username = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<double>(type: "double", nullable: false)
                 },
@@ -319,10 +321,10 @@ namespace BH.Database.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_userProductsData_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_userProductsData_Users_Username",
+                        column: x => x.Username,
                         principalTable: "Users",
-                        principalColumn: "Id",
+                        principalColumn: "Username",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -492,9 +494,9 @@ namespace BH.Database.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Analitics_UserId",
+                name: "IX_Analitics_Username",
                 table: "Analitics",
-                column: "UserId");
+                column: "Username");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_ParentId",
@@ -507,9 +509,9 @@ namespace BH.Database.Migrations
                 column: "ProductsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CompanyUser_UsersId",
+                name: "IX_CompanyUser_UsersUsername",
                 table: "CompanyUser",
-                column: "UsersId");
+                column: "UsersUsername");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Images_ProductId",
@@ -558,9 +560,9 @@ namespace BH.Database.Migrations
                 column: "StoreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_userPermissions_UserId",
+                name: "IX_userPermissions_Username",
                 table: "userPermissions",
-                column: "UserId");
+                column: "Username");
 
             migrationBuilder.CreateIndex(
                 name: "IX_userProductsData_ProductId",
@@ -568,9 +570,9 @@ namespace BH.Database.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_userProductsData_UserId",
+                name: "IX_userProductsData_Username",
                 table: "userProductsData",
-                column: "UserId");
+                column: "Username");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WebProductInfo_ProductId",

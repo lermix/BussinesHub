@@ -9,6 +9,13 @@
   {
       background-color: var(--col2);
       width: 100vw;
-      height: 30px;    
+      height: 30px;          
   }
   
+.mdbLoggedUser
+{
+    color: var(--col4);
+    float: right;
+    margin-right: 20px;
+    
+}

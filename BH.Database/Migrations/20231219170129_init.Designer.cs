@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BH.Database.Migrations
 {
     [DbContext(typeof(BHDbContex))]
-    [Migration("20230621145715_init")]
+    [Migration("20231219170129_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,8 +54,8 @@ namespace BH.Database.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("Username")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -63,7 +63,7 @@ namespace BH.Database.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("Username");
 
                     b.ToTable("Analitics");
                 });
@@ -286,9 +286,8 @@ namespace BH.Database.Migrations
 
             modelBuilder.Entity("BH.Model.General.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Username")
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -312,14 +311,10 @@ namespace BH.Database.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<byte>("userFuncEnum")
                         .HasColumnType("tinyint unsigned");
 
-                    b.HasKey("Id");
+                    b.HasKey("Username");
 
                     b.ToTable("Users");
                 });
@@ -339,12 +334,13 @@ namespace BH.Database.Migrations
                     b.Property<byte>("PermissionType")
                         .HasColumnType("tinyint unsigned");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("Username");
 
                     b.ToTable("userPermissions");
                 });
@@ -361,14 +357,15 @@ namespace BH.Database.Migrations
                     b.Property<double>("Quantity")
                         .HasColumnType("double");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("Username");
 
                     b.ToTable("userProductsData");
                 });
@@ -461,12 +458,12 @@ namespace BH.Database.Migrations
                     b.Property<int>("CompaniesId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UsersId")
-                        .HasColumnType("int");
+                    b.Property<string>("UsersUsername")
+                        .HasColumnType("varchar(255)");
 
-                    b.HasKey("CompaniesId", "UsersId");
+                    b.HasKey("CompaniesId", "UsersUsername");
 
-                    b.HasIndex("UsersId");
+                    b.HasIndex("UsersUsername");
 
                     b.ToTable("CompanyUser");
                 });
@@ -504,7 +501,7 @@ namespace BH.Database.Migrations
 
                     b.HasOne("BH.Model.General.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("Username");
 
                     b.Navigation("Company");
 
@@ -580,7 +577,7 @@ namespace BH.Database.Migrations
                 {
                     b.HasOne("BH.Model.General.User", "User")
                         .WithMany("UserPermissions")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("Username")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -597,7 +594,7 @@ namespace BH.Database.Migrations
 
                     b.HasOne("BH.Model.General.User", "User")
                         .WithMany("Products")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("Username")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -657,7 +654,7 @@ namespace BH.Database.Migrations
 
                     b.HasOne("BH.Model.General.User", null)
                         .WithMany()
-                        .HasForeignKey("UsersId")
+                        .HasForeignKey("UsersUsername")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

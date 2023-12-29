@@ -8,7 +8,7 @@ namespace BH.Model.EntityConfiguration
 	{
 		public void Configure( EntityTypeBuilder<User> builder )
 		{
-			builder.HasKey( x => x.Id );
+			builder.HasKey( x => x.Username );
 			builder.HasMany( x => x.UserPermissions )
 				.WithOne( x => x.User );
 		}

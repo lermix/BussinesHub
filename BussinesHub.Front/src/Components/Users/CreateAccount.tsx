@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from 'react'
-import { User, UserClass, VerifiedUser } from '../../Models/User'
-import '../../Styles/CreateAccount.css'
-import { useNavigate } from 'react-router-dom'
-import { requests } from '../../Api/agent'
-import { useAppDispatch } from '../../Store/hooks'
-import { Input } from '../../BasicComponents/Input/Input'
-import { SetClassNameToClasses } from '../../Helper/jsHelper'
+import React, { useEffect, useState } from 'react';
+import { User, UserClass, VerifiedUser } from '../../Models/User';
+import '../../Styles/CreateAccount.css';
+import { useNavigate } from 'react-router-dom';
+import { requests } from '../../Api/agent';
+import { useAppDispatch } from '../../Store/hooks';
+import { Input } from '../../BasicComponents/Input/Input';
+import { SetClassNameToClasses } from '../../Helper/jsHelper';
+import { setGeneralError } from '../../Helper/generalError';
+import { saveVerifiedUserAsCookie } from '../../Helper/CookieHelper';
+import { SaveUserToLocal } from '../../Store/LocalStorage';
 
 export const CreateAccount: React.FC = () => {
-	const dispatch = useAppDispatch()
-	const navigate = useNavigate()
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 
-	const [user, setUser] = useState<User>(new UserClass())
+	const [user, setUser] = useState<User>(new UserClass());
 
-	const [passwordUnmatched, setPasswordUnmatched] = useState<boolean>(true)
-	const [emptyFileds, setEmptyFileds] = useState<boolean>(true)
-	const [errorMsg, setErrorMsg] = useState<string>('')
+	const [passwordUnmatched, setPasswordUnmatched] = useState<boolean>(true);
+	const [emptyFileds, setEmptyFileds] = useState<boolean>(true);
+	const [errorMsg, setErrorMsg] = useState<string>('');
 
 	const apiActions = {
 		createUser: (user: User): Promise<VerifiedUser> => requests.post(`User/CreateUser`, user),
-	}
+	};
 
 	const btnEnabledStyle = `.createBtn:hover {
   background-color: #88dbbc;
@@ -27,12 +30,28 @@ export const CreateAccount: React.FC = () => {
   border: 1px solid #88dbbc;
 }
 
-  `
+  `;
 
 	useEffect(() => {
-		if (user.username === '' || user.email === '' || user.surname === '' || user.name === '' || user.password === '') setEmptyFileds(true)
-		else setEmptyFileds(false)
-	}, [user])
+		if (user.username === '' || user.email === '' || user.surname === '' || user.name === '' || user.password === '') setEmptyFileds(true);
+		else setEmptyFileds(false);
+	}, [user]);
+
+	const switchToNextScrenn = () => {
+		SetClassNameToClasses('CreateAccountContainer', 'CreateAccountContainerCollapsed');
+		setTimeout(() => {
+			SetClassNameToClasses('displayNone', 'ContinueContainerCollapsed');
+		}, 800);
+		setTimeout(() => {
+			SetClassNameToClasses('ContinueContainerCollapsed', 'ContinueContainer');
+			setTimeout(() => {
+				SetClassNameToClasses('continueBtnCollapsed', 'continueBtn');
+			}, 500);
+		}, 1000);
+		setTimeout(() => {
+			SetClassNameToClasses('CreateAccountContainerCollapsed', 'displayNone');
+		}, 1000);
+	};
 
 	return (
 		<div className="CreateAccountWrapper">
@@ -53,11 +72,11 @@ export const CreateAccount: React.FC = () => {
 					height={30}
 					text={'ime'}
 					onChange={(value: string) => {
-						const splitted = value.split(' ')
+						const splitted = value.split(' ');
 						if (splitted.length > 1) {
-							setUser({ ...user, name: splitted[0] })
-							setUser({ ...user, middleName: splitted.splice(1).join(' ') })
-						} else setUser({ ...user, name: value })
+							setUser({ ...user, name: splitted[0] });
+							setUser({ ...user, middleName: splitted.splice(1).join(' ') });
+						} else setUser({ ...user, name: value });
 					}}
 				/>
 				<Input
@@ -67,11 +86,11 @@ export const CreateAccount: React.FC = () => {
 					height={30}
 					text={'prezime'}
 					onChange={(value: string) => {
-						const splitted = value.split(' ')
+						const splitted = value.split(' ');
 						if (splitted.length > 1) {
-							setUser({ ...user, surname: splitted[0] })
-							setUser({ ...user, middleName: splitted.splice(1).join(' ') })
-						} else setUser({ ...user, surname: value })
+							setUser({ ...user, surname: splitted[0] });
+							setUser({ ...user, middleName: splitted.splice(1).join(' ') });
+						} else setUser({ ...user, surname: value });
 					}}
 				/>
 				<Input
@@ -106,11 +125,11 @@ export const CreateAccount: React.FC = () => {
 					text={'ponovite lozinku'}
 					onChange={(value: string) => {
 						if (value === user.password) {
-							if (errorMsg === 'Lozinke se ne poklapaju') setErrorMsg('')
-							setPasswordUnmatched(false)
+							if (errorMsg === 'Lozinke se ne poklapaju') setErrorMsg('');
+							setPasswordUnmatched(false);
 						} else {
-							setPasswordUnmatched(true)
-							setErrorMsg('Lozinke se ne poklapaju')
+							setPasswordUnmatched(true);
+							setErrorMsg('Lozinke se ne poklapaju');
 						}
 					}}
 				/>
@@ -127,19 +146,15 @@ export const CreateAccount: React.FC = () => {
 					// 	})
 					//
 					onClick={() => {
-						SetClassNameToClasses('CreateAccountContainer', 'CreateAccountContainerCollapsed')
-						setTimeout(() => {
-							SetClassNameToClasses('displayNone', 'ContinueContainerCollapsed')
-						}, 800)
-						setTimeout(() => {
-							SetClassNameToClasses('ContinueContainerCollapsed', 'ContinueContainer')
-							setTimeout(() => {
-								SetClassNameToClasses('continueBtnCollapsed', 'continueBtn')
-							}, 500)
-						}, 1000)
-						setTimeout(() => {
-							SetClassNameToClasses('CreateAccountContainerCollapsed', 'displayNone')
-						}, 1000)
+						console.log(user);
+						apiActions
+							.createUser(user)
+							.then((verifiedUser) => {
+								SaveUserToLocal(user);
+								switchToNextScrenn();
+								saveVerifiedUserAsCookie(verifiedUser);
+							})
+							.catch((e) => setGeneralError(String(e)));
 					}}
 				>
 					Napravi račun
@@ -151,10 +166,12 @@ export const CreateAccount: React.FC = () => {
 				<button className="continueBtnCollapsed" onClick={() => navigate('/')}>
 					Contine to shop
 				</button>
-				<button className="continueBtnCollapsed">Add your company</button>
+				<button className="continueBtnCollapsed" onClick={() => navigate('/CreateCompany')}>
+					Add your company
+				</button>
 			</div>
 		</div>
-	)
-}
+	);
+};
 
-export default CreateAccount
+export default CreateAccount;

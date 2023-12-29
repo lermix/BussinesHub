@@ -8,9 +8,10 @@ namespace BH.Model.General
 {
 	public enum UserFuncEnum : byte
 	{
-		StoreOwner = 0,
-		Worker = 1,
-		Default = 2,
+		Default = 0,
+		StoreOwner = 1,
+		Worker = 2,
+		
 
 	}
 

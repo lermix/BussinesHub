@@ -1,45 +1,54 @@
-import React, { useState } from 'react'
-import '../../Styles/CreateCompany.css'
-import Login from '../Users/Login'
-import { Input } from '../../basicComponents/Input/Input'
-import { Company, CompanyClass } from '../../Models/Company'
-import { requests } from '../../Api/agent'
+import React, { useState } from 'react';
+import '../../Styles/CreateCompany.css';
+import Login from '../Users/Login';
+import { Input } from '../../BasicComponents/Input/Input';
+import { Company, CompanyClass } from '../../Models/Company';
+import { requests } from '../../Api/agent';
+import { useNavigate } from 'react-router-dom';
+import { GetUserFromLocal } from '../../Store/LocalStorage';
 
-export const CreateCompany: React.FC = () => {
-	const [storesAvaliable, setStoresAvaliable] = useState<boolean>(false)
-	const [company, setCompany] = useState<Company>(new CompanyClass())
-	const [companyCreated, setCompanyCreated] = useState<boolean>(false)
-	const [companyInEdit, setCompanyInEdit] = useState<boolean>(false)
+interface IProps {
+	initalCompany: Company | null;
+	CloseAction: () => void | null;
+}
+
+export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) => {
+	const navigate = useNavigate();
+
+	const [storesAvaliable, setStoresAvaliable] = useState<boolean>(false);
+	const [company, setCompany] = useState<Company>(initalCompany ?? new CompanyClass());
+	const [companyCreated, setCompanyCreated] = useState<boolean>(initalCompany ? true : false);
+	const [companyInEdit, setCompanyInEdit] = useState<boolean>(initalCompany ? true : false);
 
 	const apiActions = {
-		createCompany: (company: Company): Promise<Company> => requests.post(`Company/CreateCompany?username=${verifiedUser?.username}`, company),
+		createCompany: (company: Company, username: string): Promise<Company> => requests.post(`Company/CreateCompany?username=${username}`, company),
 		EditCompany: (company: Company): Promise<Company> => requests.post(`Company/EditCompany`, company),
-	}
+	};
 
 	const CreateCompanyClick = () => {
-		apiActions.createCompany(company).then((res) => {
-			document.cookie = `companyInEdit=` + res + `;path=/`
-			setCompany(res)
-			setCompanyCreated(true)
-			setStoresAvaliable(true)
-		})
-	}
+		apiActions.createCompany(company, GetUserFromLocal()?.username ?? '').then((res) => {
+			setCompanyCreated(true);
+			setCompany(res);
+			setStoresAvaliable(true);
+
+			console.log(res);
+		});
+	};
 
 	const EditCompany = () => {
 		apiActions.EditCompany(company).then((res) => {
-			document.cookie = `companyInEdit=` + res + `;path=/`
-			setCompany(res)
-			setStoresAvaliable(true)
-			setCompanyInEdit(false)
-		})
-	}
+			setCompany(res);
+			setStoresAvaliable(true);
+			setCompanyInEdit(false);
+		});
+	};
 
-	const storeStyles = `.CreateCompanyAddBtn:hover {
+	const storeStyles = `.CreateCompanyRoundBtn:hover {
 	background-color: #88dbbc;
 	color: #112d32;
 	cursor: pointer;
   }
-  `
+  `;
 
 	return (
 		<>
@@ -50,6 +59,8 @@ export const CreateCompany: React.FC = () => {
 					<div className="createCompanyContainer">
 						<div className="createCompanyHeader">
 							<h2>Kompanija</h2>
+							<div className="CreateCompanyRoundBtn createCompanyHomeBtn" onClick={() => navigate('/')}></div>
+							{CloseAction && <div className="CreateCompanyRoundBtn createCompanyBackBtn" onClick={() => CloseAction()}></div>}
 						</div>
 						<div className="CreateCompanyForm">
 							<Input
@@ -66,7 +77,7 @@ export const CreateCompany: React.FC = () => {
 								width={'15vw'}
 								height={30}
 								text={'adresa'}
-								onChange={(value: string) => setCompany({ ...company, name: value })}
+								onChange={(value: string) => setCompany({ ...company, adress: value })}
 							/>
 							<Input
 								className="CreateCompanyinput"
@@ -129,14 +140,14 @@ export const CreateCompany: React.FC = () => {
 						<div className="ccscLeft">
 							<div className="createCompanyHeader">
 								<h2>Poslovnice</h2>
-								<button className="CreateCompanyAddBtn">+</button>
+								<button className="CreateCompanyRoundBtn">+</button>
 							</div>
 						</div>
 					</div>
 				</>
 			)}
 		</>
-	)
-}
+	);
+};
 
-export default CreateCompany
+export default CreateCompany;

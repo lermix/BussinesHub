@@ -10,7 +10,7 @@ namespace BussinesHub.MapperProfiles
 		{
 			CreateMap<UserDto, User>();
 			CreateMap<User, UserDto>();
-			CreateMap<CompanyDto, Company>();
+			CreateMap<CompanyDto, Company>().ReverseMap();
 		}
 	}
 }
