@@ -39,10 +39,7 @@ namespace BH.Repository.Repos
 					Log.Error( $"Store with Id: {storeId} not found, error adding product to store" );
 					return null;
 				}
-				StoreProductData spd = new StoreProductData();
-				spd.Product = foundProduct;
-				spd.Store = foundStore;
-				spd.Quantity = productCount;
+				StoreProductData spd = new StoreProductData( foundProduct, foundStore, productCount);			
 
 				var entry = context.storeProductsData.Add( spd );
 				await context.SaveChangesAsync();

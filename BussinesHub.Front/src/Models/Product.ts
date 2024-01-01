@@ -1,8 +1,3 @@
-import { Category } from './Category';
-import { Image } from './Image';
-import { Store } from './Store';
-import { Analitic } from './Analitic';
-
 export interface Product {
 	id: number;
 	name: string;
@@ -13,10 +8,8 @@ export interface Product {
 	discountPercanatage: number;
 	shipping: boolean;
 	avaliable: boolean;
-	categories: Category[];
-	images: Image[];
-	stores: Store[];
-	analitics: Analitic[];
+	categoriesIds: number[];
+	imagesIds: number[];
 }
 
 export class ProductClass implements Product {
@@ -29,8 +22,6 @@ export class ProductClass implements Product {
 	discountPercanatage = 0;
 	shipping = true;
 	avaliable = true;
-	categories = [];
-	images = [];
-	stores = [];
-	analitics = [];
+	categoriesIds = [];
+	imagesIds = [];
 }

@@ -3,6 +3,7 @@ using System;
 using BH.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BH.Database.Migrations
 {
     [DbContext(typeof(BHDbContex))]
-    partial class BHDbContexModelSnapshot : ModelSnapshot
+    [Migration("20240101105322_companyProducts")]
+    partial class companyProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,9 +74,6 @@ namespace BH.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("CompanyId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -83,8 +82,6 @@ namespace BH.Database.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
 
                     b.HasIndex("ParentId");
 
@@ -188,7 +185,7 @@ namespace BH.Database.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<int>("CompanyId")
+                    b.Property<int?>("CompanyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -520,10 +517,6 @@ namespace BH.Database.Migrations
 
             modelBuilder.Entity("BH.Model.General.Category", b =>
                 {
-                    b.HasOne("BH.Model.General.Company", null)
-                        .WithMany("Categories")
-                        .HasForeignKey("CompanyId");
-
                     b.HasOne("BH.Model.General.Category", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId")
@@ -549,13 +542,9 @@ namespace BH.Database.Migrations
 
             modelBuilder.Entity("BH.Model.General.Product", b =>
                 {
-                    b.HasOne("BH.Model.General.Company", "Company")
+                    b.HasOne("BH.Model.General.Company", null)
                         .WithMany("Products")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
+                        .HasForeignKey("CompanyId");
                 });
 
             modelBuilder.Entity("BH.Model.General.Store", b =>
@@ -712,8 +701,6 @@ namespace BH.Database.Migrations
             modelBuilder.Entity("BH.Model.General.Company", b =>
                 {
                     b.Navigation("Analitics");
-
-                    b.Navigation("Categories");
 
                     b.Navigation("Products");
 

@@ -7,5 +7,6 @@
 		public Category? Parent { get; set; }
 		public virtual ICollection<Category>? Children { get; set; } = new List<Category>();
 		public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+		public Company Company { get; set; }
 	}
 }

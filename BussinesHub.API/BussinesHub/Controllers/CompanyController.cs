@@ -4,6 +4,7 @@ using BH.Model.General;
 using BH.Repository.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Security.Claims;
 
 namespace BussinesHub.Controllers
@@ -12,17 +13,17 @@ namespace BussinesHub.Controllers
 	{
 		private readonly ICompanyRepository comapnyRepository;
 		private readonly IMapper mapper;
-		public CompanyController(ICompanyRepository comapnyRepository, IMapper mapper)
+		public CompanyController( ICompanyRepository comapnyRepository, IMapper mapper )
 		{
 			this.comapnyRepository = comapnyRepository;
-			this.mapper=mapper;
+			this.mapper = mapper;
 		}
 
 		[HttpPost]
 		public async Task<IActionResult> CreateCompany( [FromBody] CompanyDto company, [FromQuery] string username )
 		{
 			if ( username != null )
-				return Ok( mapper.Map < CompanyDto >( await comapnyRepository.CreateCompany( mapper.Map<Company>(company), username ) ));
+				return Ok( mapper.Map<CompanyDto>( await comapnyRepository.CreateCompany( mapper.Map<Company>( company ), username ) ) );
 			else
 				return BadRequest( "No username" );
 		}
@@ -38,13 +39,19 @@ namespace BussinesHub.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> GetCompanyStores( int companyId ) =>  Ok( await comapnyRepository.GetCompanyStores( companyId ));
+		public async Task<IActionResult> GetCompanyStores( int companyId ) => Ok( await comapnyRepository.GetCompanyStores( companyId ) );
+		[HttpGet]
+		public async Task<IActionResult> GetCompanyProducts( int companyId ) => Ok( mapper.Map<List<Product>>( await comapnyRepository.GetCompanyProducts( companyId ) ) );
+		[HttpGet]
+		public async Task<IActionResult> GetCompanyCategories( int companyId ) => Ok( mapper.Map<List<Category>>( await comapnyRepository.GetCompanyCategories( companyId ) ) );
+		[HttpPost]
+		public async Task<IActionResult> CreateCompanyCategory( [FromBody] CategoryDto category, [FromQuery] int companyId ) => Ok( await comapnyRepository.CreateCompanyCategory( mapper.Map<Category>( category ), companyId ) );
 
 		[HttpPost]
 		public async Task<IActionResult> CreateStore( [FromBody] Store store, [FromQuery] int companyId ) =>
 			Ok( await comapnyRepository.CreateStore( companyId, store ) );
 		[HttpPost]
-		public async Task<IActionResult> EditCompany( [FromBody] Company company) =>
+		public async Task<IActionResult> EditCompany( [FromBody] Company company ) =>
 			Ok( await comapnyRepository.UpdateCompany( company ) );
 	}
 }

@@ -44,7 +44,7 @@ export const Login: React.FC = () => {
 								saveVerifiedUserAsCookie(VerifiedUserClass.FromUser(user));
 								navigate('/');
 							})
-							.catch((e) => (e.response?.data ? setGeneralError(String(e.response?.data)) : setGeneralError(e.message)))
+							.catch((e) => setGeneralError(e))
 					}
 				>
 					Prijava

@@ -3,6 +3,8 @@ import '../../Styles/UserAccount/UserAccount.css';
 import { useNavigate } from 'react-router-dom';
 import CompanyProducts from './CompanyProducts';
 import { Company } from '../../Models/Company';
+import { table } from 'console';
+import CompanyCategories from './CompanyCategories';
 
 interface IProps {
 	CloseAction: () => void | null;
@@ -24,17 +26,18 @@ export const CompanyManagament: React.FC<IProps> = ({ CloseAction, company }) =>
 			<div className="userAccWrapper">
 				<div className="userAccMain">
 					<div className="userAccMenuBtnontainer">
-						<button className="userAccMenuBtn">
+						<button className="userAccMenuBtn" onClick={() => setActiveTab(Tabs.Products)}>
 							<p>Proizvodi</p>
 						</button>
-						<button className="userAccMenuBtn">
+						<button className="userAccMenuBtn" onClick={() => setActiveTab(Tabs.Categories)}>
 							<p>Kategorije</p>
 						</button>
 						<button className="userAccMenuBtn" onClick={() => CloseAction()}>
 							<p>Povratak</p>
 						</button>
 					</div>
-					<CompanyProducts company={company} />
+					{activeTab == Tabs.Products && <CompanyProducts company={company} />}
+					{activeTab == Tabs.Categories && <CompanyCategories company={company} />}
 				</div>
 			</div>
 		</>

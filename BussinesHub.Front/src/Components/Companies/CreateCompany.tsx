@@ -6,6 +6,7 @@ import { Company, CompanyClass } from '../../Models/Company';
 import { requests } from '../../Api/agent';
 import { useNavigate } from 'react-router-dom';
 import { GetUserFromLocal } from '../../Store/LocalStorage';
+import { ApiCompany } from '../../Api/CompanyController';
 
 interface IProps {
 	initalCompany: Company | null;
@@ -20,13 +21,8 @@ export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) 
 	const [companyCreated, setCompanyCreated] = useState<boolean>(initalCompany ? true : false);
 	const [companyInEdit, setCompanyInEdit] = useState<boolean>(initalCompany ? true : false);
 
-	const apiActions = {
-		createCompany: (company: Company, username: string): Promise<Company> => requests.post(`Company/CreateCompany?username=${username}`, company),
-		EditCompany: (company: Company): Promise<Company> => requests.post(`Company/EditCompany`, company),
-	};
-
 	const CreateCompanyClick = () => {
-		apiActions.createCompany(company, GetUserFromLocal()?.username ?? '').then((res) => {
+		ApiCompany.createCompany(company, GetUserFromLocal()?.username ?? '').then((res) => {
 			setCompanyCreated(true);
 			setCompany(res);
 			setStoresAvaliable(true);
@@ -36,7 +32,7 @@ export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) 
 	};
 
 	const EditCompany = () => {
-		apiActions.EditCompany(company).then((res) => {
+		ApiCompany.EditCompany(company).then((res) => {
 			setCompany(res);
 			setStoresAvaliable(true);
 			setCompanyInEdit(false);

@@ -1,9 +1,12 @@
 .CreateNewProductWrapper{
     display: flex;
-    width: 90%;
+    width: 60%;
     height: 90%;
     background-color: var(--col1);
     flex-direction: column;
+    margin: 0 auto;
+    text-align: center;
+    align-items: center;
 }
 
 .CreateCompanyInput {
@@ -11,3 +14,7 @@
     margin-top: 10px;
   }
   
+.CreateNewProductWrapper button{
+    width: 70px;
+    margin-top: 20px;
+}

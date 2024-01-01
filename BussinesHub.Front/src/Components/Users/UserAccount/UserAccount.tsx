@@ -16,7 +16,6 @@ export const UserAccount: React.FC = () => {
 	const [userCompanies, setUserCompanies] = useState<Company[]>([]);
 	const [companyToEditInfo, setCompanyToEditInfo] = useState<Company | null>(null);
 	const [companyToEditProducts, setCompanyToEditProducts] = useState<Company | null>(null);
-
 	window.addEventListener('storage', () => {
 		console.log(GetUserFromLocal());
 		setUser(GetUserFromLocal());

@@ -1,22 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../../Styles/Companies/CreateNewProduct.css';
-import { useNavigate } from 'react-router-dom';
-import CompanyProducts from './CompanyProducts';
-import { Company } from '../../Models/Company';
 import { Product, ProductClass } from '../../Models/Product';
 import { Input } from '../../BasicComponents/Input/Input';
+import { ApiProducts } from '../../Api/ProductsController';
+import { setGeneralError } from '../../Helper/generalError';
+import { Company } from '../../Models/Company';
 
-interface IProps {}
+interface IProps {
+	onNewProduct: (product: Product) => void;
+	onEditProduct: (product: Product) => void;
+	company: Company;
+	productToEdit?: Product | null;
+}
 
 const enum Tabs {
 	Products,
 	Categories,
 }
 
-export const CreateNewProduct: React.FC<IProps> = () => {
-	const navigate = useNavigate();
+export const CreateNewOrEditProduct: React.FC<IProps> = ({ onEditProduct, company, onNewProduct, productToEdit }) => {
+	const [product, setProduct] = useState<Product>(productToEdit ?? new ProductClass());
 
-	const [product, setProduct] = useState<Product>(new ProductClass());
+	useEffect(() => {
+		if (productToEdit) setProduct(productToEdit);
+		else setProduct(new ProductClass());
+	}, [productToEdit]);
 
 	return (
 		<>
@@ -75,11 +83,33 @@ export const CreateNewProduct: React.FC<IProps> = () => {
 					value={product?.discountPercanatage}
 					onChange={(value: number) => setProduct({ ...product, discountPercanatage: value })}
 				/>
-				<Input type="checkbox" checked={product.shipping} onChange={(value: boolean) => setProduct({ ...product, shipping: value })} />
-				<Input type="checkbox" checked={product.avaliable} onChange={(value: boolean) => setProduct({ ...product, avaliable: value })} />
+				{!productToEdit && (
+					<button
+						className="defaultBtn"
+						onClick={() =>
+							ApiProducts.CreateProduct(product, company.id)
+								.then((res) => onNewProduct(res))
+								.catch((ex) => setGeneralError(ex))
+						}
+					>
+						Kreiraj
+					</button>
+				)}
+				{productToEdit && (
+					<button
+						className="defaultBtn"
+						onClick={() =>
+							ApiProducts.UpdateProduct(product)
+								.then((res) => onEditProduct(res))
+								.catch((ex) => setGeneralError(ex))
+						}
+					>
+						Uredi
+					</button>
+				)}
 			</div>
 		</>
 	);
 };
 
-export default CreateNewProduct;
+export default CreateNewOrEditProduct;

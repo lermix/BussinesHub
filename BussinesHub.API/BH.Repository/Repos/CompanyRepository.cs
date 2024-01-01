@@ -43,6 +43,29 @@ namespace BH.Repository.Repos
 
 		}
 
+		public async Task<Category?> CreateCompanyCategory( Category category, int companyId )
+		{
+			var company = await context.Companies.FirstOrDefaultAsync( x => x.Id == companyId );
+			if ( company == null )
+				throw new ArgumentNullException( $"Company with Id {companyId} could not be found" );
+
+			category.Company = company;
+
+			Category parent = await context.Categories.FirstOrDefaultAsync( x => x.Id == category.Parent.Id);
+
+			category.Parent = null;
+
+			await context.Categories.AddAsync( category );
+
+			await context.SaveChangesAsync();
+
+			category.Parent = parent;
+
+			await context.SaveChangesAsync();
+
+			return category;
+		}
+
 		public async Task<Store> CreateStore( int companyId, Store store )
 		{
 			var foundCompany = context.Companies.FirstOrDefault( x => x.Id == companyId );			
@@ -92,8 +115,18 @@ namespace BH.Repository.Repos
 			return -1;
 		}
 
+		public async Task<List<Category>?> GetCompanyCategories( int companyId )
+		{
+			return (await context.Companies.Include( x => x.Categories).FirstOrDefaultAsync( x => x.Id == companyId ))?.Categories
+				.Where( cat => cat.Parent == null).ToList() ?? new List<Category>();
+		}
 
+		public async Task<List<Product>> GetCompanyProducts( int companyId )
+		{
+			return (await context.Companies.Include( x => x.Products).FirstOrDefaultAsync( x => x.Id == companyId ))?.Products.ToList() ?? new List<Product>();
+		}
 
+		
 		public Task<List<Store>> GetCompanyStores( int companyId )
 		{
 			var foundCompany = context.Companies.Include(x => x.Stores).FirstOrDefault( x => x.Id == companyId );

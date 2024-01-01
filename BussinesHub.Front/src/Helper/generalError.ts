@@ -1,6 +1,7 @@
 import { SetClassNameToClasses } from './jsHelper';
 
-export const setGeneralError = (msg: string) => {
+export const setGeneralError = (error: any) => {
+	const msg = error.response?.data ? String(error.response?.data) : error.message ? error.message : error;
 	var paragraph = document.getElementById('ErrorParagraph');
 	SetClassNameToClasses('generalErrorHidden', 'generalError');
 
