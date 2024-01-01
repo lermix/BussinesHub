@@ -29,6 +29,11 @@ namespace BH.Model
 			modelBuilder.Entity<WebTab>().ToTable( "WebTab" );
 			modelBuilder.Entity<WebTabProducts>().ToTable( "WebTabProducts" );
 			modelBuilder.Entity<WebTabInfo>().ToTable( "WebTabInfo" );
+
+			modelBuilder.Entity<Company>().Navigation( x => x.Stores ).AutoInclude();
+
+			modelBuilder.Entity<Store>().Navigation(x => x.Images ).AutoInclude();
+			modelBuilder.Entity<Store>().Navigation( x => x.Coordinate ).AutoInclude();
 		}
 	}
 }

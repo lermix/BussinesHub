@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react';
 import '../../../Styles/UserAccount/UACompanyDisplay.css';
 import { Company } from '../../../Models/Company';
 import { useNavigate } from 'react-router-dom';
+import { GetCategoriesForCompany } from '../../../Store/shared/actions';
+import { useAppDispatch } from '../../../Store/hooks';
 
 interface IProps {
 	userCompanies: Company[];
@@ -10,6 +12,8 @@ interface IProps {
 }
 
 export const UACompanyDisplay: React.FC<IProps> = ({ userCompanies, setCompanyToEdit, setCompanyToEditProducts }) => {
+	const dispatch = useAppDispatch();
+
 	const navigate = useNavigate();
 	const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
 
@@ -19,10 +23,17 @@ export const UACompanyDisplay: React.FC<IProps> = ({ userCompanies, setCompanyTo
 				{userCompanies.length > 0 && (
 					<>
 						<div className="userAccCompanyListContainer">
-							<h2>Companies</h2>
+							<h2>Tvrtke:</h2>
 							<ul className="userAccCompanyList">
 								{userCompanies.map((company) => (
-									<li onClick={() => setSelectedCompany(company)}>{company.name}</li>
+									<li
+										onClick={() => {
+											setSelectedCompany(company);
+											dispatch(GetCategoriesForCompany(company.id));
+										}}
+									>
+										{company.name}
+									</li>
 								))}
 							</ul>
 						</div>

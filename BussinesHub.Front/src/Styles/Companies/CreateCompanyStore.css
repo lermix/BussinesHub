@@ -1,0 +1,12 @@
+.CreateCompanyStoreWrapper{
+    width: 90%;
+    height: 90%;
+    margin-left: 5%;
+    margin-top: 5%;    
+}
+
+.CreateCompanyStoreWrapper button{
+    margin-top: 20px;
+    width: 6vw;
+    margin-left: 14vw;
+}

@@ -40,10 +40,14 @@ namespace BussinesHub.Controllers
 
 		[HttpGet]
 		public async Task<IActionResult> GetCompanyStores( int companyId ) => Ok( await comapnyRepository.GetCompanyStores( companyId ) );
+		[HttpPost]
+		public async Task<IActionResult> AddCompanyStores( StoreDto store, int companyId ) => Ok( mapper.Map<StoreDto>(await comapnyRepository.AddCompanyStore( mapper.Map<Store>(store), companyId ) ));
 		[HttpGet]
-		public async Task<IActionResult> GetCompanyProducts( int companyId ) => Ok( mapper.Map<List<Product>>( await comapnyRepository.GetCompanyProducts( companyId ) ) );
+		public async Task<IActionResult> RemoveCompanyStores( int storeId, int companyId) => Ok( await comapnyRepository.RemoveCompanyStore( storeId, companyId ) );
 		[HttpGet]
-		public async Task<IActionResult> GetCompanyCategories( int companyId ) => Ok( mapper.Map<List<Category>>( await comapnyRepository.GetCompanyCategories( companyId ) ) );
+		public async Task<IActionResult> GetCompanyProducts( int companyId ) => Ok( mapper.Map<List<ProductDto>>( await comapnyRepository.GetCompanyProducts( companyId ) ) );
+		[HttpGet]
+		public async Task<IActionResult> GetCompanyCategories( int companyId ) => Ok( mapper.Map<List<CategoryDto>>( mapper.Map<List<CategoryDto>>(await comapnyRepository.GetCompanyCategories( companyId ) ) ));
 		[HttpPost]
 		public async Task<IActionResult> CreateCompanyCategory( [FromBody] CategoryDto category, [FromQuery] int companyId ) => Ok( await comapnyRepository.CreateCompanyCategory( mapper.Map<Category>( category ), companyId ) );
 
@@ -51,7 +55,7 @@ namespace BussinesHub.Controllers
 		public async Task<IActionResult> CreateStore( [FromBody] Store store, [FromQuery] int companyId ) =>
 			Ok( await comapnyRepository.CreateStore( companyId, store ) );
 		[HttpPost]
-		public async Task<IActionResult> EditCompany( [FromBody] Company company ) =>
-			Ok( await comapnyRepository.UpdateCompany( company ) );
+		public async Task<IActionResult> EditCompany( [FromBody] CompanyDto company ) =>
+			Ok( await comapnyRepository.UpdateCompany( mapper.Map<Company>( company )) );
 	}
 }

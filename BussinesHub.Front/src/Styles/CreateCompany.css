@@ -79,12 +79,22 @@
   float: left;
   margin-left: 10px;
   margin-top: 2.5vh;
+  display: flex;
+  flex-direction: row;
+  color: var(--col4);
 }
+
 
 .ccscLeft {
   width: 30%;
   height: 100%;
   border-right: 1px solid #88dbbc;
+}
+
+.ccscRight {
+  width: 100%;
+  height: 100%;
+  
 }
 
 .createCompanyHeader {
@@ -119,4 +129,8 @@
   width: 100%;
   height: 50px;
   border-bottom: 1px solid #88dbbc;
+}
+
+.ccscLeft ul{
+  list-style-type: decimal-leading-zero;  
 }

@@ -6,7 +6,7 @@ namespace BH.Model.Dtos
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }
-		public CategoryDto? Parent { get; set; }
+		public int? ParentId { get; set; }
 		public virtual ICollection<CategoryDto>? Children { get; set; } = new List<CategoryDto>();
 	}
 }

@@ -13,6 +13,17 @@ namespace BH.Repository.Repos
 			this.context = context;
 		}
 
+		public async Task<List<int>?> AddProductCategory( int productId, int categoryId )
+		{
+			var product = await context.Products.Include(x => x.Categories).FirstOrDefaultAsync( x => x.Id == productId );
+			var category = await context.Categories.FirstOrDefaultAsync( x => x.Id == categoryId);
+
+			product.Categories.Add( category );
+			await context.SaveChangesAsync();
+
+			return product.Categories.Select( x => x.Id).ToList();
+		}
+
 		public async Task<Product> CreateProduct( Product product, int companyId )
 		{			
 			var company = await context.Companies.FirstOrDefaultAsync( x => x.Id == companyId );
@@ -37,6 +48,19 @@ namespace BH.Repository.Repos
 			}
 			else
 				return -1;
+		}
+
+		public async Task<List<int>> RemoveProductCategory( int productId, int categoryId )
+		{
+			var product = await context.Products.Include( x => x.Categories ).FirstOrDefaultAsync( x => x.Id == productId );
+			var category = await context.Categories.FirstOrDefaultAsync( x => x.Id == categoryId );
+
+			product.Categories.Remove( category );
+
+			await context.SaveChangesAsync();
+
+			return product.Categories.Select( x => x.Id ).ToList();
+
 		}
 
 		public async Task<Product> UpdateProduct( Product product )

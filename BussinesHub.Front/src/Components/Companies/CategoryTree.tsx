@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../Styles/Companies/CompanyCategories.css';
 import { Category } from '../../Models/Category';
 
 const CategoryTree: React.FC<{ categories: Category[]; setSelecteCategory: React.Dispatch<React.SetStateAction<Category | null>> }> = ({
@@ -15,7 +16,7 @@ const CategoryTree: React.FC<{ categories: Category[]; setSelecteCategory: React
 						event.stopPropagation();
 					}}
 				>
-					{category.name}
+					<p className="catTreeParagraph">{category.name}</p>
 					{category.children && category.children.length > 0 && (
 						<CategoryTree categories={category.children} setSelecteCategory={setSelecteCategory} />
 					)}

@@ -25,7 +25,7 @@ export const CompanyCategories: React.FC<IProps> = ({ company }) => {
 	}, []);
 
 	useEffect(() => {
-		newCategory.parent = selectedCategory;
+		newCategory.parentId = selectedCategory?.id;
 	}, [selectedCategory]);
 	return (
 		<>

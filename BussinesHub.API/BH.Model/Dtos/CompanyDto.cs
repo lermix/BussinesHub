@@ -1,11 +1,4 @@
-﻿using BH.Model.General;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BH.Model.Dtos
+﻿namespace BH.Model.Dtos
 {
 	public class CompanyDto
 	{
@@ -17,5 +10,7 @@ namespace BH.Model.Dtos
 		public string PostalCode { get; set; }
 		public string Country { get; set; }
 		public string PhoneNumber { get; set; }
+		public virtual ICollection<StoreDto> Stores { get; set; } = new List<StoreDto>();
+
 	}
 }

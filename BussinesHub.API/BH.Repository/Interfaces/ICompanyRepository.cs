@@ -1,4 +1,5 @@
-﻿using BH.Model.General;
+﻿using BH.Model.Dtos;
+using BH.Model.General;
 
 namespace BH.Repository.Interfaces
 {
@@ -14,5 +15,7 @@ namespace BH.Repository.Interfaces
 		Task<List<Product>> GetCompanyProducts( int companyId );
 		Task<List<Category>?> GetCompanyCategories( int companyId );
 		Task<Category?> CreateCompanyCategory( Category category, int companyId );
+		Task<int> RemoveCompanyStore( int storeId, int companyId );
+		Task<Store> AddCompanyStore( Store store, int companyId );
 	}
 }

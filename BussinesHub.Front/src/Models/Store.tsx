@@ -1,4 +1,4 @@
-import { Company, CompanyClass } from './Company';
+import { Coordinate, CoordinateClass } from './Coordinate';
 
 export interface Store {
 	id: number;
@@ -7,8 +7,9 @@ export interface Store {
 	city: string;
 	postalCode: string;
 	country: string;
-	mobileNumber: string | null;
-	parentCompany: Company;
+	mobileNumber: string;
+	ParentCompanyId: number;
+	coordinate: Coordinate;
 	imagesIds: number[];
 }
 
@@ -20,6 +21,7 @@ export class StoreClass implements Store {
 	postalCode = '';
 	country = '';
 	mobileNumber = '';
-	parentCompany = new CompanyClass();
+	ParentCompanyId = -1;
+	coordinate = new CoordinateClass();
 	imagesIds = [];
 }

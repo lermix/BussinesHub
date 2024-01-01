@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ApiUser } from '../../../Api/UserController';
 import { GetUserFromLocal } from '../../../Store/LocalStorage';
 import '../../../Styles/UserAccount/UserAccount.css';
@@ -20,6 +20,10 @@ export const UserAccount: React.FC = () => {
 		console.log(GetUserFromLocal());
 		setUser(GetUserFromLocal());
 	});
+
+	useEffect(() => {
+		ApiUser.GetUserCompanies(user?.username ?? '').then((res) => setUserCompanies(res));
+	}, []);
 
 	return (
 		<>

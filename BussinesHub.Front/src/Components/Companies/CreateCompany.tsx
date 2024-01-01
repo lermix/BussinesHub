@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import '../../Styles/CreateCompany.css';
 import Login from '../Users/Login';
 import { Input } from '../../BasicComponents/Input/Input';
@@ -7,6 +7,7 @@ import { requests } from '../../Api/agent';
 import { useNavigate } from 'react-router-dom';
 import { GetUserFromLocal } from '../../Store/LocalStorage';
 import { ApiCompany } from '../../Api/CompanyController';
+import CreateCompanyStore from './CreateCompanyStore';
 
 interface IProps {
 	initalCompany: Company | null;
@@ -16,18 +17,26 @@ interface IProps {
 export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) => {
 	const navigate = useNavigate();
 
-	const [storesAvaliable, setStoresAvaliable] = useState<boolean>(false);
+	const [storesAvaliable, setStoresAvaliable] = useState<boolean>(initalCompany ? true : false);
 	const [company, setCompany] = useState<Company>(initalCompany ?? new CompanyClass());
 	const [companyCreated, setCompanyCreated] = useState<boolean>(initalCompany ? true : false);
 	const [companyInEdit, setCompanyInEdit] = useState<boolean>(initalCompany ? true : false);
+	const [showCreateStore, setShowCreateStore] = useState<boolean>(false);
+
+	useEffect(() => {
+		if (initalCompany) {
+			setCompany(initalCompany);
+			setCompanyInEdit(false);
+			setStoresAvaliable(true);
+			setCompanyCreated(true);
+		}
+	}, [initalCompany]);
 
 	const CreateCompanyClick = () => {
 		ApiCompany.createCompany(company, GetUserFromLocal()?.username ?? '').then((res) => {
 			setCompanyCreated(true);
 			setCompany(res);
 			setStoresAvaliable(true);
-
-			console.log(res);
 		});
 	};
 
@@ -54,7 +63,7 @@ export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) 
 				<>
 					<div className="createCompanyContainer">
 						<div className="createCompanyHeader">
-							<h2>Kompanija</h2>
+							<h2>Tvrtka</h2>
 							<div className="CreateCompanyRoundBtn createCompanyHomeBtn" onClick={() => navigate('/')}></div>
 							{CloseAction && <div className="CreateCompanyRoundBtn createCompanyBackBtn" onClick={() => CloseAction()}></div>}
 						</div>
@@ -64,7 +73,8 @@ export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) 
 								type="text"
 								width={'15vw'}
 								height={30}
-								text={'ime kompanije'}
+								text={'ime tvrtke'}
+								value={company.name}
 								onChange={(value: string) => setCompany({ ...company, name: value })}
 							/>
 							<Input
@@ -73,6 +83,7 @@ export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) 
 								width={'15vw'}
 								height={30}
 								text={'adresa'}
+								value={company.adress}
 								onChange={(value: string) => setCompany({ ...company, adress: value })}
 							/>
 							<Input
@@ -81,6 +92,7 @@ export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) 
 								width={'15vw'}
 								height={30}
 								text={'grad'}
+								value={company.city}
 								onChange={(value: string) => setCompany({ ...company, city: value })}
 							/>
 							<Input
@@ -89,6 +101,7 @@ export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) 
 								width={'15vw'}
 								height={30}
 								text={'poštanski broj'}
+								value={company.postalCode}
 								onChange={(value: string) => setCompany({ ...company, postalCode: value })}
 							/>
 							<Input
@@ -97,6 +110,7 @@ export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) 
 								width={'15vw'}
 								height={30}
 								text={'država'}
+								value={company.country}
 								onChange={(value: string) => setCompany({ ...company, country: value })}
 							/>
 							<Input
@@ -105,6 +119,7 @@ export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) 
 								width={'15vw'}
 								height={30}
 								text={'oib'}
+								value={company.identificationNumber}
 								onChange={(value: string) => setCompany({ ...company, identificationNumber: value })}
 							/>
 							<Input
@@ -113,6 +128,7 @@ export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) 
 								width={'15vw'}
 								height={30}
 								text={'telefonski broj'}
+								value={company.phoneNumber}
 								onChange={(value: string) => setCompany({ ...company, phoneNumber: value })}
 							/>
 							{companyCreated ? (
@@ -136,8 +152,23 @@ export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) 
 						<div className="ccscLeft">
 							<div className="createCompanyHeader">
 								<h2>Poslovnice</h2>
-								<button className="CreateCompanyRoundBtn">+</button>
+								<button className="CreateCompanyRoundBtn" onClick={() => setShowCreateStore(true)}>
+									+
+								</button>
 							</div>
+							<ul>
+								{company.stores.map((st) => (
+									<li>{st.name}</li>
+								))}
+							</ul>
+						</div>
+						<div className="ccscRight">
+							{showCreateStore && (
+								<CreateCompanyStore
+									company={company}
+									onStoreCreated={(store) => setCompany({ ...company, stores: [...company.stores, store] })}
+								/>
+							)}
 						</div>
 					</div>
 				</>

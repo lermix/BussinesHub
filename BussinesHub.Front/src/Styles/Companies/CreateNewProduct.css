@@ -7,6 +7,7 @@
     margin: 0 auto;
     text-align: center;
     align-items: center;
+    color: var(--col4);
 }
 
 .CreateCompanyInput {
@@ -17,4 +18,64 @@
 .CreateNewProductWrapper button{
     width: 70px;
     margin-top: 20px;
+}
+
+.CreateNewProductWrapper p
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    margin: 0;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    border-bottom: 1px solid var(--col4);
+}
+
+.CreateNewProductWrapper b{
+    border: 1px solid var(--col4);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.CreateNewProductWrapper b:hover{
+    color: black;
+    background-color: var(--col4);
+}
+
+.createNewProductCategoriesWrapper{
+    display: flex;
+    width: 60%;
+    height: 90%;
+    background-color: var(--col1);
+    color: var(--col4);   
+}
+
+.CreateNewProductWrapper ul{
+    list-style-type: none;
+    margin-left: -60px;
+    height: 150px;
+    overflow-y: scroll;
+}
+
+.CreateNewProductWrapper ul li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+}
+
+.CreateNewProductWrapper ul li b{
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    padding-bottom: 3px;
+    padding-right: 1px;
+
 }

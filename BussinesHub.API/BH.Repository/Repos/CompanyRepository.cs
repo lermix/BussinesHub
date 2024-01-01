@@ -1,4 +1,5 @@
 ﻿using BH.Model;
+using BH.Model.Dtos;
 using BH.Model.General;
 using BH.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,20 @@ namespace BH.Repository.Repos
 		{
 			this.context = context;
 		}
+
+		public async Task<Store> AddCompanyStore( Store store, int companyId )
+		{
+			await context.Store.AddAsync( store );
+
+			var company = await context.Companies.FirstOrDefaultAsync( x => x.Id == companyId );
+
+			store.ParentCompany = company;
+
+			await context.SaveChangesAsync();
+
+			return store;
+		}
+
 		public async Task<Company> AddStoreToCompany( int storeId, int companyId )
 		{
 			var foundCompany = context.Companies.FirstOrDefault( x => x.Id == companyId );
@@ -123,7 +138,10 @@ namespace BH.Repository.Repos
 
 		public async Task<List<Product>> GetCompanyProducts( int companyId )
 		{
-			return (await context.Companies.Include( x => x.Products).FirstOrDefaultAsync( x => x.Id == companyId ))?.Products.ToList() ?? new List<Product>();
+			return (await context.Companies
+				.Include( x => x.Products).ThenInclude( x => x.Categories)
+				.Include( x => x.Products ).ThenInclude( x => x.Images )
+				.FirstOrDefaultAsync( x => x.Id == companyId ))?.Products.ToList() ?? new List<Product>();
 		}
 
 		
@@ -135,6 +153,20 @@ namespace BH.Repository.Repos
 					return Task.FromResult( foundCompany.Stores.ToList() );
 
 			return Task.FromResult( new List<Store>() );
+		}
+
+		public async Task<int> RemoveCompanyStore( int storeId, int companyId )
+		{
+			var store = await context.Store.FirstOrDefaultAsync( x => x.Id == storeId );
+			var company = await context.Companies.FirstOrDefaultAsync( x => x.Id == companyId );
+
+			company.Stores.Remove(store );
+			await context.SaveChangesAsync();
+
+			context.Store.Remove( store );
+
+			await context.SaveChangesAsync( );
+			return store.Id;
 		}
 
 		public async Task<Company> UpdateCompany( Company store )

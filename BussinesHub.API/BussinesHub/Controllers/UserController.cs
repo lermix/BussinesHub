@@ -25,7 +25,7 @@ namespace BussinesHub.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> CreateUser(UserDto userDto)
+		public async Task<IActionResult> CreateUser( UserDto userDto )
 		{
 			if ( userDto == null )
 				return BadRequest( "User is null" );
@@ -51,20 +51,20 @@ namespace BussinesHub.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> DeleteUser(string username)
+		public async Task<IActionResult> DeleteUser( string username )
 		{
 			string deletedUsername = await userRepository.DeleteUser( username );
-			if ( string.IsNullOrEmpty(deletedUsername))
+			if ( string.IsNullOrEmpty( deletedUsername ) )
 				NotFound( username );
 
 			return Ok( deletedUsername );
 		}
 		[HttpPost]
-		public async Task<IActionResult> UpdateUser(User user) => Ok( await userRepository.UpdateUser( user ) );
+		public async Task<IActionResult> UpdateUser( User user ) => Ok( await userRepository.UpdateUser( user ) );
 		[HttpGet]
 		public async Task<IActionResult> GetUsers() => Ok( await userRepository.GetAllUsers() );
 		[HttpGet]
-		public async Task<IActionResult> GetUserCompanies(string username) => Ok( await userRepository.GetUserCompanies( username ) );
+		public async Task<IActionResult> GetUserCompanies( string username ) => Ok( mapper.Map<List<Company>>( await userRepository.GetUserCompanies( username ) ) );
 		[HttpGet]
 		public async Task<IActionResult> SetUserCompany( string username, int companyId ) => Ok( await userRepository.SetUserCompany( username, companyId ) );
 

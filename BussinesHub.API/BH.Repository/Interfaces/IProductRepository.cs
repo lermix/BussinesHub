@@ -12,5 +12,7 @@ namespace BH.Repository.Interfaces
 		public Task<int> DeleteProduct( int ProductId);
 		public Task<Product> CreateProduct( Product product, int companyId);
 		public Task<Product> UpdateProduct( Product product );
+		Task<List<int>> AddProductCategory( int productId, int categoryId );
+		Task<List<int>> RemoveProductCategory( int productId, int categoryId );
 	}
 }

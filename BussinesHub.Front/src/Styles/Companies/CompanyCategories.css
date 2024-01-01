@@ -47,3 +47,12 @@
     margin-top: 0px;
     
   }
+
+  .catTreeParagraph{
+    padding-left: 5px;
+  }
+
+.catTreeParagraph:hover{
+    color: black;
+    background-color: var(--col4);
+}

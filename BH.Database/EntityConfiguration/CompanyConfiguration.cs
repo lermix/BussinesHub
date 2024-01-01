@@ -17,7 +17,7 @@ namespace BH.Model.EntityConfiguration
 			builder.Property( x => x.Country ).IsRequired();
 			builder.HasMany( x => x.Stores ).WithOne( x => x.ParentCompany );
 			builder.HasMany( x => x.Analitics )
-				.WithOne( x => x.Company );
+				.WithOne( x => x.Company );				
 		}
 	}
 }

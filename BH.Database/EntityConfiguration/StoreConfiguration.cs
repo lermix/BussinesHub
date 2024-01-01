@@ -9,6 +9,7 @@ namespace BH.Model.EntityConfiguration
 		public void Configure( EntityTypeBuilder<Store> builder )
 		{
 			builder.HasKey( x => x.Id );
+			builder.Property( x => x.Adress ).IsRequired();
 			builder.HasMany( x => x.Images );
 			builder.HasMany( x => x.ProductsData );
 			builder.HasOne( x => x.ParentCompany )
