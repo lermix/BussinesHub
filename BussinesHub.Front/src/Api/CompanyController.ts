@@ -5,6 +5,7 @@ import { Category } from '../Models/Category';
 import { Store } from '../Models/Store';
 
 export const ApiCompany = {
+	GetAllCompanies: (): Promise<Company[]> => requests.get(`Company/GetAllCompanies`),
 	createCompany: (company: Company, username: string): Promise<Company> => requests.post(`Company/CreateCompany?username=${username}`, company),
 	EditCompany: (company: Company): Promise<Company> => requests.post(`Company/EditCompany`, company),
 	getCompanyProducts: (companyId: number): Promise<Product[]> => requests.get(`Company/GetCompanyProducts?companyId=${companyId}`),
@@ -14,4 +15,5 @@ export const ApiCompany = {
 	addCompanyStores: (store: Store, companyId: number): Promise<Store> => requests.post(`Company/AddCompanyStores?companyId=${companyId}`, store),
 	removeCompanyStores: (storeId: number, companyId: number): Promise<number> =>
 		requests.get(`Company/RemoveCompanyStores?storeId=${storeId}&companyId=${companyId}`),
+	removeCompanyCategory: (categoryId: number): Promise<number> => requests.get(`Company/RemoveCompanyCategory?categoryId=${categoryId}`),
 };

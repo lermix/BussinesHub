@@ -3,7 +3,7 @@ using BH.Model.Dtos;
 using BH.Model.General;
 using BH.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
-
+using System.Diagnostics;
 
 namespace BH.Repository.Repos
 {
@@ -17,34 +17,21 @@ namespace BH.Repository.Repos
 
 		public async Task<Store> AddCompanyStore( Store store, int companyId )
 		{
-			await context.Store.AddAsync( store );
-
 			var company = await context.Companies.FirstOrDefaultAsync( x => x.Id == companyId );
-
 			store.ParentCompany = company;
+
+			if ( store.Images == null )
+				store.Images = new List<Image>();
+
+			var entry = await context.Store.AddAsync( store );
 
 			await context.SaveChangesAsync();
 
 			return store;
 		}
-
-		public async Task<Company> AddStoreToCompany( int storeId, int companyId )
-		{
-			var foundCompany = context.Companies.FirstOrDefault( x => x.Id == companyId );
-			var foundStore = context.Store.FirstOrDefault( x => x.Id == storeId );
-			if ( foundStore != null && foundCompany != null )
-			{
-				foundCompany.Stores.Add( foundStore );
-				await context.SaveChangesAsync();
-				return foundCompany;
-			}
-
-			return null;
-		}
-
 		public async Task<Company> CreateCompany( Company comapny, string username )
 		{
-			var foundUser = await context.Users.Include(x => x.Companies).FirstOrDefaultAsync( x => x.Username == username );
+			var foundUser = await context.Users.Include( x => x.Companies ).FirstOrDefaultAsync( x => x.Username == username );
 			if ( foundUser != null )
 			{
 				var entry = await context.Companies.AddAsync( comapny );
@@ -66,7 +53,7 @@ namespace BH.Repository.Repos
 
 			category.Company = company;
 
-			Category parent = await context.Categories.FirstOrDefaultAsync( x => x.Id == category.Parent.Id);
+			Category parent = await context.Categories.FirstOrDefaultAsync( x => x.Id == category.Parent.Id );
 
 			category.Parent = null;
 
@@ -83,7 +70,7 @@ namespace BH.Repository.Repos
 
 		public async Task<Store> CreateStore( int companyId, Store store )
 		{
-			var foundCompany = context.Companies.FirstOrDefault( x => x.Id == companyId );			
+			var foundCompany = context.Companies.FirstOrDefault( x => x.Id == companyId );
 			if ( foundCompany != null )
 			{
 				if ( foundCompany.Stores == null )
@@ -130,24 +117,29 @@ namespace BH.Repository.Repos
 			return -1;
 		}
 
+		public async Task<List<Company>> GetAllCompanies()
+		{
+			return await context.Companies.ToListAsync();
+		}
+
 		public async Task<List<Category>?> GetCompanyCategories( int companyId )
 		{
-			return (await context.Companies.Include( x => x.Categories).FirstOrDefaultAsync( x => x.Id == companyId ))?.Categories
-				.Where( cat => cat.Parent == null).ToList() ?? new List<Category>();
+			return ( await context.Companies.Include( x => x.Categories ).FirstOrDefaultAsync( x => x.Id == companyId ) )?.Categories
+				.Where( cat => cat.Parent == null ).ToList() ?? new List<Category>();
 		}
 
 		public async Task<List<Product>> GetCompanyProducts( int companyId )
 		{
-			return (await context.Companies
-				.Include( x => x.Products).ThenInclude( x => x.Categories)
+			return ( await context.Companies
+				.Include( x => x.Products ).ThenInclude( x => x.Categories )
 				.Include( x => x.Products ).ThenInclude( x => x.Images )
-				.FirstOrDefaultAsync( x => x.Id == companyId ))?.Products.ToList() ?? new List<Product>();
+				.FirstOrDefaultAsync( x => x.Id == companyId ) )?.Products.ToList() ?? new List<Product>();
 		}
 
-		
+
 		public Task<List<Store>> GetCompanyStores( int companyId )
 		{
-			var foundCompany = context.Companies.Include(x => x.Stores).FirstOrDefault( x => x.Id == companyId );
+			var foundCompany = context.Companies.Include( x => x.Stores ).FirstOrDefault( x => x.Id == companyId );
 			if ( foundCompany != null )
 				if ( foundCompany.Stores != null )
 					return Task.FromResult( foundCompany.Stores.ToList() );
@@ -155,17 +147,39 @@ namespace BH.Repository.Repos
 			return Task.FromResult( new List<Store>() );
 		}
 
+		public async Task<int> RemoveCompanyCategory( int categoryId )
+		{			
+			var category = await context.Categories.Include( x => x.Children).FirstOrDefaultAsync( x => x.Id == categoryId );
+			if ( category == null )
+				return -1;
+
+			if ( category.Children != null )
+			{
+				var children = category.Children.Select( x => x.Id ).ToList();
+
+				foreach ( var childId in children )
+					await RemoveCompanyCategory( childId );
+
+			}
+
+			context.Categories.Remove( category );
+			await context.SaveChangesAsync();
+
+			
+			return categoryId;
+		}
+
 		public async Task<int> RemoveCompanyStore( int storeId, int companyId )
 		{
 			var store = await context.Store.FirstOrDefaultAsync( x => x.Id == storeId );
 			var company = await context.Companies.FirstOrDefaultAsync( x => x.Id == companyId );
 
-			company.Stores.Remove(store );
+			company.Stores.Remove( store );
 			await context.SaveChangesAsync();
 
 			context.Store.Remove( store );
 
-			await context.SaveChangesAsync( );
+			await context.SaveChangesAsync();
 			return store.Id;
 		}
 

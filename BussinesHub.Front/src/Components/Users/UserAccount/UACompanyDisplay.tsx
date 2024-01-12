@@ -36,6 +36,9 @@ export const UACompanyDisplay: React.FC<IProps> = ({ userCompanies, setCompanyTo
 									</li>
 								))}
 							</ul>
+							<button className="defaultBtn" onClick={() => navigate('/CreateCompany')}>
+								Kreiraj tvrtku
+							</button>
 						</div>
 						{selectedCompany && (
 							<div className="userAccCompanyControl">

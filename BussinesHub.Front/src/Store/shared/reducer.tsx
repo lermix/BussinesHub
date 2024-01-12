@@ -13,6 +13,7 @@ const initialState: ISharedState = {
 	notificationMessage: '',
 	dialogMessage: '',
 	companyCategories: [],
+	companyToDisplay: null,
 };
 
 // REDUCER
@@ -53,6 +54,11 @@ export function sharedReducer(state: ISharedState = initialState, action: IShare
 			return {
 				...state,
 				companyCategories: action.categories,
+			};
+		case actionTypes.SET_COMPANY_TO_DISPLAY:
+			return {
+				...state,
+				companyToDisplay: action.companyToDisplay,
 			};
 		default:
 			return state;

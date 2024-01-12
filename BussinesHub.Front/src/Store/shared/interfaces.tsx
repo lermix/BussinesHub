@@ -1,4 +1,5 @@
 import { Category } from '../../Models/Category';
+import { Company } from '../../Models/Company';
 import { User } from '../../Models/User';
 import * as actionTypes from './actionTypes';
 
@@ -15,6 +16,7 @@ export interface ISharedState {
 	deleteDialogAction: any;
 	dialogMessage: string;
 	companyCategories: Category[];
+	companyToDisplay: Company | null;
 }
 
 // ACTIONS
@@ -47,10 +49,16 @@ interface IGetCompanyCategories {
 	categories: Category[];
 }
 
+interface ISetCompanyToDisplay {
+	type: typeof actionTypes.SET_COMPANY_TO_DISPLAY;
+	companyToDisplay: Company;
+}
+
 export type ISharedActionType =
 	| ITurnOnMainLoadingAction
 	| ITurnOffMainLoadingAction
 	| IShowErrorAction
 	| IHideErrorAction
 	| IToggleNotificationAction
-	| IGetCompanyCategories;
+	| IGetCompanyCategories
+	| ISetCompanyToDisplay;

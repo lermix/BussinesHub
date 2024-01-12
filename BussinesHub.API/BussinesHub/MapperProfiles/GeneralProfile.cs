@@ -21,6 +21,7 @@ namespace BussinesHub.MapperProfiles
 			CreateMap<Store, StoreDto>()
 				.ForMember( dest => dest.ParentCompanyId, opt => opt.MapFrom( src => src.ParentCompany.Id ) )
 				.ReverseMap();
+			CreateMap<ProductAdditionalInfo, ProductAdditionalInfoDto>().ReverseMap();
 		}
 	}
 }

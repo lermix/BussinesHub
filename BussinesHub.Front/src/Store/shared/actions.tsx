@@ -4,6 +4,7 @@ import { ISharedActionType } from './interfaces';
 import { AppState } from '../rootReducer';
 import { ApiCompany } from '../../Api/CompanyController';
 import { Category } from '../../Models/Category';
+import { Company } from '../../Models/Company';
 
 export const GetCategoriesForCompany =
 	(companyId: number): ThunkAction<void, AppState, unknown, Action<string>> =>
@@ -24,6 +25,11 @@ export const GetCategoriesForCompany =
 			};
 		}
 	};
+
+export const SetcompanyToDisplay = (companyToDisplay: Company): ISharedActionType => ({
+	type: actionTypes.SET_COMPANY_TO_DISPLAY,
+	companyToDisplay: companyToDisplay,
+});
 
 export const turnOnLoading = (): ISharedActionType => ({
 	type: actionTypes.TURN_ON_MAIN_LOADING,

@@ -7,6 +7,7 @@ import MainDisplay from './Components/MainDisplay';
 import CreateCompany from './Components/Companies/CreateCompany';
 import CreateAccount from './Components/Users/CreateAccount';
 import UserAccount from './Components/Users/UserAccount/UserAccount';
+import CompanyPresentation from './Components/CompaniesPresentation/CompanyPresentation';
 
 const App: React.FC = () => {
 	return (
@@ -27,6 +28,7 @@ const App: React.FC = () => {
 				<Route path="CreateAccount" element={<CreateAccount />} />
 				<Route path="Login" element={<Login />} />
 				<Route path="UserAccount" element={<UserAccount />} />
+				<Route path="companyPresentation" element={<CompanyPresentation />} />
 			</Routes>
 
 			{/* <TabMenu orientation="vertical">

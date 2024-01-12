@@ -47,6 +47,10 @@ export const CompanyProducts: React.FC<IProps> = ({ company }) => {
 							setProducts([...products, product]);
 						}}
 						onEditProduct={(product) => setProducts(products.map((item) => (item.id == product.id ? product : item)))}
+						onDeleteProduct={(productId) => {
+							setSelectedProduct(null);
+							setProducts([...products.filter((x) => x.id != productId)]);
+						}}
 						productToEdit={selectedProduct}
 					/>
 				</div>

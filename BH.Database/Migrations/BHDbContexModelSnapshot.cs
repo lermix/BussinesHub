@@ -72,7 +72,7 @@ namespace BH.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("CompanyId")
+                    b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -106,6 +106,10 @@ namespace BH.Database.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -222,6 +226,30 @@ namespace BH.Database.Migrations
                     b.HasIndex("CompanyId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("BH.Model.General.ProductAdditionalInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("InfoName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("InfoValue")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductAdditionalInfo");
                 });
 
             modelBuilder.Entity("BH.Model.General.Store", b =>
@@ -407,6 +435,51 @@ namespace BH.Database.Migrations
                     b.ToTable("LabelValue");
                 });
 
+            modelBuilder.Entity("BH.Model.General.Web.MenuItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Clickable")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int?>("MenuItemId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("StoreWebPageId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MenuItemId");
+
+                    b.HasIndex("StoreWebPageId");
+
+                    b.ToTable("MenuItem");
+                });
+
+            modelBuilder.Entity("BH.Model.General.Web.StoreWebPage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId")
+                        .IsUnique();
+
+                    b.ToTable("StoreWebPage");
+                });
+
             modelBuilder.Entity("BH.Model.General.Web.WebProductInfo", b =>
                 {
                     b.Property<int>("Id")
@@ -441,7 +514,18 @@ namespace BH.Database.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int>("MenuItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StoreWebPageId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("MenuItemId")
+                        .IsUnique();
+
+                    b.HasIndex("StoreWebPageId");
 
                     b.ToTable("WebTab", (string)null);
                 });
@@ -520,14 +604,18 @@ namespace BH.Database.Migrations
 
             modelBuilder.Entity("BH.Model.General.Category", b =>
                 {
-                    b.HasOne("BH.Model.General.Company", null)
+                    b.HasOne("BH.Model.General.Company", "Company")
                         .WithMany("Categories")
-                        .HasForeignKey("CompanyId");
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("BH.Model.General.Category", "Parent")
                         .WithMany("Children")
                         .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.ClientCascade);
+
+                    b.Navigation("Company");
 
                     b.Navigation("Parent");
                 });
@@ -556,6 +644,17 @@ namespace BH.Database.Migrations
                         .IsRequired();
 
                     b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("BH.Model.General.ProductAdditionalInfo", b =>
+                {
+                    b.HasOne("BH.Model.General.Product", "Product")
+                        .WithMany("AdditionalInfos")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("BH.Model.General.Store", b =>
@@ -637,6 +736,28 @@ namespace BH.Database.Migrations
                         .HasForeignKey("WebTabInfoId");
                 });
 
+            modelBuilder.Entity("BH.Model.General.Web.MenuItem", b =>
+                {
+                    b.HasOne("BH.Model.General.Web.MenuItem", null)
+                        .WithMany("MenuItems")
+                        .HasForeignKey("MenuItemId");
+
+                    b.HasOne("BH.Model.General.Web.StoreWebPage", null)
+                        .WithMany("MenuItems")
+                        .HasForeignKey("StoreWebPageId");
+                });
+
+            modelBuilder.Entity("BH.Model.General.Web.StoreWebPage", b =>
+                {
+                    b.HasOne("BH.Model.General.Company", "Company")
+                        .WithOne("StoreWebPage")
+                        .HasForeignKey("BH.Model.General.Web.StoreWebPage", "CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
             modelBuilder.Entity("BH.Model.General.Web.WebProductInfo", b =>
                 {
                     b.HasOne("BH.Model.General.Product", "Product")
@@ -650,6 +771,21 @@ namespace BH.Database.Migrations
                         .HasForeignKey("WebTabProductsId");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("BH.Model.General.Web.WebTab", b =>
+                {
+                    b.HasOne("BH.Model.General.Web.MenuItem", "MenuItem")
+                        .WithOne("Tab")
+                        .HasForeignKey("BH.Model.General.Web.WebTab", "MenuItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BH.Model.General.Web.StoreWebPage", null)
+                        .WithMany("WebTabItems")
+                        .HasForeignKey("StoreWebPageId");
+
+                    b.Navigation("MenuItem");
                 });
 
             modelBuilder.Entity("CategoryProduct", b =>
@@ -717,11 +853,15 @@ namespace BH.Database.Migrations
 
                     b.Navigation("Products");
 
+                    b.Navigation("StoreWebPage");
+
                     b.Navigation("Stores");
                 });
 
             modelBuilder.Entity("BH.Model.General.Product", b =>
                 {
+                    b.Navigation("AdditionalInfos");
+
                     b.Navigation("Analitics");
 
                     b.Navigation("Images");
@@ -745,6 +885,21 @@ namespace BH.Database.Migrations
                     b.Navigation("Products");
 
                     b.Navigation("UserPermissions");
+                });
+
+            modelBuilder.Entity("BH.Model.General.Web.MenuItem", b =>
+                {
+                    b.Navigation("MenuItems");
+
+                    b.Navigation("Tab")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BH.Model.General.Web.StoreWebPage", b =>
+                {
+                    b.Navigation("MenuItems");
+
+                    b.Navigation("WebTabItems");
                 });
 
             modelBuilder.Entity("BH.Model.General.Web.WebProductInfo", b =>

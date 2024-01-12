@@ -1,9 +1,5 @@
-﻿using BH.Model.General;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BH.Model.Dtos;
+using BH.Model.General;
 
 namespace BH.Repository.Interfaces
 {
@@ -14,5 +10,8 @@ namespace BH.Repository.Interfaces
 		public Task<Product> UpdateProduct( Product product );
 		Task<List<int>> AddProductCategory( int productId, int categoryId );
 		Task<List<int>> RemoveProductCategory( int productId, int categoryId );
+		Task<ProductAdditionalInfo?> AddProductAdditionalInfo( int productId, ProductAdditionalInfo additionalInfo );
+		Task<int> RemoveAdditionalInfo( int productId, int additionalInfoId );
+		Task<List<ProductAdditionalInfo>> GetProductAdditionalInfo( int productId );
 	}
 }

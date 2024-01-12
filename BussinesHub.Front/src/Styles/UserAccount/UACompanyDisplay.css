@@ -16,6 +16,11 @@
   transition: 1s;
 }
 
+.userAccCompanyListContainer button
+{  
+  margin-top: 50px;
+}
+
 .userAccCompanySettings{
   width: 100%;
   display: flex;
@@ -95,3 +100,4 @@ width: 70%;
 .userAccCompanyFunctions *{
     margin: 15px;
 }
+

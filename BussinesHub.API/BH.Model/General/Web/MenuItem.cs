@@ -6,6 +6,6 @@
         public string Name { get; set; } = "no_name";
         public bool Clickable { get; set; } = true;
         public virtual ICollection<MenuItem> MenuItems { get; set; } = new List<MenuItem>();
-        public WebTab? Tab { get; set; }
+        public WebTab Tab { get; set; }
     }
 }

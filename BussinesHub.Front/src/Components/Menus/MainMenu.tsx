@@ -61,9 +61,11 @@ export const MainMenu: React.FC = () => {
 				</div>
 				<div className="mainMenuBtnContainer">
 					<div className="mainMenuBtn">
+						<h2>🏢</h2>
 						<p>Tvrtke</p>
 					</div>
 					<div className="mainMenuBtn">
+						<h2>🛠️</h2>
 						<p>Usluge</p>
 					</div>
 				</div>

@@ -6,23 +6,31 @@ import CreateNewOrEditProduct from './CreateNewProduct';
 import { Product } from '../../Models/Product';
 import { ApiCompany } from '../../Api/CompanyController';
 import { Category, CategoryClass } from '../../Models/Category';
-import { setGeneralError } from '../../Helper/generalError';
 import { Input } from '../../BasicComponents/Input/Input';
 import CategoryTree from './CategoryTree';
+import { GetCategoriesForCompany } from '../../Store/shared/actions';
+import { useAppDispatch } from '../../Store/hooks';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../Store/rootReducer';
 
 interface IProps {
 	company: Company;
 }
 
+interface IStateProps {
+	categories: Category[];
+}
+
 export const CompanyCategories: React.FC<IProps> = ({ company }) => {
-	const [categories, setCategories] = useState<Category[]>([]);
+	const dispatch = useAppDispatch();
+	const { categories } = useSelector<AppState, IStateProps>((state: AppState): IStateProps => {
+		return {
+			categories: state.shared.companyCategories,
+		};
+	});
+
 	const [selectedCategory, setSelecteCategory] = useState<Category | null>(null);
 	const [newCategory, setNewCategory] = useState<Category>(new CategoryClass());
-	useEffect(() => {
-		ApiCompany.getCompanyCategories(company.id)
-			.then((res) => setCategories(res))
-			.catch((ex) => setGeneralError(ex));
-	}, []);
 
 	useEffect(() => {
 		newCategory.parentId = selectedCategory?.id;
@@ -57,9 +65,7 @@ export const CompanyCategories: React.FC<IProps> = ({ company }) => {
 					<div
 						className="CompanyCategoriesRoundBtn"
 						onClick={() => {
-							ApiCompany.createCompanyCategory(newCategory, company.id).then((res) =>
-								ApiCompany.getCompanyCategories(company.id).then((cats) => setCategories(cats)),
-							);
+							ApiCompany.createCompanyCategory(newCategory, company.id).then((res) => dispatch(GetCategoriesForCompany(company.id)));
 							setSelecteCategory(null);
 						}}
 					>
@@ -68,7 +74,12 @@ export const CompanyCategories: React.FC<IProps> = ({ company }) => {
 				</div>
 				<div className="companyCategoriesTree">
 					<h3>Popis kategorija</h3>
-					<CategoryTree categories={categories} setSelecteCategory={setSelecteCategory} />
+					<CategoryTree
+						categories={categories}
+						setSelecteCategory={setSelecteCategory}
+						allowDelete={true}
+						onDeleteCategory={() => dispatch(GetCategoriesForCompany(company.id))}
+					/>
 				</div>
 			</div>
 		</>

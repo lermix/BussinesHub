@@ -1,17 +1,18 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import '../../Styles/CreateCompany.css';
 import Login from '../Users/Login';
 import { Input } from '../../BasicComponents/Input/Input';
 import { Company, CompanyClass } from '../../Models/Company';
-import { requests } from '../../Api/agent';
 import { useNavigate } from 'react-router-dom';
 import { GetUserFromLocal } from '../../Store/LocalStorage';
 import { ApiCompany } from '../../Api/CompanyController';
 import CreateCompanyStore from './CreateCompanyStore';
+import { Store } from '../../Models/Store';
+import { Textarea } from '../../BasicComponents/Input/Textarea';
 
 interface IProps {
-	initalCompany: Company | null;
-	CloseAction: () => void | null;
+	initalCompany?: Company | null;
+	CloseAction?: () => void | null;
 }
 
 export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) => {
@@ -22,6 +23,7 @@ export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) 
 	const [companyCreated, setCompanyCreated] = useState<boolean>(initalCompany ? true : false);
 	const [companyInEdit, setCompanyInEdit] = useState<boolean>(initalCompany ? true : false);
 	const [showCreateStore, setShowCreateStore] = useState<boolean>(false);
+	const [selectedStore, setSelectedStore] = useState<Store | null>(null);
 
 	useEffect(() => {
 		if (initalCompany) {
@@ -131,6 +133,14 @@ export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) 
 								value={company.phoneNumber}
 								onChange={(value: string) => setCompany({ ...company, phoneNumber: value })}
 							/>
+							<Textarea
+								className="CreateCompanyinput"
+								width={'15vw'}
+								height={120}
+								text={'Opis'}
+								value={company.description}
+								onChange={(value: string) => setCompany({ ...company, description: value })}
+							/>
 							{companyCreated ? (
 								companyInEdit ? (
 									<button className="createCompanyBtn" onClick={EditCompany}>
@@ -152,13 +162,19 @@ export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) 
 						<div className="ccscLeft">
 							<div className="createCompanyHeader">
 								<h2>Poslovnice</h2>
-								<button className="CreateCompanyRoundBtn" onClick={() => setShowCreateStore(true)}>
+								<button
+									className="CreateCompanyRoundBtn"
+									onClick={() => {
+										setShowCreateStore(true);
+										setSelectedStore(null);
+									}}
+								>
 									+
 								</button>
 							</div>
 							<ul>
 								{company.stores.map((st) => (
-									<li>{st.name}</li>
+									<li onClick={() => setSelectedStore(st)}>{st.name}</li>
 								))}
 							</ul>
 						</div>

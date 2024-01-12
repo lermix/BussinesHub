@@ -55,4 +55,38 @@
 .catTreeParagraph:hover{
     color: black;
     background-color: var(--col4);
+    cursor: grab;
+}
+
+.catTreeParagraph:hover b{
+  background-color: var(--col2);
+  color: var(--col4);
+}
+.catTreeParagraph:has(span:hover)
+{
+  background-color: var(--col1);
+  color: var(--col4);
+}
+
+.catTreeParagraph span:hover {
+  font-style: italic;
+  cursor: pointer;
+
+}
+
+.catTreeParagraph b{
+  float: right;
+  border: 1px solid var(--col4);
+  border-radius: 20px;
+  width: 20px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.catTreeParagraph b:hover{
+  background-color: #88dbbc;
+  border: 1px solid black;
+  color: black;
 }

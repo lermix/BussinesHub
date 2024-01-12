@@ -40,4 +40,13 @@
     -moz-box-shadow: 10px -3px 5px -4px rgba(0, 0, 0, 0.24);
     box-shadow: 10px -3px 5px -4px rgba(0, 0, 0, 0.24);
     font-size: 16px;
+
+    transition: 0.5s;
+}
+
+.card:hover{
+    -webkit-box-shadow: 10px -3px 5px -4px rgba(0, 0, 0, 0.24);
+    -moz-box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.24);
+    box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.74);
+    border: 1px solid var(--col4);
 }

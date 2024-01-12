@@ -13,6 +13,19 @@ namespace BH.Repository.Repos
 			this.context = context;
 		}
 
+		public async Task<ProductAdditionalInfo> AddProductAdditionalInfo( int productId, ProductAdditionalInfo additionalInfo )
+		{
+			var product = await context.Products.FirstOrDefaultAsync( x => x.Id == productId );
+			if ( product == null )
+				return null;
+
+			product.AdditionalInfos.Add( additionalInfo );
+
+			context.SaveChanges();
+
+			return additionalInfo;
+		}
+
 		public async Task<List<int>?> AddProductCategory( int productId, int categoryId )
 		{
 			var product = await context.Products.Include(x => x.Categories).FirstOrDefaultAsync( x => x.Id == productId );
@@ -48,6 +61,26 @@ namespace BH.Repository.Repos
 			}
 			else
 				return -1;
+		}
+
+		public async Task<List<ProductAdditionalInfo>> GetProductAdditionalInfo( int productId )
+		{
+			var product = await context.Products.FirstOrDefaultAsync( x => x.Id == productId );
+			if ( product == null )
+				return new List<ProductAdditionalInfo>();
+
+			return product.AdditionalInfos.ToList();
+		}
+
+		public async Task<int> RemoveAdditionalInfo( int productId, int additionalInfoId )
+		{
+			var product = await context.Products.Include( x => x.AdditionalInfos).FirstOrDefaultAsync( x => x.Id == productId && x.AdditionalInfos.Any( x => x.Id == additionalInfoId) );
+			var additionalInfo = await context.ProductAdditionalInfos.FirstOrDefaultAsync( x => x.Id == additionalInfoId );
+			if ( product == null || additionalInfo == null)
+				return -1;
+			product.AdditionalInfos.Remove( additionalInfo );
+
+			return additionalInfoId;
 		}
 
 		public async Task<List<int>> RemoveProductCategory( int productId, int categoryId )

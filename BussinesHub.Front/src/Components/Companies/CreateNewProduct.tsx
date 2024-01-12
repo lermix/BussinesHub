@@ -10,10 +10,13 @@ import { AppState } from '../../Store/rootReducer';
 import { useSelector } from 'react-redux';
 import CategoryTree from './CategoryTree';
 import { getAllTreeItems } from '../../Helper/HelperFunctions';
+import EditProductAdditionalInfo from './EditProductAdditionalInfo';
+import { info } from 'console';
 
 interface IProps {
 	onNewProduct: (product: Product) => void;
 	onEditProduct: (product: Product) => void;
+	onDeleteProduct: (productId: number) => void;
 	company: Company;
 	productToEdit?: Product | null;
 }
@@ -21,12 +24,8 @@ interface IProps {
 interface IStateProps {
 	companyCategories: Category[];
 }
-const enum Tabs {
-	Products,
-	Categories,
-}
 
-export const CreateNewOrEditProduct: React.FC<IProps> = ({ onEditProduct, company, onNewProduct, productToEdit }) => {
+export const CreateNewOrEditProduct: React.FC<IProps> = ({ onDeleteProduct, onEditProduct, company, onNewProduct, productToEdit }) => {
 	const { companyCategories } = useSelector<AppState, IStateProps>((state: AppState): IStateProps => {
 		return {
 			companyCategories: state.shared.companyCategories,
@@ -36,15 +35,21 @@ export const CreateNewOrEditProduct: React.FC<IProps> = ({ onEditProduct, compan
 	const [product, setProduct] = useState<Product>(productToEdit ?? new ProductClass());
 	const [showCategories, setShowCategories] = useState<boolean>(false);
 	const [selectedCategory, setSelecteCategory] = useState<Category | null>(null);
+	const [showAdditionalInfo, setShowAdditionalInfo] = useState<boolean>(false);
 
 	useEffect(() => {
-		if (productToEdit) setProduct(productToEdit);
-		else setProduct(new ProductClass());
+		if (productToEdit) {
+			setProduct(productToEdit);
+			setShowCategories(false);
+		} else setProduct(new ProductClass());
 	}, [productToEdit]);
 
 	useEffect(() => {
 		if (selectedCategory) {
-			ApiProducts.AddProductCategory(product.id, selectedCategory.id).then((res) => setProduct({ ...product, categoriesIds: res }));
+			ApiProducts.AddProductCategory(product.id, selectedCategory.id).then((res) => {
+				onEditProduct({ ...product, categoriesIds: res });
+				setProduct({ ...product, categoriesIds: res });
+			});
 			setSelecteCategory(null);
 			setShowCategories(false);
 		}
@@ -52,6 +57,15 @@ export const CreateNewOrEditProduct: React.FC<IProps> = ({ onEditProduct, compan
 
 	return (
 		<>
+			{showAdditionalInfo && (
+				<EditProductAdditionalInfo
+					product={product}
+					onClose={(infos) => {
+						setShowAdditionalInfo(false);
+						infos.forEach((x) => ApiProducts.AddProductAdditionalInfo(product.id, x));
+					}}
+				/>
+			)}
 			{!showCategories && (
 				<div className="CreateNewProductWrapper">
 					<Input
@@ -147,23 +161,41 @@ export const CreateNewOrEditProduct: React.FC<IProps> = ({ onEditProduct, compan
 							Kreiraj
 						</button>
 					)}
+					<button className="defaultBtn" style={{ width: 250 }} onClick={() => setShowAdditionalInfo(true)}>
+						Dodatne informacije
+					</button>
 					{productToEdit && (
-						<button
-							className="defaultBtn"
-							onClick={() =>
-								ApiProducts.UpdateProduct(product)
-									.then((res) => onEditProduct(res))
-									.catch((ex) => setGeneralError(ex))
-							}
-						>
-							Uredi
-						</button>
+						<div className="crateNewProductBtnContainer">
+							<button
+								className="defaultBtn"
+								onClick={() =>
+									ApiProducts.UpdateProduct(product)
+										.then((res) => onEditProduct(res))
+										.catch((ex) => setGeneralError(ex))
+								}
+							>
+								Uredi
+							</button>
+							<button
+								className="defaultBtn"
+								onClick={() =>
+									ApiProducts.DeleteProduct(product.id)
+										.then((res) => onDeleteProduct(res))
+										.catch((ex) => setGeneralError(ex))
+								}
+							>
+								Obriši
+							</button>
+						</div>
 					)}
 				</div>
 			)}
 			{showCategories && (
 				<div className="createNewProductCategoriesWrapper">
-					<CategoryTree categories={companyCategories} setSelecteCategory={setSelecteCategory} />
+					<CategoryTree setSelecteCategory={setSelecteCategory} allowDelete={false} categories={companyCategories} />
+					<button className="defaultBtn" onClick={() => setShowCategories(false)}>
+						Nazad
+					</button>
 				</div>
 			)}
 		</>

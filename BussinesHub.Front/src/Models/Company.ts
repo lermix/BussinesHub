@@ -10,6 +10,7 @@ export interface Company {
 	country: string;
 	phoneNumber: string;
 	stores: Store[];
+	description: string;
 }
 
 export class CompanyClass implements Company {
@@ -22,4 +23,5 @@ export class CompanyClass implements Company {
 	country = '';
 	phoneNumber = '';
 	stores = [];
+	description = '';
 }

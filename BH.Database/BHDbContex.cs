@@ -16,10 +16,12 @@ namespace BH.Model
 		public DbSet<UserPermission> userPermissions { get; set; }
 		public DbSet<StoreProductData> storeProductsData { get; set; }
 		public DbSet<UserProductData> userProductsData { get; set; }
+		public DbSet<ProductAdditionalInfo> ProductAdditionalInfos { get; set; }
 
 		public BHDbContex( DbContextOptions<BHDbContex> options )
 		  : base( options )
 		{
+			
 		}
 
 

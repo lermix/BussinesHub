@@ -1,0 +1,45 @@
+.editProductAdditionalInfoWindow{
+    position: absolute;
+    top: 5%;
+    left: 20%;
+    z-index: 999;
+    background-color: var(--col11);
+    width: 60%;
+    height: 90%;
+    border: 1px solid var(--col4);
+    display: flex;
+    flex-direction: column;
+}
+
+.editProductAdditionalInfobackground{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 990;
+    background-color: rgba(0, 0, 0, 0.685);
+}
+
+.createAdditionalInfoInput {
+    color: #88dbbc;
+    margin-top: 10px;
+  }
+
+  .epaiwInputs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+
+  .epaiwBtn{
+    width: 100px;
+    height: 30px;
+    margin-top: 35px;    
+  }
+
+  .editProductAdditionalInfoWindow table{
+    color: var(--col4);
+  }
