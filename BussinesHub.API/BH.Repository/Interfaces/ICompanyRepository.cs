@@ -1,4 +1,5 @@
-﻿using BH.Model.Dtos;
+﻿using BH.Database.Migrations;
+using BH.Model.Dtos;
 using BH.Model.General;
 
 namespace BH.Repository.Interfaces
@@ -18,5 +19,6 @@ namespace BH.Repository.Interfaces
 		Task<Store> AddCompanyStore( Store store, int companyId );
 		Task<int> RemoveCompanyCategory( int categoryId );
 		Task<List<Company>> GetAllCompanies();
+		Task<List<ProductAdditionalInfo>> GetCompanyAdditionalInfos( int companyId );
 	}
 }

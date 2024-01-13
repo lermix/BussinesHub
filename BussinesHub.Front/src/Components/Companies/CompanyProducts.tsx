@@ -35,7 +35,15 @@ export const CompanyProducts: React.FC<IProps> = ({ company }) => {
 					</div>
 					<ul>
 						{products.map((product) => (
-							<li onClick={() => setSelectedProduct(product)}>{product.name}</li>
+							<li
+								style={{
+									backgroundColor: selectedProduct?.id == product.id ? 'var(--col4)' : '',
+									color: selectedProduct?.id == product.id ? 'black' : '',
+								}}
+								onClick={() => setSelectedProduct(product)}
+							>
+								{product.name}
+							</li>
 						))}
 					</ul>
 				</div>

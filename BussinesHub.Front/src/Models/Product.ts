@@ -10,6 +10,7 @@ export interface Product {
 	avaliable: boolean;
 	categoriesIds: number[];
 	imagesIds: number[];
+	companyId: number;
 }
 
 export class ProductClass implements Product {
@@ -24,4 +25,5 @@ export class ProductClass implements Product {
 	avaliable = true;
 	categoriesIds = [];
 	imagesIds = [];
+	companyId = 0;
 }

@@ -60,9 +60,8 @@ export const CreateNewOrEditProduct: React.FC<IProps> = ({ onDeleteProduct, onEd
 			{showAdditionalInfo && (
 				<EditProductAdditionalInfo
 					product={product}
-					onClose={(infos) => {
+					onClose={() => {
 						setShowAdditionalInfo(false);
-						infos.forEach((x) => ApiProducts.AddProductAdditionalInfo(product.id, x));
 					}}
 				/>
 			)}
@@ -161,32 +160,35 @@ export const CreateNewOrEditProduct: React.FC<IProps> = ({ onDeleteProduct, onEd
 							Kreiraj
 						</button>
 					)}
-					<button className="defaultBtn" style={{ width: 250 }} onClick={() => setShowAdditionalInfo(true)}>
-						Dodatne informacije
-					</button>
+
 					{productToEdit && (
-						<div className="crateNewProductBtnContainer">
-							<button
-								className="defaultBtn"
-								onClick={() =>
-									ApiProducts.UpdateProduct(product)
-										.then((res) => onEditProduct(res))
-										.catch((ex) => setGeneralError(ex))
-								}
-							>
-								Uredi
+						<>
+							<button className="defaultBtn" style={{ width: 250 }} onClick={() => setShowAdditionalInfo(true)}>
+								Dodatne informacije
 							</button>
-							<button
-								className="defaultBtn"
-								onClick={() =>
-									ApiProducts.DeleteProduct(product.id)
-										.then((res) => onDeleteProduct(res))
-										.catch((ex) => setGeneralError(ex))
-								}
-							>
-								Obriši
-							</button>
-						</div>
+							<div className="crateNewProductBtnContainer">
+								<button
+									className="defaultBtn"
+									onClick={() =>
+										ApiProducts.UpdateProduct(product)
+											.then((res) => onEditProduct(res))
+											.catch((ex) => setGeneralError(ex))
+									}
+								>
+									Uredi
+								</button>
+								<button
+									className="defaultBtn"
+									onClick={() =>
+										ApiProducts.DeleteProduct(product.id)
+											.then((res) => onDeleteProduct(res))
+											.catch((ex) => setGeneralError(ex))
+									}
+								>
+									Obriši
+								</button>
+							</div>
+						</>
 					)}
 				</div>
 			)}

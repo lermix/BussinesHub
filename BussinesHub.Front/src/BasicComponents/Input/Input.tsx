@@ -27,6 +27,7 @@ export const Input: React.FC<InputProps> = ({ text, width, height, onChange, typ
 			<input
 				type={type}
 				defaultValue={innerValue}
+				value={innerValue}
 				autoComplete={autoComplete}
 				checked={checked}
 				onChange={(event: ChangeEvent<HTMLInputElement>) => {

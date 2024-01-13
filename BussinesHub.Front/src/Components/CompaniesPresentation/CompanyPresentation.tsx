@@ -5,10 +5,11 @@ import { AppState } from '../../Store/rootReducer';
 import '../../Styles/CompaniesPresentation/CompanyPresentation.css';
 import { Product } from '../../Models/Product';
 import { ApiCompany } from '../../Api/CompanyController';
-import ProductPresentation from './ProductPresentation';
+import ProductPresentationCard from './ProductPresentationCard';
 import { useAppDispatch } from '../../Store/hooks';
 import { GetCategoriesForCompany } from '../../Store/shared/actions';
 import { Category } from '../../Models/Category';
+import CategoryTree from '../Companies/CategoryTree';
 interface IStateProps {
 	company: Company | null;
 	categories: Category[];
@@ -25,6 +26,8 @@ export const CompanyPresentation: React.FC = () => {
 	});
 
 	const [products, setProducts] = useState<Product[]>([]);
+	const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+	const [selectedCategorie, setSelectedCategorie] = useState<Category | null>(null);
 
 	useEffect(() => {
 		if (company) {
@@ -32,6 +35,7 @@ export const CompanyPresentation: React.FC = () => {
 			dispatch(GetCategoriesForCompany(company.id));
 		}
 	}, []);
+
 	return (
 		<>
 			{company && (
@@ -39,7 +43,14 @@ export const CompanyPresentation: React.FC = () => {
 					<div className="presentationHeader">
 						<h1>{company.name}</h1>
 						<div className="presentationMenu">
-							<button className="presentationMenuBtn">Proizvodi</button>
+							<button
+								className="presentationMenuBtn"
+								onClick={() => {
+									setSelectedCategorie(null);
+								}}
+							>
+								Proizvodi
+							</button>
 							<button className="presentationMenuBtn">O nama</button>
 						</div>
 					</div>
@@ -47,20 +58,21 @@ export const CompanyPresentation: React.FC = () => {
 					<div className="presentationContent">
 						<div className="ProductFilter">
 							<div className="MainProductFilter">
-								{categories
-									.filter((x) => !x.parentId)
-									.map((x) => (
-										<p>{x.name}</p>
-									))}
+								<CategoryTree categories={categories} allowDelete={false} setSelecteCategory={(cat) => setSelectedCategorie(cat)} />
 							</div>
 							<div className="AdditionalProductFilter"></div>
 						</div>
 						<div className="cardContainer cardContainerProduct">
-							{products.map((product) => (
-								<div className="card cardProduct">
-									<ProductPresentation product={product} />
-								</div>
-							))}
+							{products
+								.filter((x) => {
+									if (selectedCategorie) return x.categoriesIds.includes(selectedCategorie?.id);
+									else return true;
+								})
+								.map((product) => (
+									<div className="card cardProduct">
+										<ProductPresentationCard product={product} />
+									</div>
+								))}
 						</div>
 					</div>
 				</div>

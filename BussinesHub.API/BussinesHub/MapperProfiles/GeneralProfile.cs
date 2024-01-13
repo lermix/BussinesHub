@@ -14,6 +14,7 @@ namespace BussinesHub.MapperProfiles
 			CreateMap<Product, ProductDto>()
 				.ForMember( dest => dest.ImagesIds, opt => opt.MapFrom( src => src.Images.Select( x => x.Id ) ) )
 				.ForMember( dest => dest.CategoriesIds, opt => opt.MapFrom( src => src.Categories.Select( x => x.Id ) ) )
+				.ForMember( dest => dest.CompanyId, opt => opt.MapFrom( src => src.Company.Id ) )
 				.ReverseMap();
 			CreateMap<Category, CategoryDto>()
 				.ForMember( dest => dest.ParentId, opt => opt.MapFrom( src => src.Parent != null ? src.Parent.Id : new int?()) )
@@ -21,7 +22,9 @@ namespace BussinesHub.MapperProfiles
 			CreateMap<Store, StoreDto>()
 				.ForMember( dest => dest.ParentCompanyId, opt => opt.MapFrom( src => src.ParentCompany.Id ) )
 				.ReverseMap();
-			CreateMap<ProductAdditionalInfo, ProductAdditionalInfoDto>().ReverseMap();
+			CreateMap<ProductAdditionalInfo, ProductAdditionalInfoDto>()
+				.ForMember( dest => dest.CategorieIds, opt => opt.MapFrom( src => src.Categories.Select( x => x.Id) ) )
+				.ReverseMap();
 		}
 	}
 }

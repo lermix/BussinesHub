@@ -28,7 +28,7 @@ namespace BussinesHub.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> CreateProduct( [FromBody]ProductDto product, [FromQuery]int companyId ) => Ok( await productRepository.CreateProduct( mapper.Map<Product>(product), companyId ) );
+		public async Task<IActionResult> CreateProduct( [FromBody] ProductDto product, [FromQuery] int companyId ) => Ok( mapper.Map<ProductDto>( await productRepository.CreateProduct( mapper.Map<Product>( product ), companyId ) ) );
 		[HttpPost]
 		public async Task<IActionResult> UpdateProduct( Product product ) => Ok( await productRepository.UpdateProduct( product ) );
 
@@ -38,8 +38,8 @@ namespace BussinesHub.Controllers
 		[HttpGet]
 		public async Task<IActionResult> RemoveProductCategory( int productId, int categoryId ) => Ok( await productRepository.RemoveProductCategory( productId, categoryId ) );
 
-		[HttpGet]
-		public async Task<IActionResult> AddProductAdditionalInfo( [FromQuery]int productId, [FromBody]ProductAdditionalInfoDto additionalInfo ) => Ok( await productRepository.AddProductAdditionalInfo( productId, mapper.Map<ProductAdditionalInfo>(additionalInfo) ) );
+		[HttpPost]
+		public async Task<IActionResult> AddProductAdditionalInfo( [FromQuery] int productId, [FromBody] ProductAdditionalInfoDto additionalInfo ) => Ok( mapper.Map<ProductAdditionalInfoDto>( await productRepository.AddProductAdditionalInfo( productId, mapper.Map<ProductAdditionalInfo>( additionalInfo ), additionalInfo.CategorieIds ) ) );
 		[HttpGet]
 		public async Task<IActionResult> RemoveAdditionalInfo( int productId, int additionalInfoId ) => Ok( await productRepository.RemoveAdditionalInfo( productId, additionalInfoId ) );
 		[HttpGet]

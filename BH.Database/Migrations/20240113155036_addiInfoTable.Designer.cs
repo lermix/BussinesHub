@@ -3,6 +3,7 @@ using System;
 using BH.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BH.Database.Migrations
 {
     [DbContext(typeof(BHDbContex))]
-    partial class BHDbContexModelSnapshot : ModelSnapshot
+    [Migration("20240113155036_addiInfoTable")]
+    partial class addiInfoTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -545,21 +547,6 @@ namespace BH.Database.Migrations
                     b.ToTable("CategoryProduct");
                 });
 
-            modelBuilder.Entity("CategoryProductAdditionalInfo", b =>
-                {
-                    b.Property<int>("AdditionalInfosId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoriesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AdditionalInfosId", "CategoriesId");
-
-                    b.HasIndex("CategoriesId");
-
-                    b.ToTable("CategoryProductAdditionalInfo");
-                });
-
             modelBuilder.Entity("CompanyUser", b =>
                 {
                     b.Property<int>("CompaniesId")
@@ -814,21 +801,6 @@ namespace BH.Database.Migrations
                     b.HasOne("BH.Model.General.Product", null)
                         .WithMany()
                         .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("CategoryProductAdditionalInfo", b =>
-                {
-                    b.HasOne("BH.Model.General.ProductAdditionalInfo", null)
-                        .WithMany()
-                        .HasForeignKey("AdditionalInfosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BH.Model.General.Category", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

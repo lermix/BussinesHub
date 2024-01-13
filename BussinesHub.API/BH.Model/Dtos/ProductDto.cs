@@ -12,7 +12,8 @@
 		public bool Shipping { get; set; } = true;
 		public bool Avaliable { get; set; } = true;
 		public int MainImageId { get; set; }
-		public virtual List<int> CategoriesIds { get; set; } = new List<int>();
+        public int CompanyId { get; set; }
+        public virtual List<int> CategoriesIds { get; set; } = new List<int>();
 		public virtual List<int> ImagesIds { get; set; } = new List<int>();
 	}
 }

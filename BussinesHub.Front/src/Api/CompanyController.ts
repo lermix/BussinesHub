@@ -3,6 +3,7 @@ import { requests } from './agent';
 import { Product } from '../Models/Product';
 import { Category } from '../Models/Category';
 import { Store } from '../Models/Store';
+import { ProductAdditionalInfo } from '../Models/AdditionalInfo';
 
 export const ApiCompany = {
 	GetAllCompanies: (): Promise<Company[]> => requests.get(`Company/GetAllCompanies`),
@@ -16,4 +17,6 @@ export const ApiCompany = {
 	removeCompanyStores: (storeId: number, companyId: number): Promise<number> =>
 		requests.get(`Company/RemoveCompanyStores?storeId=${storeId}&companyId=${companyId}`),
 	removeCompanyCategory: (categoryId: number): Promise<number> => requests.get(`Company/RemoveCompanyCategory?categoryId=${categoryId}`),
+	GetCompanyAdditionalInfos: (companyId: number): Promise<ProductAdditionalInfo[]> =>
+		requests.get(`Company/GetCompanyAdditionalInfos?companyId=${companyId}`),
 };

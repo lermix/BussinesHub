@@ -20,7 +20,7 @@ namespace BH.Model.General
 		public virtual ICollection<UserProductData> UsersProductData { get; set; }
 		public virtual ICollection<Analitic> Analitics { get; set; }
 		public virtual ICollection<WebTabProducts> webTabProducts { get; set; }
-		public virtual ICollection<ProductAdditionalInfo> AdditionalInfos { get; set; }
+		public virtual ICollection<ProductAdditionalInfo> AdditionalInfos { get; set; } = new List<ProductAdditionalInfo>();
 		public Company Company { get; set; }
 	}
 }

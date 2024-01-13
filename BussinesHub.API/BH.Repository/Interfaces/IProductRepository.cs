@@ -10,7 +10,7 @@ namespace BH.Repository.Interfaces
 		public Task<Product> UpdateProduct( Product product );
 		Task<List<int>> AddProductCategory( int productId, int categoryId );
 		Task<List<int>> RemoveProductCategory( int productId, int categoryId );
-		Task<ProductAdditionalInfo?> AddProductAdditionalInfo( int productId, ProductAdditionalInfo additionalInfo );
+		Task<ProductAdditionalInfo?> AddProductAdditionalInfo( int productId, ProductAdditionalInfo additionalInfo, List<int> categorieIds );
 		Task<int> RemoveAdditionalInfo( int productId, int additionalInfoId );
 		Task<List<ProductAdditionalInfo>> GetProductAdditionalInfo( int productId );
 	}

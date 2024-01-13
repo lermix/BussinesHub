@@ -61,5 +61,9 @@ namespace BussinesHub.Controllers
 		[HttpPost]
 		public async Task<IActionResult> EditCompany( [FromBody] CompanyDto company ) =>
 			Ok( await companyRepository.UpdateCompany( mapper.Map<Company>( company )) );
+
+		[HttpGet]
+		public async Task<IActionResult> GetCompanyAdditionalInfos( int companyId ) => Ok( mapper.Map<List<ProductAdditionalInfoDto>>(await companyRepository.GetCompanyAdditionalInfos( companyId ) ));
+
 	}
 }

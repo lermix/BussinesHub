@@ -2,7 +2,7 @@
     position: absolute;
     top: 5%;
     left: 20%;
-    z-index: 999;
+    z-index: 995;
     background-color: var(--col11);
     width: 60%;
     height: 90%;
@@ -42,4 +42,91 @@
 
   .editProductAdditionalInfoWindow table{
     color: var(--col4);
+    width: 95%;
   }
+
+.editProductAdditionalInfoWindow td
+{
+  text-align: center;
+}
+
+  .epaiwHeader p{
+    padding: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0px;
+    color: var(--col4);
+    float: right;
+}
+
+.epaiwHeader p:hover{
+ background-color: var(--col4);
+ color: black;
+ cursor: pointer;
+}
+.epaiwDelete{
+  text-align: center;
+}
+
+.epaiwDelete p{
+  margin: 0 auto;
+  padding: 0;
+}
+
+.epaiwDelete:hover{
+  background-color: var(--col4);
+color: black;
+cursor:pointer;
+}
+
+.exisitngAdittionalInfosWindow{
+  position: absolute;
+  width: 20%;
+  height: 80%;
+  top: 10%;
+  left: 40%;
+  z-index: 999;
+  background-color: var(--col11);
+  border: 1px solid var(--col4);
+  display: flex;
+  flex-direction: column;
+}
+
+.exisitngAdittionalInfosWindow ul{
+  justify-self: center;
+  height: 90%;
+  width: 90%;
+  align-self: center;
+  list-style: none;
+}
+
+.exisitngAdittionalInfosWindowBackground{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 996;
+  background-color: rgba(0, 0, 0, 0.685);
+}
+
+.exisitngAdittionalInfosWindow li
+{ 
+color: var(--col4);
+width: 90%;
+border-bottom: 1px solid var(--col4);
+overflow-y: scroll;
+} 
+
+.exisitngAdittionalInfosWindow li:hover
+{ 
+  background-color: var(--col4);
+  color: black;
+
+}
+
+.exisitngAdittionalInfosWindowFilter 
+{
+  align-self: center;
+  color: var(--col4);
+}

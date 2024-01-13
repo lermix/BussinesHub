@@ -1,4 +1,5 @@
-﻿using BH.Model;
+﻿using BH.Database.Migrations;
+using BH.Model;
 using BH.Model.Dtos;
 using BH.Model.General;
 using BH.Repository.Interfaces;
@@ -120,6 +121,15 @@ namespace BH.Repository.Repos
 		public async Task<List<Company>> GetAllCompanies()
 		{
 			return await context.Companies.ToListAsync();
+		}
+
+		public async Task<List<ProductAdditionalInfo>> GetCompanyAdditionalInfos( int companyId )
+		{
+			return await context.ProductAdditionalInfos
+				.Include( x => x.Product ).ThenInclude( x => x.Company )
+				.Include( x => x.Categories )
+				.Where( x => x.Product.Company.Id == companyId )
+				.ToListAsync();
 		}
 
 		public async Task<List<Category>?> GetCompanyCategories( int companyId )

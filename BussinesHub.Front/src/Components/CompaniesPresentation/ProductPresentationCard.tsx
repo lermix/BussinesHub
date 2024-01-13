@@ -5,7 +5,7 @@ interface IProps {
 	product: Product;
 }
 
-export const ProductPresentation: React.FC<IProps> = ({ product }) => {
+export const ProductPresentationCard: React.FC<IProps> = ({ product }) => {
 	return (
 		<>
 			<div className="productPresentationWrapper">
@@ -18,4 +18,4 @@ export const ProductPresentation: React.FC<IProps> = ({ product }) => {
 	);
 };
 
-export default ProductPresentation;
+export default ProductPresentationCard;

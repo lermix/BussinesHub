@@ -91,7 +91,7 @@
     display: flex;
     flex-direction: column;
     background-color: rgba(23, 51, 44, 0.548);
-
+    font-size: 15px;
     width: 15vw;
     border-right: 2px solid rgba(255, 255, 255, 0.377);
 }
@@ -101,7 +101,7 @@
     margin: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.377); ;
     transition: 0.5s;
-    font-weight: bolder;
+    font-weight: bold;
     color: azure;
 }
 
@@ -109,3 +109,39 @@
     background-color: rgba(255, 255, 255, 0.568);
     color: black;
 }
+
+.MainProductFilter ul{
+    list-style: none;
+    padding: 0;
+}
+
+.MainProductFilter{    
+    overflow-y: scroll;
+    height: 300px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.678);
+}
+
+.presentationWrapper{
+    
+}
+/* width */
+.MainProductFilter::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  .MainProductFilter::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.527);
+  }
+  
+  /* Handle */
+  .MainProductFilter::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.671);
+  }
+  
+  /* Handle on hover */
+  .MainProductFilter::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.884);
+
+  }
+  
