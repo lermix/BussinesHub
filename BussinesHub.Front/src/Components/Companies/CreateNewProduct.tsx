@@ -45,15 +45,44 @@ export const CreateNewOrEditProduct: React.FC<IProps> = ({ onDeleteProduct, onEd
 	}, [productToEdit]);
 
 	useEffect(() => {
+		handleSelectedCategory();
+	}, [selectedCategory]);
+
+	const handleSelectedCategory = async () => {
 		if (selectedCategory) {
-			ApiProducts.AddProductCategory(product.id, selectedCategory.id).then((res) => {
-				onEditProduct({ ...product, categoriesIds: res });
-				setProduct({ ...product, categoriesIds: res });
-			});
+			const list: Category[] = [];
+			GetParentCategories(selectedCategory, list);
+			list.push(selectedCategory);
+			for (let i = 0; i < list.length; i++) {
+				const element = list[i];
+				if (i !== list.length - 1) await ApiProducts.AddProductCategory(product.id, element.id);
+
+				if (i === list.length - 1)
+					ApiProducts.AddProductCategory(product.id, element.id).then((res) => {
+						console.log(res);
+						onEditProduct({ ...product, categoriesIds: res });
+						setProduct({ ...product, categoriesIds: res });
+					});
+			}
+
 			setSelecteCategory(null);
 			setShowCategories(false);
 		}
-	}, [selectedCategory]);
+	};
+
+	const GetParentCategories = (category: Category, catList: Category[]) => {
+		const parentCat = flatten(companyCategories, (x) => x.children ?? []).find((x) => x.id == category.parentId);
+		if (parentCat) {
+			catList.push(parentCat);
+			GetParentCategories(parentCat, catList);
+		}
+	};
+
+	let flatten = (children: Category[], extractChildren: (arg: Category) => Category[]): Category[] =>
+		Array.prototype.concat.apply(
+			children,
+			children.map((x) => flatten(extractChildren(x) || [], extractChildren)),
+		);
 
 	return (
 		<>
@@ -112,15 +141,7 @@ export const CreateNewOrEditProduct: React.FC<IProps> = ({ onDeleteProduct, onEd
 						value={product.vatPercantage}
 						onChange={(value: number) => setProduct({ ...product, vatPercantage: value })}
 					/>
-					<Input
-						text="popust"
-						className="CreateCompanyInput"
-						type="number"
-						width={'15vw'}
-						height={30}
-						value={product?.discountPercanatage}
-						onChange={(value: number) => setProduct({ ...product, discountPercanatage: value })}
-					/>
+
 					{productToEdit && (
 						<>
 							<p>

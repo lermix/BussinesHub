@@ -1,4 +1,6 @@
-﻿namespace BH.Model.Dtos
+﻿using BH.Model.General;
+
+namespace BH.Model.Dtos
 {
 	public class ProductDto
 	{
@@ -15,5 +17,7 @@
         public int CompanyId { get; set; }
         public virtual List<int> CategoriesIds { get; set; } = new List<int>();
 		public virtual List<int> ImagesIds { get; set; } = new List<int>();
+		public virtual List<ProductAdditionalInfo> AdditionalInfos { get; set; } = new List<ProductAdditionalInfo>();
+
 	}
 }

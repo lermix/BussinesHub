@@ -30,7 +30,7 @@ namespace BussinesHub.Controllers
 		[HttpPost]
 		public async Task<IActionResult> CreateProduct( [FromBody] ProductDto product, [FromQuery] int companyId ) => Ok( mapper.Map<ProductDto>( await productRepository.CreateProduct( mapper.Map<Product>( product ), companyId ) ) );
 		[HttpPost]
-		public async Task<IActionResult> UpdateProduct( Product product ) => Ok( await productRepository.UpdateProduct( product ) );
+		public async Task<IActionResult> UpdateProduct( ProductDto product ) => Ok( await productRepository.UpdateProduct( mapper.Map<Product>(product )) );
 
 		[HttpGet]
 		public async Task<IActionResult> AddProductCategory( int productId, int categoryId ) => Ok( await productRepository.AddProductCategory( productId, categoryId ) );

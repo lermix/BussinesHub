@@ -23,7 +23,7 @@ export const CompaniesGrid: React.FC = () => {
 					<div
 						className="card"
 						onClick={() => {
-							dispatch(SetcompanyToDisplay(company));
+							localStorage.setItem('companyToDisplay', company.id.toString());
 							navigate('/companyPresentation');
 						}}
 					>

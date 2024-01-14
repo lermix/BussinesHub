@@ -29,18 +29,6 @@ const EditProductAdditionalInfo: React.FC<IProps> = ({ product, onClose }) => {
 		ApiCompany.GetCompanyAdditionalInfos(product.companyId).then((res) => setCompanyAdditionlInfos(res));
 	}, []);
 
-	function uniqueArray<T>(ar: T[]): T[] {
-		var j: any = {};
-
-		ar.forEach(function (v) {
-			j[v + '::' + typeof v] = v;
-		});
-
-		return Object.keys(j).map(function (v) {
-			return j[v];
-		});
-	}
-
 	return (
 		<>
 			{companyAdditionlInfosVisible && (

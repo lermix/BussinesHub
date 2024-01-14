@@ -1,3 +1,5 @@
+import { ProductAdditionalInfo } from './AdditionalInfo';
+
 export interface Product {
 	id: number;
 	name: string;
@@ -11,6 +13,7 @@ export interface Product {
 	categoriesIds: number[];
 	imagesIds: number[];
 	companyId: number;
+	additionalInfos: ProductAdditionalInfo[];
 }
 
 export class ProductClass implements Product {
@@ -26,4 +29,5 @@ export class ProductClass implements Product {
 	categoriesIds = [];
 	imagesIds = [];
 	companyId = 0;
+	additionalInfos = [];
 }

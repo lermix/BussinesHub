@@ -105,9 +105,15 @@ namespace BH.Repository.Repos
 
 		public async Task<Product> UpdateProduct( Product product )
 		{
-			var entry = context.Products.Update( product );
+			var found = await context.Products.FirstOrDefaultAsync( x => x.Id == product.Id );
+			found.Name = product.Name;
+			found.Description = product.Description;
+			found.Price = product.Price;
+			found.Code = product.Code;
+			found.VatPercantage = product.VatPercantage;
+			found.DiscountPercanatage = product.DiscountPercanatage;
 			await context.SaveChangesAsync();
-			return entry.Entity;
+			return found;
 		}
 	}
 }

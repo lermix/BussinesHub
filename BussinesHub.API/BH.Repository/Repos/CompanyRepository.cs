@@ -143,6 +143,7 @@ namespace BH.Repository.Repos
 			return ( await context.Companies
 				.Include( x => x.Products ).ThenInclude( x => x.Categories )
 				.Include( x => x.Products ).ThenInclude( x => x.Images )
+				.Include( x => x.Products).ThenInclude( x => x.AdditionalInfos)
 				.FirstOrDefaultAsync( x => x.Id == companyId ) )?.Products.ToList() ?? new List<Product>();
 		}
 

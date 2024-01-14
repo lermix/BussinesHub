@@ -10,7 +10,8 @@
 		public string PostalCode { get; set; }
 		public string Country { get; set; }
 		public string PhoneNumber { get; set; }
-		public virtual ICollection<StoreDto> Stores { get; set; } = new List<StoreDto>();
+        public string Description { get; set; }
+        public virtual ICollection<StoreDto> Stores { get; set; } = new List<StoreDto>();
 
 	}
 }

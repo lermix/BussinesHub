@@ -71,7 +71,9 @@ export const MainMenu: React.FC = () => {
 				</div>
 				{!user && (
 					<div className="mainMenuBottom">
-						<button className="mainMenuActionButton">Registracija</button>
+						<button className="mainMenuActionButton" onClick={() => navigate('CreateAccount')}>
+							Registracija
+						</button>
 						<button className="mainMenuActionButton" onClick={() => navigate('Login')}>
 							Prijava
 						</button>
