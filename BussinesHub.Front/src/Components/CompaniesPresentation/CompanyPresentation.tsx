@@ -6,6 +6,7 @@ import '../../Styles/CompaniesPresentation/CompanyPresentation.css';
 import { Product } from '../../Models/Product';
 import { ApiCompany } from '../../Api/CompanyController';
 import ProductPresentationCard from './ProductPresentationCard';
+import ProductPresentation from './ProductPresentation';
 import { useAppDispatch } from '../../Store/hooks';
 import { GetCategoriesForCompany, SetcompanyToDisplay } from '../../Store/shared/actions';
 import { Category } from '../../Models/Category';
@@ -31,6 +32,7 @@ export const CompanyPresentation: React.FC = () => {
 	const [showCatFilter, setShowCatFilter] = useState<boolean>(false);
 	const [companyAdditionalInfo, setCompanyAdditionalInfo] = useState<ProductAdditionalInfo[]>([]);
 	const [additonalInfoFilters, setAdditonalInfoFilters] = useState<ProductAdditionalInfo[]>([]);
+	const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
 	useEffect(() => {
 		ApiCompany.GetAllCompanies().then((res) => setCompany(res.find((x) => x.id === Number(localStorage.getItem('companyToDisplay'))) ?? null));
@@ -77,6 +79,7 @@ export const CompanyPresentation: React.FC = () => {
 									onClick={() => {
 										setSelectedCategorie(null);
 										setAdditonalInfoFilters([]);
+										setSelectedProduct(null);
 									}}
 								>
 									Proizvodi
@@ -159,17 +162,19 @@ export const CompanyPresentation: React.FC = () => {
 								</div>
 							</div>
 							<div className="cardContainer cardContainerProduct">
-								{products
-									.filter((x) => {
-										if (selectedCategorie) return x.categoriesIds.includes(selectedCategorie?.id);
-										else return true;
-									})
-									.filter((x) => filterByAdditionalInfo(x))
-									.map((product) => (
-										<div className="card cardProduct">
-											<ProductPresentationCard product={product} />
-										</div>
-									))}
+								{!selectedProduct &&
+									products
+										.filter((x) => {
+											if (selectedCategorie) return x.categoriesIds.includes(selectedCategorie?.id);
+											else return true;
+										})
+										.filter((x) => filterByAdditionalInfo(x))
+										.map((product) => (
+											<div className="card cardProduct" onClick={() => setSelectedProduct(product)}>
+												<ProductPresentationCard product={product} />
+											</div>
+										))}
+								{selectedProduct && <ProductPresentation product={selectedProduct} />}
 							</div>
 						</div>
 					</>

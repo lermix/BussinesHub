@@ -1,4 +1,5 @@
-﻿using BH.Model.Dtos;
+﻿using AutoMapper;
+using BH.Model.Dtos;
 using BH.Model.General;
 using BH.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -9,9 +10,11 @@ namespace BussinesHub.Controllers
 	{
 
 		private readonly IStoreRepository storeRepository;
-		public StoreController( IStoreRepository storeRepository )
+		private readonly IMapper mapper;
+		public StoreController( IStoreRepository storeRepository, IMapper mapper )
 		{
 			this.storeRepository = storeRepository;
+			this.mapper = mapper;
 		}
 
 		[HttpPost]
@@ -28,7 +31,7 @@ namespace BussinesHub.Controllers
 		}
 
 		[HttpPost]
-		public async Task<ActionResult> UpdateStore( Store store ) => Ok( storeRepository.UpdateStore( store ) );
+		public async Task<ActionResult> UpdateStore( StoreDto store ) => Ok( mapper.Map<StoreDto>( await storeRepository.UpdateStore( mapper.Map<Store>( store ))) );
 
 		[HttpGet]
 		public async Task<ActionResult> GetStoreProduct( int storeId ) => Ok( storeRepository.GetStoreProduct( storeId ) );

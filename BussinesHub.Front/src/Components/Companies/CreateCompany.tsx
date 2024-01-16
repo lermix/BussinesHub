@@ -9,6 +9,10 @@ import { ApiCompany } from '../../Api/CompanyController';
 import CreateCompanyStore from './CreateCompanyStore';
 import { Store } from '../../Models/Store';
 import { Textarea } from '../../BasicComponents/Input/Textarea';
+import Map from '../Map/map';
+import { Coordinate } from '../../Models/Coordinate';
+import { Console } from 'console';
+import { ApiStore } from '../../Api/StoreController';
 
 interface IProps {
 	initalCompany?: Company | null;
@@ -23,6 +27,7 @@ export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) 
 	const [companyCreated, setCompanyCreated] = useState<boolean>(initalCompany ? true : false);
 	const [companyInEdit, setCompanyInEdit] = useState<boolean>(initalCompany ? true : false);
 	const [showCreateStore, setShowCreateStore] = useState<boolean>(false);
+	const [showStoreLocation, setShowStoreLocation] = useState<boolean>(false);
 	const [selectedStore, setSelectedStore] = useState<Store | null>(null);
 
 	useEffect(() => {
@@ -167,15 +172,27 @@ export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) 
 									onClick={() => {
 										setShowCreateStore(true);
 										setSelectedStore(null);
+										setShowStoreLocation(false);
 									}}
 								>
 									+
 								</button>
 							</div>
 							<ul>
-								{company.stores.map((st) => (
-									<li onClick={() => setSelectedStore(st)}>{st.name}</li>
-								))}
+								{company.stores
+									.sort((a, b) => a.name.localeCompare(b.name))
+									.map((st) => (
+										<li
+											className={st.id === selectedStore?.id ? 'ccscLeftSelected' : ''}
+											onClick={() => {
+												setSelectedStore(st);
+												setShowStoreLocation(true);
+												setShowCreateStore(false);
+											}}
+										>
+											<p>{st.name}</p>
+										</li>
+									))}
 							</ul>
 						</div>
 						<div className="ccscRight">
@@ -183,6 +200,20 @@ export const CreateCompany: React.FC<IProps> = ({ initalCompany, CloseAction }) 
 								<CreateCompanyStore
 									company={company}
 									onStoreCreated={(store) => setCompany({ ...company, stores: [...company.stores, store] })}
+								/>
+							)}
+							{showStoreLocation && selectedStore && (
+								<Map
+									initalMarker={selectedStore.coordinate}
+									onMarkerSet={(lat, long) => {
+										const newStore = { ...selectedStore, coordinate: { latitude: lat, longitude: long } as Coordinate };
+										ApiStore.UpdateStore(newStore).then((res) => {
+											setSelectedStore(res);
+											const newStores = [...company.stores.filter((x) => x.id != res.id)];
+											newStores.push(res);
+											setCompany({ ...company, stores: newStores });
+										});
+									}}
 								/>
 							)}
 						</div>

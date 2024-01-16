@@ -3,6 +3,8 @@ using BH.Model.General;
 using BH.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using System.Diagnostics.Metrics;
+using System.Xml.Linq;
 
 namespace BH.Repository.Repos
 {
@@ -92,10 +94,21 @@ namespace BH.Repository.Repos
 
 		public async Task<Store> UpdateStore( Store store )
 		{
-			var entry = context.Entry( store );
-			entry.State = EntityState.Modified;
+			var found = await context.Store.FirstOrDefaultAsync( x => x.Id == store.Id );
+
+			if ( found == null )
+				return store;
+
+			found.Name = store.Name ;
+			found.Adress = store.Adress ;
+			found.City = store.City ;
+			found.PostalCode = store.PostalCode ;
+			found.Country = store.Country ;
+			found.MobileNumber = store.MobileNumber ;
+			found.Coordinate = store.Coordinate;
+
 			await context.SaveChangesAsync();
-			return entry.Entity;
+			return found;
 		}
 
 	}

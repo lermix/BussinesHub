@@ -13,6 +13,6 @@ namespace BH.Model.Dtos
 		public string? MobileNumber { get; set; }
 		public int ParentCompanyId { get; set; }
 		public Coordinate Coordinate { get; set; }
-		public virtual ICollection<int> ImagesIds { get; set; }
+		public virtual ICollection<int> ImagesIds { get; set; } = new List<int>();	
 	}
 }

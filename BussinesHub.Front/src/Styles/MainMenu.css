@@ -164,8 +164,8 @@
     height: 50px;
     display: flex;
     border-bottom: 1px solid var(--col4);
-    
-    justify-content: center;
+        
+    justify-content: start;
     align-items: center;    
   }
 
@@ -176,7 +176,8 @@
 
   .mainMenuBtnCollapsed h2
   {
-    margin-left: 75%;
+    
+    margin-left: 5px;
     transition: 0.5s;
   }
 

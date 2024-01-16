@@ -8,7 +8,7 @@
 }
 
 .cardInfoImage{
-    background-image: url("../../Images/defaultCompanyImg.jpg");
+    background-image: url("../../Images/bussines.jpg");
     background-size: cover;
     width: 80%;
     height: 150px;
@@ -18,3 +18,6 @@
     box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.24);
 }
 
+.cardInfoDesc{
+    height: 100px;
+}

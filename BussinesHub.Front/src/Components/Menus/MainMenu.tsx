@@ -6,7 +6,17 @@ import { GetUserFromLocal, IsUserInLocal, RemoveUserFromLocal } from '../../Stor
 import { deleteVerifiedUserAsCookie } from '../../Helper/CookieHelper';
 import { User } from '../../Models/User';
 
-export const MainMenu: React.FC = () => {
+export const enum TabsEnum {
+	Companies,
+	Products,
+	Services,
+}
+
+interface IProps {
+	seletecTabChanged: (tab: TabsEnum) => void;
+}
+
+export const MainMenu: React.FC<IProps> = ({ seletecTabChanged }) => {
 	const navigate = useNavigate();
 
 	const [expanded, setExpanded] = useState(true);
@@ -60,9 +70,13 @@ export const MainMenu: React.FC = () => {
 					<button className="mainMenuTopBtnCollapse" onClick={handleExpansion}></button>
 				</div>
 				<div className="mainMenuBtnContainer">
-					<div className="mainMenuBtn">
+					<div className="mainMenuBtn" onClick={() => seletecTabChanged(TabsEnum.Companies)}>
 						<h2>🏢</h2>
 						<p>Tvrtke</p>
+					</div>
+					<div className="mainMenuBtn" onClick={() => seletecTabChanged(TabsEnum.Products)}>
+						<h2>📦</h2>
+						<p>Svi proizvodi</p>
 					</div>
 					<div className="mainMenuBtn">
 						<h2>🛠️</h2>
