@@ -8,13 +8,12 @@ export const Allproducts: React.FC = () => {
 	const [allProducts, setAllProducts] = useState<Product[]>([]);
 
 	useEffect(() => {
-		GetAll().then((res) => setAllProducts([...allProducts, ...res]));
+		GetAll().then((res) => setAllProducts(res));
 	}, []);
 
 	const GetAll = async () => {
 		const all: Product[] = [];
 		const companies = await ApiCompany.GetAllCompanies();
-		console.log('com', companies);
 		const promise = new Promise((resolve, reject) => {
 			companies.forEach(async (x, i) => {
 				(await ApiCompany.getCompanyProducts(x.id)).forEach((product) => {

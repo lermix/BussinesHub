@@ -17,7 +17,7 @@ namespace BH.Model.Dtos
         public int CompanyId { get; set; }
         public virtual List<int> CategoriesIds { get; set; } = new List<int>();
 		public virtual List<int> ImagesIds { get; set; } = new List<int>();
-		public virtual List<ProductAdditionalInfo> AdditionalInfos { get; set; } = new List<ProductAdditionalInfo>();
+		public virtual List<ProductAdditionalInfoDto> AdditionalInfos { get; set; } = new List<ProductAdditionalInfoDto>();
 
 	}
 }

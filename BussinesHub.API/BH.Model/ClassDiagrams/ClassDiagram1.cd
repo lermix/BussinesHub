@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BH.Model.General.Web.LabelValue" Collapsed="true">
+    <Position X="4.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>General\Web\LabelValue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BH.Model.General.Web.MenuItem" Collapsed="true">
+    <Position X="8.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgABgAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>General\Web\MenuItem.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Tab" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BH.Model.General.Web.StoreWebPage">
+    <Position X="6.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAIAABAAAAAAAAAAAAAAAAAAAAAABAEAAAA=</HashCode>
+      <FileName>General\Web\StoreWebPage.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="WebTabItems" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="BH.Model.General.Web.WebProductInfo" Collapsed="true">
+    <Position X="7" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>General\Web\WebProductInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BH.Model.General.Web.WebTab" Collapsed="true">
+    <Position X="6" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAACAAAAAAAAABAAAAAAAAAAgQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>General\Web\WebTab.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BH.Model.General.Web.WebTabInfo" Collapsed="true">
+    <Position X="4.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>General\Web\WebTabInfo.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="LabelValues" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="BH.Model.General.Web.WebTabProducts">
+    <Position X="7" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>General\Web\WebTabProducts.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="ProductInfos" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="BH.Model.General.Analitic">
+    <Position X="9" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADEAAAgEAAAAAIAAAIAACAAAIAAAABAAAABAAAAAA=</HashCode>
+      <FileName>General\Analitic.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Company" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BH.Model.General.Category">
+    <Position X="16" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAACAAAAAAAAAAAAAAAEQAQAAAAAAAAAAAAABAAAAAQ=</HashCode>
+      <FileName>General\Category.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="AdditionalInfos" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="BH.Model.General.Company">
+    <Position X="10.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAGAAAAAgAAAIIAAAQAQAAAoAEAAAAAAAAQAIgAQ=</HashCode>
+      <FileName>General\Company.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="StoreWebPage" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Stores" />
+      <Property Name="Users" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="BH.Model.General.Coordinate">
+    <Position X="17.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAEAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>General\Coordinate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BH.Model.General.Image">
+    <Position X="15.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAEAAAAAAA=</HashCode>
+      <FileName>General\Image.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BH.Model.General.Product">
+    <Position X="13.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gABCAEAAAQAggQAAAABgAQQAAAAAEBAAAAQABAAAIAA=</HashCode>
+      <FileName>General\Product.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Company" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="AdditionalInfos" />
+      <Property Name="Categories" />
+      <Property Name="Images" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="BH.Model.General.ProductAdditionalInfo">
+    <Position X="13.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAACAAA=</HashCode>
+      <FileName>General\ProductAdditionalInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BH.Model.General.Store">
+    <Position X="15" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACCAAAAAAIBAAIIAAAAAQAAAoAABAAAAAAAAAABAA=</HashCode>
+      <FileName>General\Store.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Coordinate" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BH.Model.General.StoreProductData">
+    <Position X="17.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgQAAAAA=</HashCode>
+      <FileName>General\StoreProductData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Product" />
+      <Property Name="Store" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BH.Model.General.User">
+    <Position X="10.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAACAAAAAAAQAQAAQABAAgAAACQAAAAAAAAAQ=</HashCode>
+      <FileName>General\User.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="userFuncEnum" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="UserPermissions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="BH.Model.General.UserPermission">
+    <Position X="12.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>General\UserPermission.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="PermissionType" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="BH.Model.General.UserProductData">
+    <Position X="11" Y="7.25" Width="1.5" />
+    <AssociationLine Name="User" Type="BH.Model.General.User" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="11.094" Y="8.546" />
+        <Point X="11.094" Y="9.75" />
+        <Point X="12.25" Y="9.75" />
+        <Point X="12.25" Y="10.25" />
+        <Point X="12" Y="10.25" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>General\UserProductData.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Product" />
+      <Property Name="User" />
+    </ShowAsAssociation>
+  </Class>
+  <Enum Name="BH.Model.General.UserFuncEnum">
+    <Position X="7.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>General\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BH.Model.General.PermissionEnum">
+    <Position X="17.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAEAAAAAAAAIAAAAEAAIQAAAAAAAAAAgAAAAAAAAIgA=</HashCode>
+      <FileName>General\Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
