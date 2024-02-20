@@ -4,6 +4,7 @@ import { Product } from '../Models/Product';
 import { Category } from '../Models/Category';
 import { Store } from '../Models/Store';
 import { ProductAdditionalInfo } from '../Models/AdditionalInfo';
+import { GraphData } from '../Models/GraphData';
 
 export const ApiCompany = {
 	GetAllCompanies: (): Promise<Company[]> => requests.get(`Company/GetAllCompanies`),
@@ -19,4 +20,5 @@ export const ApiCompany = {
 	removeCompanyCategory: (categoryId: number): Promise<number> => requests.get(`Company/RemoveCompanyCategory?categoryId=${categoryId}`),
 	GetCompanyAdditionalInfos: (companyId: number): Promise<ProductAdditionalInfo[]> =>
 		requests.get(`Company/GetCompanyAdditionalInfos?companyId=${companyId}`),
+	GetGraphData: (companyId: number): Promise<GraphData[]> => requests.get(`Company/GetGraphData?companyId=${companyId}`),
 };

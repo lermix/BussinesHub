@@ -143,7 +143,7 @@ namespace BH.Repository.Repos
 			return ( await context.Companies
 				.Include( x => x.Products ).ThenInclude( x => x.Categories )
 				.Include( x => x.Products ).ThenInclude( x => x.Images )
-				.Include( x => x.Products).ThenInclude( x => x.AdditionalInfos)
+				.Include( x => x.Products ).ThenInclude( x => x.AdditionalInfos )
 				.FirstOrDefaultAsync( x => x.Id == companyId ) )?.Products.ToList() ?? new List<Product>();
 		}
 
@@ -158,9 +158,23 @@ namespace BH.Repository.Repos
 			return Task.FromResult( new List<Store>() );
 		}
 
+		public async Task<List<GraphDataDto>> GetGraphData( int companyId )
+		{
+			var foundCompany = context.Companies.Include( x => x.Categories ).ThenInclude( x => x.Products ).FirstOrDefault( x => x.Id == companyId );
+			if ( foundCompany == null )
+				return new List<GraphDataDto>();
+
+			List<GraphDataDto> result = new List<GraphDataDto>();
+
+			foreach ( var item in foundCompany.Categories )			
+				result.Add( new GraphDataDto() { CategoryName = item.Name, ProductCount = item.Products.Count } );
+			
+			return result;
+		}
+
 		public async Task<int> RemoveCompanyCategory( int categoryId )
-		{			
-			var category = await context.Categories.Include( x => x.Children).FirstOrDefaultAsync( x => x.Id == categoryId );
+		{
+			var category = await context.Categories.Include( x => x.Children ).FirstOrDefaultAsync( x => x.Id == categoryId );
 			if ( category == null )
 				return -1;
 
@@ -176,7 +190,7 @@ namespace BH.Repository.Repos
 			context.Categories.Remove( category );
 			await context.SaveChangesAsync();
 
-			
+
 			return categoryId;
 		}
 

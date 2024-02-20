@@ -65,5 +65,7 @@ namespace BussinesHub.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetCompanyAdditionalInfos( int companyId ) => Ok( mapper.Map<List<ProductAdditionalInfoDto>>(await companyRepository.GetCompanyAdditionalInfos( companyId ) ));
 
+		[HttpGet]
+		public async Task<IActionResult> GetGraphData( int companyId ) => Ok( mapper.Map<List<GraphDataDto>>( await companyRepository.GetGraphData( companyId ) ) );
 	}
 }

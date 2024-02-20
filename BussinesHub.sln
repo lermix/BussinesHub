@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BH.Model", "BussinesHub.API
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BH.Repository", "BussinesHub.API\BH.Repository\BH.Repository.csproj", "{2ED5FB0A-3B08-4EE4-8C05-D6648255623C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BH.Database", "BH.Database\BH.Database.csproj", "{8AB50385-93E7-417F-A4FE-F57C63B759EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BH.Database", "BH.Database\BH.Database.csproj", "{8AB50385-93E7-417F-A4FE-F57C63B759EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -20,5 +20,6 @@ namespace BH.Repository.Interfaces
 		Task<int> RemoveCompanyCategory( int categoryId );
 		Task<List<Company>> GetAllCompanies();
 		Task<List<ProductAdditionalInfo>> GetCompanyAdditionalInfos( int companyId );
+		Task<List<GraphDataDto>> GetGraphData( int companyId );
 	}
 }
