@@ -51,6 +51,10 @@ namespace BH.Repository.Repos
 				throw new ArgumentNullException( $"Company with Id {companyId} not found" );
 
 			product.Company = company;
+
+			if ( context.Products.Any( x => x.Code == product.Code ) )
+				throw new ExceptionForUser( "Barkod već postoji" );
+
 			await context.Products.AddAsync( product );
 
 			await context.SaveChangesAsync();
